@@ -39,12 +39,9 @@ Item {
 
     property string trackerUrl: ""
 
-    property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { text-decoration: none; color: '" + Theme.secondaryHighlightColor + "' }</style><body>";
-    property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
-
     Column {
         id: col
-        anchors { left: parent.left; leftMargin: Theme.paddingLarge; right: parent.right; rightMargin: Theme.paddingLarge }
+        anchors { left: parent.left; leftMargin: Theme.horizontalPageMargin; right: parent.right; rightMargin: Theme.horizontalPageMargin }
 
         Item {
             width: parent.width
@@ -59,6 +56,9 @@ Item {
                 color: Theme.highlightColor
                 anchors.left: parent.left
                 text: model.version
+                textFormat: Text.StyledText
+                linkColor: Theme.secondaryHighlightColor
+                onLinkActivated: Qt.openUrlExternally(link)
             }
 
             Text {
@@ -70,6 +70,7 @@ Item {
                 color: Theme.secondaryColor
                 anchors.right: parent.right
                 text: Qt.formatDateTime(new Date(model.date), Qt.DefaultLocaleShortDate)
+                textFormat: Text.PlainText
             }
         }
 
@@ -94,12 +95,13 @@ Item {
                     id: desc
                     width: parent.width - typeIcon.width - Theme.paddingSmall
                     anchors { left: typeIcon.right; leftMargin: Theme.paddingSmall; right: parent.right }
-                    textFormat: Text.RichText
+                    textFormat: Text.StyledText
+                    linkColor: Theme.secondaryHighlightColor
                     color: Theme.primaryColor
                     wrapMode: Text.WordWrap
                     font.pixelSize: Theme.fontSizeSmall
                     onLinkActivated: { Qt.openUrlExternally(link) }
-                    text: _RICHTEXT_STYLESHEET_PREAMBLE + model.description + issueUrl + _RICHTEXT_STYLESHEET_APPENDIX
+                    text:model.description + issueUrl
                 }
             }
         }

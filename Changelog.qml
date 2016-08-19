@@ -24,9 +24,6 @@ import Sailfish.Silica 1.0
 Page {
     id: changelogPage
 
-    property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { text-decoration: none; color: '" + Theme.secondaryHighlightColor + "' }</style><body>";
-    property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
-
     property alias model: changelogList.model
     property string bugTrackerBase: ""
 
@@ -122,7 +119,7 @@ Page {
             }
         }
 
-        VerticalScrollDecorator {}
+        VerticalScrollDecorator { page: changelogPage; flickable: changelogList }
 
         delegate: ChangelogDelegate { trackerUrl: changelogPage.bugTrackerBase }
     }

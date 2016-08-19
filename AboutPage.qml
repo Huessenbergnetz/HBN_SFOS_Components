@@ -36,44 +36,39 @@ Page {
 
     property string appTitle: ""
     property string appVersion: ""
-    property string appCover: ""
-    property string appDescription: ""
-    property string appHomepage: ""
-    property string appCopyright: ""
-    property string appLicense: ""
+    property alias appCover: appCoverImage.source
 
-    property string privacyPolicyQmlFile: ""
+    property alias appDescription: description.text
+    property url appHomepage: ""
+    property alias appCopyright: copyright.text
+    property alias appLicense: license.text
+
+    property url privacyPolicyQmlFile: ""
     property ListModel changelogModel: null
     property string bugTrackerBaseUrl: ""
     property ListModel contributorsModel: null
     property string contributorsAvatarBasePath: ""
 
-    property string contactCompany: ""
-    property string contactName: ""
+    property alias contactCompany: company.text
+    property alias contactName: name.text
     property string contactStreet: ""
     property string contactHouseNo: ""
     property string contactZIP: ""
     property string contactCity: ""
-    property string contactCountry: ""
-    property string contactPhone: ""
-    property string contactFax: ""
+    property alias contactCountry: country.text
     property string contactEmail: ""
     property string contactWebsite: ""
 
-    property string bugUrl: ""
-    property string translateUrl: ""
+    property url bugUrl: ""
+    property url translateUrl: ""
 
     property alias licensesModel: licensesRepeater.model
 
-    property string paypalOrganization: ""
-    property string paypalItem: ""
-    property string paypalEmail: ""
-    property string paypalMessage: ""
-    property string paypalLabel: ""
-
-
-    property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { text-decoration: none; color: '" + Theme.secondaryHighlightColor + "' }</style><body>";
-    property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
+    property alias paypalOrganization: donation.organization
+    property alias paypalItem: donation.item
+    property alias paypalEmail: donation.email
+    property alias paypalMessage: donation.message
+    property alias paypalLabel: donation.label
 
     SilicaFlickable {
         id: aboutFlick
@@ -82,16 +77,16 @@ Page {
         VerticalScrollDecorator {}
 
         PullDownMenu {
-            visible: appHomepage || privacyPolicyQmlFile || changelogModel !== null || contributorsModel !== null
+            visible: appHomepage.toString().length > 0 || privacyPolicyQmlFile.toString().length > 0 || changelogModel !== null || contributorsModel !== null
             MenuItem {
                 text: qsTr("Homepage")
                 onClicked: Qt.openUrlExternally(appHomepage)
-                visible: appHomepage
+                visible: appHomepage.toString().length > 0
             }
             MenuItem {
                 text: qsTr("Privacy Policy")
-                onClicked: pageStack.push(Qt.resolvedUrl(privacyPolicyQmlFile))
-                visible: privacyPolicyQmlFile
+                onClicked: pageStack.push(privacyPolicyQmlFile)
+                visible: privacyPolicyQmlFile.length > 0
             }
             MenuItem {
                 text: qsTr("Changelog")
@@ -109,20 +104,20 @@ Page {
         Column {
             id: imgCol
             anchors { left: parent.left; right: parent.right }
-            PageHeader { title: qsTr("About") }
+            PageHeader { title: qsTr("About"); page: about }
 
             Image {
-                visible: appCover
+                id: appCoverImage
+                visible: status === Image.Ready
                 width: parent.width
                 smooth: true
-                source: appCover
             }
 
         }
 
        Column {
            id: aboutCol
-           anchors { left: parent.left; right: parent.right; leftMargin: Theme.paddingLarge; top: imgCol.bottom; topMargin: Theme.paddingMedium }
+           anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; rightMargin: Theme.horizontalPageMargin; top: imgCol.bottom; topMargin: Theme.paddingMedium }
            spacing: Theme.paddingSmall
 
             Label {
@@ -131,73 +126,72 @@ Page {
                 text: appTitle + " " + appVersion
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
+                wrapMode: Text.WordWrap
             }
 
             Text {
                 id: description
-                text: appDescription
                 width: parent.width
                 wrapMode: Text.WordWrap
                 textFormat: Text.PlainText
                 color: Theme.secondaryHighlightColor
+                visible: text
             }
 
             Text {
                 id: copyright
-                text: appCopyright
                 width: parent.width
                 wrapMode: Text.WordWrap
                 textFormat: Text.PlainText
                 color: Theme.primaryColor
-                visible: appCopyright
+                visible: text
             }
 
             Text {
                 id: license
-                text: _RICHTEXT_STYLESHEET_PREAMBLE + appLicense + _RICHTEXT_STYLESHEET_APPENDIX
                 width: parent.width
-                textFormat: Text.RichText
+                textFormat: Text.StyledText
                 color: Theme.primaryColor
+                linkColor: Theme.secondaryHighlightColor
                 font.pixelSize: Theme.fontSizeSmall
-                visible: appLicense
+                visible: text
+                onLinkActivated: Qt.openUrlExternally(link)
+                wrapMode: Text.WordWrap
             }
        }
 
        Column {
            id: contactCol
-           anchors { left: parent.left; right: parent.right; leftMargin: Theme.paddingLarge; top: aboutCol.bottom; topMargin: Theme.paddingMedium }
+           anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; top: aboutCol.bottom; topMargin: Theme.paddingMedium }
 
             SectionHeader { text: qsTr("Contact") }
 
             Text {
                 id: company
-                text: contactCompany
-                width: parent.width
+                width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
-                textFormat: Text.StyledText
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                visible: contactCompany
+                visible: text
             }
 
             Text {
                 id: name
-                text: contactName
-                width: parent.width
+                width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
-                textFormat: Text.StyledText
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                visible: contactName
+                visible: text
             }
 
             Text {
                 id: streetAndNo
-                property string san: "%1 %2"
-                text: san.arg(contactStreet).arg(contactHouseNo)
-                width: parent.width
+                text: contactStreet + " " + contactHouseNo
+                width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
-                textFormat: Text.StyledText
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 visible: contactStreet
@@ -205,11 +199,10 @@ Page {
 
             Text {
                 id: zibAndCity
-                property string zac: "%1 %2"
-                text: zac.arg(contactZIP).arg(contactCity)
-                width: parent.width
+                text: contactZIP + " " + contactCity
+                width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
-                textFormat: Text.StyledText
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 visible: contactCity
@@ -217,64 +210,70 @@ Page {
 
             Text {
                 id: country
-                text: contactCountry
-                width: parent.width
+                width: parent.width - Theme.horizontalPageMargin
                 wrapMode: Text.WordWrap
-                textFormat: Text.StyledText
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                visible: contactCountry
+                visible: text
             }
 
             Text {
                 id: email
-                text: _RICHTEXT_STYLESHEET_PREAMBLE + "<a href='mailto:" + contactEmail + "'>" + contactEmail + "</a>" + _RICHTEXT_STYLESHEET_APPENDIX
+                width: parent.width - Theme.horizontalPageMargin
+                text: "<a href='mailto:" + contactEmail + "'>" + contactEmail + "</a>"
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                textFormat: Text.RichText
+                textFormat: Text.StyledText
+                linkColor: Theme.secondaryHighlightColor
                 onLinkActivated: Qt.openUrlExternally(link)
                 visible: contactEmail
+                elide: Text.ElideRight
             }
 
             Text {
                 id: website
-                text: _RICHTEXT_STYLESHEET_PREAMBLE + "<a href='http://" + contactWebsite + "'>" + contactWebsite + "</a>" + _RICHTEXT_STYLESHEET_APPENDIX
+                width: parent.width - Theme.horizontalPageMargin
+                text: "<a href='http://" + contactWebsite + "'>" + contactWebsite + "</a>"
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
-                textFormat: Text.RichText
+                textFormat: Text.StyledText
+                linkColor: Theme.secondaryHighlightColor
                 onLinkActivated: Qt.openUrlExternally(link)
                 visible: contactWebsite
+                elide: Text.ElideRight
             }
         }
 
         Column {
             id: contributeCol
-            anchors { left: parent.left; right: parent.right; leftMargin: Theme.paddingLarge; top: contactCol.bottom; topMargin: Theme.paddingMedium }
+            anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; top: contactCol.bottom; topMargin: Theme.paddingMedium }
 
-            SectionHeader { text: qsTr("Contribute"); visible: translateUrl || bugUrl || donation.visible }
+            SectionHeader { text: qsTr("Contribute"); visible: translateUrl.toString().length > 0 || bugUrl.toString().length > 0 || donation.visible }
 
             Row {
                 id: contributeRow
                 width: parent.width - Theme.paddingLarge
+                spacing: Theme.paddingMedium
 
                 Button {
-                    width: parent.width/contributeRow.visibleChildren.length
+                    width: (parent.width/2) - (parent.spacing/2)
                     text: qsTr("Translate")
                     onClicked: Qt.openUrlExternally(translateUrl)
-                    visible: translateUrl
+                    visible: translateUrl.toString().length > 0
                 }
 
                 Button {
-                    width: parent.width/contributeRow.visibleChildren.length
+                    width: (parent.width/2) - (parent.spacing/2)
                     text: qsTr("Report bugs")
                     onClicked: Qt.openUrlExternally(bugUrl)
-                    visible: bugUrl
+                    visible: bugUrl.toString().length > 0
                 }
             }
 
             PaypalChooser {
                 id: donation
-                anchors { left: parent.left; leftMargin: -Theme.paddingLarge; right: parent.right }
+                anchors { left: parent.left; leftMargin: -Theme.horizontalPageMargin; right: parent.right }
                 organization: paypalOrganization
                 item: paypalItem
                 email: paypalEmail
@@ -296,12 +295,13 @@ Page {
                 width: parent.width
 
                 Text {
-                    text: _RICHTEXT_STYLESHEET_PREAMBLE + qsTranslate("LicensesModel", model.text) + _RICHTEXT_STYLESHEET_APPENDIX
-                    width: parent.width
+                    text: qsTranslate("LicensesModel", model.text)
+                    width: parent.width - Theme.horizontalPageMargin
                     wrapMode: Text.WordWrap
                     color: Theme.primaryColor
                     font.pixelSize: Theme.fontSizeSmall
-                    textFormat: Text.RichText
+                    textFormat: Text.StyledText
+                    linkColor: Theme.secondaryHighlightColor
                     onLinkActivated: Qt.openUrlExternally(link)
                 }
             }

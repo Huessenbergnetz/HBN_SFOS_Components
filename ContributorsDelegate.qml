@@ -38,14 +38,8 @@ ListItem {
     contentWidth: parent.width
 
     property string avatarPath
-    property string website: model.website ? model.website : ""
-    property string twitter: model.twitter ? model.twitter : ""
-    property string github: model.github ? model.github : ""
-    property string bitbucket: model.bitbucket ? model.bitbucket : ""
-    property string linkedin: model.linkedin ? model.linkedin : ""
-    property string weibo: model.weibo ? model.weibo : ""
 
-    enabled: (website || twitter || github || bitbucket || linkedin || weibo)
+    enabled: (model.website !== undefined || model.twitter !== undefined || model.github !== undefined || model.bitbucket !== undefined || model.linkedin !== undefined || model.weibo !== undefined)
 
     showMenuOnPressAndHold: true
 
@@ -56,7 +50,7 @@ ListItem {
     Row {
         id: contentRow
         spacing: 10
-        anchors { left: parent.left; leftMargin: Theme.paddingLarge; right: parent.right; rightMargin: Theme.paddingLarge }
+        anchors { left: parent.left; leftMargin: Theme.horizontalPageMargin; right: parent.right; rightMargin: Theme.horizontalPageMargin }
 
         Image {
             id:contribImage
@@ -65,6 +59,7 @@ ListItem {
             sourceSize.width: 86
             width: 86
             height: 86
+            anchors.verticalCenter: parent.verticalCenter
         }
 
         Column {
@@ -94,37 +89,37 @@ ListItem {
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
                     source: "images/icon-s-browser.png"
-                    visible: root.website
+                    visible: model.website !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
                     source: "images/icon-s-twitter.png"
-                    visible: root.twitter
+                    visible: model.twitter !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
                     source: "images/icon-s-github.png"
-                    visible: root.github
+                    visible: model.github !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
                     source: "images/icon-s-bitbucket.png"
-                    visible: root.bitbucket
+                    visible: model.bitbucket !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
                     source: "images/icon-s-linkedin.png"
-                    visible: root.linkedin
+                    visible: model.linkedin !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
                     source: "images/icon-s-weibo.png"
-                    visible: root.weibo
+                    visible: model.weibo !== undefined
                 }
             }
         }
@@ -135,33 +130,33 @@ ListItem {
         ContextMenu {
             MenuItem {
                 text: qsTr("Website")
-                visible: root.website
-                onClicked: Qt.openUrlExternally(root.website)
+                visible: model.website !== undefined
+                onClicked: Qt.openUrlExternally(model.website)
             }
             MenuItem {
                 text: "Twitter"
-                visible: root.twitter
-                onClicked: Qt.openUrlExternally("https://twitter.com/" + root.twitter)
+                visible: model.twitter !== undefined
+                onClicked: Qt.openUrlExternally("https://twitter.com/" + model.twitter)
             }
             MenuItem {
                 text: "GitHub"
-                visible: root.github
-                onClicked: Qt.openUrlExternally("https://github.com/" + root.github)
+                visible: model.github !== undefined
+                onClicked: Qt.openUrlExternally("https://github.com/" + model.github)
             }
             MenuItem {
                 text: "Bitbucket"
-                visible: root.bitbucket
-                onClicked: Qt.openUrlExternally("https://bitbucket.org/" + root.bitbucket)
+                visible: model.bitbucket !== undefined
+                onClicked: Qt.openUrlExternally("https://bitbucket.org/" + model.bitbucket)
             }
             MenuItem {
                 text: "LinkedIn"
-                visible: root.linkedin
-                onClicked: Qt.openUrlExternally("http://www.linkedin.com/profile/view?id=" + root.linkedin)
+                visible: model.linkedin !== undefined
+                onClicked: Qt.openUrlExternally("http://www.linkedin.com/profile/view?id=" + model.linkedin)
             }
             MenuItem {
                 text: qsTr("Sina Weibo")
-                visible: root.weibo
-                onClicked: Qt.openUrlExternally("http://www.weibo.com/" + root.weibo)
+                visible: model.weibo !== undefined
+                onClicked: Qt.openUrlExternally("http://www.weibo.com/" + model.weibo)
             }
         }
     }
