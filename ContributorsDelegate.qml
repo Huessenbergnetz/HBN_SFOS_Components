@@ -39,7 +39,7 @@ ListItem {
 
     property string avatarPath
 
-    enabled: (model.website !== undefined || model.twitter !== undefined || model.github !== undefined || model.bitbucket !== undefined || model.linkedin !== undefined || model.weibo !== undefined)
+    enabled: (model.website !== undefined || model.twitter !== undefined || model.github !== undefined || model.bitbucket !== undefined || model.linkedin !== undefined || model.weibo !== undefined || model.tmo !== undefined)
 
     showMenuOnPressAndHold: true
 
@@ -121,6 +121,12 @@ ListItem {
                     source: "images/icon-s-weibo.png"
                     visible: model.weibo !== undefined
                 }
+
+                Image {
+                    sourceSize.width: 32; sourceSize.height: 32
+                    source: "images/icon-s-tmo.png"
+                    visible: model.tmo !== undefined
+                }
             }
         }
     }
@@ -157,6 +163,12 @@ ListItem {
                 text: qsTr("Sina Weibo")
                 visible: model.weibo !== undefined
                 onClicked: Qt.openUrlExternally("http://www.weibo.com/" + model.weibo)
+            }
+            MenuItem {
+                //: abbreviation for talk.maemo.org
+                text: qsTr("TMO")
+                visible: model.tmo !== undefined
+                onClicked: Qt.openUrlExternally("https://talk.maemo.org/member.php?u=" + model.tmo)
             }
         }
     }
