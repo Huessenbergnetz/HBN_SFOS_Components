@@ -37,7 +37,6 @@ Page {
     property alias pageTitle: pHeader.title
 
     property string appTitle: ""
-    property string appVersion: ""
     property alias appCover: appCoverImage.source
 
     property alias appDescription: description.text
@@ -117,13 +116,19 @@ Page {
         Column {
             id: imgCol
             anchors { left: parent.left; right: parent.right }
-            PageHeader { id: pHeader; page: about }
+            PageHeader {
+                id: pHeader;
+                page: about
+                //% "About"
+                title: qsTrId("btsc-about")
+            }
 
             Image {
                 id: appCoverImage
                 visible: status === Image.Ready
                 width: parent.width
                 smooth: true
+                fillMode: Image.PreserveAspectFit
             }
 
         }

@@ -39,6 +39,8 @@ BackgroundItem {
     onClicked: {
         if (model.licenseFile) {
             pageStack.push("licenses/"+model.licenseFile, {componentName: model.name, componentAuthor: model.author, componentDescription: model.description ? model.description : "", componentUrl: model.website ? model.website : ""})
+        } else if (model.customLicenseFile) {
+            pageStack.push(model.customLicenseFile)
         }
     }
 
