@@ -320,7 +320,7 @@ Page {
                 email: paypalEmail
                 message: paypalMessage
                 label: paypalLabel
-                visible: label && email
+                visible: email && organization
             }
         }
 

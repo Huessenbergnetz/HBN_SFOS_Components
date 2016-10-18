@@ -101,7 +101,30 @@ Item {
         }
 
         if (currency !== "") {
-            url = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=" + email +"&lc=" + lang +"&item_name="+ organization +"&item_number=" + item +"&no_note=0&cn="+ message + "&no_shipping=1&currency_code="+ currency +"&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"
+
+            if (email === "" || organization === "") {
+                console.log("You have to specify your PayPal email address and an organization to get PayPal donations.")
+                return;
+            }
+
+            url = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=" + email + "&lc=" + lang + "&item_name="+ organization
+
+            if (item !== "") {
+                url += "&item_number="
+                url += item
+            }
+
+            if (message !== "") {
+                url += "&no_note=0&cn="
+                url += message
+            } else {
+                url += "&no_note=1"
+            }
+
+            url += "&no_shipping=1&currency_code="
+            url += currency
+
+            url += "&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHostedGuest"
 
             Qt.openUrlExternally(encodeURI(url))
         }
@@ -189,6 +212,8 @@ Item {
     ComboBox {
         id: donation
         anchors { left: parent.left; right: parent.right }
+        //% "Donate"
+        label: qsTrId("btsc-donate")
         menu: ContextMenu {
             Repeater {
                 model: donationModel
