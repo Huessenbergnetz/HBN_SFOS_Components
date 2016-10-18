@@ -2,7 +2,7 @@
 <context>
     <name/>
     <message id="btsc-homepage">
-        <location filename="../qml/AboutPage.qml" line="+92"/>
+        <location filename="../qml/AboutPage.qml" line="+91"/>
         <source>Homepage</source>
         <translation>Internetseite</translation>
     </message>
@@ -23,8 +23,13 @@
         <source>Contributors</source>
         <translation>Mitwirkende</translation>
     </message>
+    <message id="btsc-about">
+        <location line="+14"/>
+        <source>About</source>
+        <translation>Über</translation>
+    </message>
     <message id="btsc-contact">
-        <location line="+86"/>
+        <location line="+78"/>
         <source>Contact</source>
         <translation>Kontakt</translation>
     </message>
@@ -45,6 +50,7 @@
     </message>
     <message id="btsc-donate">
         <location line="+8"/>
+        <location filename="../qml/PaypalChooser.qml" line="+216"/>
         <source>Donate</source>
         <translation>Spenden</translation>
     </message>
@@ -85,7 +91,7 @@
         <translation>Internetseite</translation>
     </message>
     <message id="btsc-currency">
-        <location filename="../qml/PaypalChooser.qml" line="+139"/>
+        <location filename="../qml/PaypalChooser.qml" line="-54"/>
         <source>Currency</source>
         <translation>Währung</translation>
     </message>
@@ -205,7 +211,7 @@
         <translation>Forint</translation>
     </message>
     <message id="btsec-lic-item-text">
-        <location filename="../qml/LicenseDelegate.qml" line="+58"/>
+        <location filename="../qml/LicenseDelegate.qml" line="+60"/>
         <source>%1 %2 by %3</source>
         <oldsource>%1 %2 by %3 is licensed under %4.</oldsource>
         <extracomment>%1 is the name of the sofware, %2 is the version, %3 is the author's name</extracomment>
