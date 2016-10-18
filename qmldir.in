@@ -1,0 +1,7 @@
+module $$BTSC_MODULE_NAME
+AboutPage 1.0 AboutPage.qml
+Changelog 1.0 Changelog.qml
+Contributors 1.0 Contributors.qml
+IconWithHint 1.0 IconWithHint.qml
+InfoHint 1.0 InfoHint.qml
+PaypalChooser 1.0 PaypalChooser.qml
