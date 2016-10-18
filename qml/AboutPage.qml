@@ -42,8 +42,11 @@ Page {
 
     property alias appDescription: description.text
     property url appHomepage: ""
-    property alias appCopyright: copyright.text
+    property string appCopyrightYear: ""
+    property string appCopyrightHolder: ""
     property alias appLicense: license.text
+    property string appLicenseFile: ""
+    property url appCustomLicense
 
     property url privacyPolicyQmlFile: ""
 
@@ -80,7 +83,7 @@ Page {
         id: aboutFlick
         anchors.fill: parent
         contentHeight: imgCol.height + aboutCol.height + contactCol.height + contributeCol.height + licensesCol.height + Theme.paddingLarge + 4 * Theme.paddingMedium
-        VerticalScrollDecorator {}
+        VerticalScrollDecorator { flickable: aboutFlick; page: about }
 
         PullDownMenu {
             visible: appHomepage.toString().length > 0 || privacyPolicyQmlFile.toString().length > 0 || changelogModel !== null || contributorsModel !== null
@@ -154,19 +157,34 @@ Page {
                 wrapMode: Text.WordWrap
                 textFormat: Text.PlainText
                 color: Theme.primaryColor
-                visible: text
+                text: appCopyrightYear !== "" ? String("© %1, %2").arg(appCopyrightYear).arg(appCopyrightHolder) : String("© %1").arg(appCopyrightHolder)
+                visible: appCopyrightHolder
             }
 
-            Text {
-                id: license
-                width: parent.width
-                textFormat: Text.StyledText
-                color: Theme.primaryColor
-                linkColor: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeSmall
-                visible: text
-                onLinkActivated: Qt.openUrlExternally(link)
-                wrapMode: Text.WordWrap
+            BackgroundItem {
+                id: licenseBi
+                anchors { left: parent.left; right: parent.right; leftMargin: -Theme.horizontalPageMargin; rightMargin: -Theme.horizontalPageMargin }
+                contentHeight: license.height
+
+                enabled: appCustomLicense.toString().length > 0 || appLicenseFile !== ""
+
+                onClicked: {
+                    if (appCustomLicense.toString().length > 0) {
+                        pageStack.push(appCustomLicense)
+                    } else if (appLicenseFile !== "") {
+                        pageStack.push("licenses/"+appLicenseFile, {componentName: appTitle, componentAuthor: appCopyrightHolder})
+                    }
+                }
+
+                Label {
+                    id: license
+                    anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; rightMargin: Theme.horizontalPageMargin }
+                    textFormat: Text.PlainText
+                    color: licenseBi.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    font.pixelSize: Theme.fontSizeSmall
+                    wrapMode: Text.WordWrap
+                }
+
             }
        }
 
@@ -309,7 +327,6 @@ Page {
         Column {
             id: licensesCol
             anchors { left: parent.left; right: parent.right; top: contributeCol.bottom; topMargin: Theme.paddingMedium }
-            spacing: Theme.paddingSmall
 
             SectionHeader {
                 //% "3rd party components"
@@ -320,10 +337,11 @@ Page {
             Text {
                 anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; rightMargin: Theme.horizontalPageMargin }
                 color: Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeSmall
-                //% "%1 uses the following third party components."
-                text: qsTrId("btsc-third-party-desc")
+                font.pixelSize: Theme.fontSizeExtraSmall
+                //% "%1 uses the following components:"
+                text: qsTrId("btsc-third-party-desc").arg(appTitle)
                 visible: licensesRepeater.count > 0
+                wrapMode: Text.WordWrap
             }
 
             Repeater {

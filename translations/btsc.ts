@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message id="btsc-homepage">
-        <location filename="../qml/AboutPage.qml" line="+89"/>
+        <location filename="../qml/AboutPage.qml" line="+92"/>
         <source>Homepage</source>
         <translation type="unfinished"></translation>
     </message>
@@ -26,7 +26,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="btsc-contact">
-        <location line="+71"/>
+        <location line="+86"/>
         <source>Contact</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51,13 +51,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="btsc-third-party">
-        <location line="+23"/>
+        <location line="+22"/>
         <source>3rd party components</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="btsc-third-party-desc">
         <location line="+9"/>
-        <source>%1 uses the following third party components.</source>
+        <source>%1 uses the following components:</source>
+        <oldsource>%1 uses the following third party components.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message id="btsc-new">
@@ -206,15 +207,39 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="btsec-lic-item-text">
-        <location filename="../qml/LicenseDelegate.qml" line="+51"/>
-        <source>%1 %2 by %3 is licensed under %4.</source>
-        <extracomment>%1 is the name of the sofware, %2 is the version, %3 is the author&apos;s name, %4 is the license name</extracomment>
+        <location filename="../qml/LicenseDelegate.qml" line="+58"/>
+        <source>%1 %2 by %3</source>
+        <oldsource>%1 %2 by %3 is licensed under %4.</oldsource>
+        <extracomment>%1 is the name of the sofware, %2 is the version, %3 is the author&apos;s name</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message id="btsec-lic-item-without-version-text">
         <location line="+3"/>
-        <source>%1 by %2 is licensed under %3.</source>
-        <extracomment>%1 is the name of the sofware, %2 is the author&apos;s name, %3 is the license name</extracomment>
+        <source>%1 by %2.</source>
+        <oldsource>%1 by %2 is licensed under %3.</oldsource>
+        <extracomment>%1 is the name of the sofware, %2 is the author&apos;s name</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="btsc-license-web">
+        <location filename="../qml/licenses/LicenseBase.qml" line="+56"/>
+        <source>License website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="btsc-comp-web">
+        <location line="+7"/>
+        <source>Visit %1</source>
+        <extracomment>%1 is the name of the 3rd party component</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="btsc-back-to-top">
+        <location line="+8"/>
+        <source>Back to top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="btsc-license-intro">
+        <location line="+33"/>
+        <source>%1 is available under the terms of the following license:</source>
+        <extracomment>%1 is the name of the 3rd party app/lib/component</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
