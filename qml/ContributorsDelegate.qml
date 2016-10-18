@@ -68,7 +68,7 @@ ListItem {
             width: parent.width - contribImage.width
 
             Label {
-                text: qsTranslate("ContributorsModel", model.name)
+                text: model.name
                 font.pixelSize: Theme.fontSizeSmall
                 width: parent.width
                 wrapMode: Text.WordWrap
@@ -76,7 +76,7 @@ ListItem {
             }
 
             Label {
-                text: qsTranslate("ContributorsModel", model.role)
+                text: model.role
                 font.pixelSize: Theme.fontSizeExtraSmall
                 width: parent.width
                 wrapMode: Text.WordWrap
@@ -89,43 +89,43 @@ ListItem {
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
-                    source: "images/icon-s-browser.png"
+                    source: "icons/icon-s-browser.png"
                     visible: model.website !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
-                    source: "images/icon-s-twitter.png"
+                    source: "icons/icon-s-twitter.png"
                     visible: model.twitter !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
-                    source: "images/icon-s-github.png"
+                    source: "icons/icon-s-github.png"
                     visible: model.github !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
-                    source: "images/icon-s-bitbucket.png"
+                    source: "icons/icon-s-bitbucket.png"
                     visible: model.bitbucket !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
-                    source: "images/icon-s-linkedin.png"
+                    source: "icons/icon-s-linkedin.png"
                     visible: model.linkedin !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
-                    source: "images/icon-s-weibo.png"
+                    source: "icons/icon-s-weibo.png"
                     visible: model.weibo !== undefined
                 }
 
                 Image {
                     sourceSize.width: 32; sourceSize.height: 32
-                    source: "images/icon-s-tmo.png"
+                    source: "icons/icon-s-tmo.png"
                     visible: model.tmo !== undefined
                 }
             }

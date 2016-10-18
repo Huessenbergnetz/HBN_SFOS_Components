@@ -34,8 +34,8 @@ import Sailfish.Silica 1.0
 Page {
     id: contributorsPage
 
-    property alias avatarBasePath: contDelegate.avatarPath
-    property alias avatarPlaceholderPath: contDelegate.placeHolderPath
+    property string avatarBasePath
+    property string avatarPlaceholderPath
     property alias model: contributorsList.model
 
 
@@ -53,12 +53,12 @@ Page {
         section {
             property: 'section'
             delegate: SectionHeader {
-                text: qsTranslate("ContributorsModel", section)
+                text: section
                 height: Theme.itemSizeExtraSmall
             }
         }
 
-        delegate: ContributorsDelegate { id: contDelegate }
+        delegate: ContributorsDelegate { avatarPath: contributorsPage.avatarBasePath; placeHolderPath: contributorsPage.avatarPlaceholderPath }
     }
 }
 
