@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[bt-sfos-components.main]
+file_filter = translations/btsc_<lang>.ts
+source_file = translations/btsc.ts
+source_lang = en
+type = QT
