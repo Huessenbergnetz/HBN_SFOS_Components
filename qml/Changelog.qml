@@ -36,7 +36,10 @@ Page {
             id: headerContainer
             width: changelogPage.width
 
-            PageHeader { title: qsTr("Changelog") }
+            PageHeader {
+                //% "Changelog"
+                title: qsTrId("btsc-changelog")
+            }
 
             Row {
                 width: parent.width
@@ -56,7 +59,8 @@ Page {
                         color: Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         horizontalAlignment: Text.AlignHCenter
-                        text: qsTr("New")
+                        //% "New"
+                        text: qsTrId("btsc-new")
                     }
                 }
 
@@ -75,7 +79,8 @@ Page {
                         color: Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         horizontalAlignment: Text.AlignHCenter
-                        text: qsTr("Improved")
+                        //% "Improved"
+                        text: qsTrId("btsc-improved")
                     }
                 }
 
@@ -94,7 +99,8 @@ Page {
                         color: Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         horizontalAlignment: Text.AlignHCenter
-                        text: qsTr("Fixed")
+                        //% "Fixed"
+                        text: qsTrId("btsc-fixed")
                     }
                 }
 
@@ -113,7 +119,8 @@ Page {
                         color: Theme.secondaryColor
                         font.pixelSize: Theme.fontSizeExtraSmall
                         horizontalAlignment: Text.AlignHCenter
-                        text: qsTr("Note")
+                        //% "Note"
+                        text: qsTrId("btsc-note")
                     }
                 }
             }

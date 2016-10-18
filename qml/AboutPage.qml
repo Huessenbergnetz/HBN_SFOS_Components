@@ -34,6 +34,8 @@ import Sailfish.Silica 1.0
 Page {
     id: about
 
+    property alias pageTitle: pHeader.title
+
     property string appTitle: ""
     property string appVersion: ""
     property alias appCover: appCoverImage.source
@@ -44,10 +46,13 @@ Page {
     property alias appLicense: license.text
 
     property url privacyPolicyQmlFile: ""
+
     property ListModel changelogModel: null
     property string bugTrackerBaseUrl: ""
+
     property ListModel contributorsModel: null
     property string contributorsAvatarBasePath: ""
+    property string contributorsPlaceholderPath: ""
 
     property alias contactCompany: company.text
     property alias contactName: name.text
@@ -69,6 +74,7 @@ Page {
     property alias paypalEmail: donation.email
     property alias paypalMessage: donation.message
     property alias paypalLabel: donation.label
+    property alias paypalDescription: donation.description
 
     SilicaFlickable {
         id: aboutFlick
@@ -79,23 +85,27 @@ Page {
         PullDownMenu {
             visible: appHomepage.toString().length > 0 || privacyPolicyQmlFile.toString().length > 0 || changelogModel !== null || contributorsModel !== null
             MenuItem {
-                text: qsTr("Homepage")
+                //% "Homepage"
+                text: qsTrId("btsc-homepage")
                 onClicked: Qt.openUrlExternally(appHomepage)
                 visible: appHomepage.toString().length > 0
             }
             MenuItem {
-                text: qsTr("Privacy Policy")
+                //% "Privacy Policy"
+                text: qsTrId("btsc-priv-policy")
                 onClicked: pageStack.push(privacyPolicyQmlFile)
                 visible: privacyPolicyQmlFile.length > 0
             }
             MenuItem {
-                text: qsTr("Changelog")
+                //% "Changelog"
+                text: qsTrId("btsc-changelog")
                 onClicked: pageStack.push(Qt.resolvedUrl("Changelog.qml"), {model: changelogModel, bugTrackerBase: bugTrackerBaseUrl})
                 visible: changelogModel !== null
             }
             MenuItem {
-                text: qsTr("Contributors")
-                onClicked: pageStack.push(Qt.resolvedUrl("Contributors.qml"), { avatarBasePath: contributorsAvatarBasePath, model: contributorsModel })
+                //% "Contributors"
+                text: qsTrId("btsc-contributors")
+                onClicked: pageStack.push(Qt.resolvedUrl("Contributors.qml"), { avatarBasePath: contributorsAvatarBasePath, model: contributorsModel, avatarPlaceholderPath: contributorsPlaceholderPath })
                 visible: contributorsModel !== null
             }
         }
@@ -104,7 +114,7 @@ Page {
         Column {
             id: imgCol
             anchors { left: parent.left; right: parent.right }
-            PageHeader { title: qsTr("About"); page: about }
+            PageHeader { id: pHeader; page: about }
 
             Image {
                 id: appCoverImage
@@ -123,7 +133,7 @@ Page {
             Label {
                 id: labelName
                 textFormat: Text.PlainText
-                text: appTitle + " " + appVersion
+                text: appTitle + " " + Qt.application.version
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
                 wrapMode: Text.WordWrap
@@ -164,7 +174,8 @@ Page {
            id: contactCol
            anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; top: aboutCol.bottom; topMargin: Theme.paddingMedium }
 
-            SectionHeader { text: qsTr("Contact") }
+           //% "Contact"
+            SectionHeader { text: qsTrId("btsc-contact") }
 
             Text {
                 id: company
@@ -249,7 +260,11 @@ Page {
             id: contributeCol
             anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; top: contactCol.bottom; topMargin: Theme.paddingMedium }
 
-            SectionHeader { text: qsTr("Contribute"); visible: translateUrl.toString().length > 0 || bugUrl.toString().length > 0 || donation.visible }
+            SectionHeader {
+                //% "Contribute"
+                text: qsTrId("btsc-contribute")
+                visible: translateUrl.toString().length > 0 || bugUrl.toString().length > 0 || donation.visible
+            }
 
             Row {
                 id: contributeRow
@@ -258,17 +273,25 @@ Page {
 
                 Button {
                     width: (parent.width/2) - (parent.spacing/2)
-                    text: qsTr("Translate")
+                    //% "Translate"
+                    text: qsTrId("btsc-translate")
                     onClicked: Qt.openUrlExternally(translateUrl)
                     visible: translateUrl.toString().length > 0
                 }
 
                 Button {
                     width: (parent.width/2) - (parent.spacing/2)
-                    text: qsTr("Report bugs")
+                    //% "Report bugs"
+                    text: qsTrId("btsc-report-bugs")
                     onClicked: Qt.openUrlExternally(bugUrl)
                     visible: bugUrl.toString().length > 0
                 }
+            }
+
+            SectionHeader {
+                //% "Donate"
+                text: qsTrId("btsc-donate")
+                visible: donation.label && email
             }
 
             PaypalChooser {
@@ -285,25 +308,29 @@ Page {
 
         Column {
             id: licensesCol
-            anchors { left: parent.left; right: parent.right; leftMargin: Theme.paddingLarge; top: contributeCol.bottom; topMargin: Theme.paddingMedium }
+            anchors { left: parent.left; right: parent.right; top: contributeCol.bottom; topMargin: Theme.paddingMedium }
             spacing: Theme.paddingSmall
 
-            SectionHeader { text: qsTr("3rd party licenses"); visible: licensesRepeater.count > 0 }
+            SectionHeader {
+                //% "3rd party components"
+                text: qsTrId("btsc-third-party")
+                visible: licensesRepeater.count > 0
+            }
+
+            Text {
+                anchors { left: parent.left; right: parent.right; leftMargin: Theme.horizontalPageMargin; rightMargin: Theme.horizontalPageMargin }
+                color: Theme.secondaryColor
+                font.pixelSize: Theme.fontSizeSmall
+                //% "%1 uses the following third party components."
+                text: qsTrId("btsc-third-party-desc")
+                visible: licensesRepeater.count > 0
+            }
 
             Repeater {
                 id: licensesRepeater
                 width: parent.width
 
-                Text {
-                    text: qsTranslate("LicensesModel", model.text)
-                    width: parent.width - Theme.horizontalPageMargin
-                    wrapMode: Text.WordWrap
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeSmall
-                    textFormat: Text.StyledText
-                    linkColor: Theme.secondaryHighlightColor
-                    onLinkActivated: Qt.openUrlExternally(link)
-                }
+                delegate: LicenseDelegate {}
             }
         }
     }

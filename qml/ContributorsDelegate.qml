@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015, Buschtrommel
+Copyright (c) 2015-2016, Buschtrommel
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -38,6 +38,7 @@ ListItem {
     contentWidth: parent.width
 
     property string avatarPath
+    property string placeHolderPath
 
     enabled: (model.website !== undefined || model.twitter !== undefined || model.github !== undefined || model.bitbucket !== undefined || model.linkedin !== undefined || model.weibo !== undefined || model.tmo !== undefined)
 
@@ -54,7 +55,7 @@ ListItem {
 
         Image {
             id:contribImage
-            source: model.image ? avatarPath + "/" + model.image : "images/placeholder.png"
+            source: model.image ? avatarPath + "/" + model.image : placeHolderPath
             sourceSize.height: 86
             sourceSize.width: 86
             width: 86
@@ -135,7 +136,8 @@ ListItem {
         id: contextMenu
         ContextMenu {
             MenuItem {
-                text: qsTr("Website")
+                //% "Website"
+                text: qsTrId("btsc-website")
                 visible: model.website !== undefined
                 onClicked: Qt.openUrlExternally(model.website)
             }
@@ -160,13 +162,12 @@ ListItem {
                 onClicked: Qt.openUrlExternally("http://www.linkedin.com/profile/view?id=" + model.linkedin)
             }
             MenuItem {
-                text: qsTr("Sina Weibo")
+                text: "Sina Weibo"
                 visible: model.weibo !== undefined
                 onClicked: Qt.openUrlExternally("http://www.weibo.com/" + model.weibo)
             }
             MenuItem {
-                //: abbreviation for talk.maemo.org
-                text: qsTr("TMO")
+                text: "TMO"
                 visible: model.tmo !== undefined
                 onClicked: Qt.openUrlExternally("https://talk.maemo.org/member.php?u=" + model.tmo)
             }

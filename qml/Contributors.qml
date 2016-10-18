@@ -34,14 +34,18 @@ import Sailfish.Silica 1.0
 Page {
     id: contributorsPage
 
-    property string avatarBasePath
+    property alias avatarBasePath: contDelegate.avatarPath
+    property alias avatarPlaceholderPath: contDelegate.placeHolderPath
     property alias model: contributorsList.model
 
 
     SilicaListView {
         id: contributorsList
         anchors.fill: parent
-        header: PageHeader { title: qsTr("Contributors") }
+        header: PageHeader {
+            //% "Contributors"
+            title: qsTrId("btsc-contributors")
+        }
         spacing: 10
 
         VerticalScrollDecorator {}
@@ -54,7 +58,7 @@ Page {
             }
         }
 
-        delegate: ContributorsDelegate { avatarPath: contributorsPage.avatarBasePath }
+        delegate: ContributorsDelegate { id: contDelegate }
     }
 }
 
