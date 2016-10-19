@@ -313,7 +313,7 @@ Page {
             SectionHeader {
                 //% "Donate"
                 text: qsTrId("btsc-donate")
-                visible: donation.label && email
+                visible: donation.visible
             }
 
             PaypalChooser {
