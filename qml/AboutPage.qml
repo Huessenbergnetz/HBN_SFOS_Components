@@ -45,9 +45,9 @@ Page {
     property string appCopyrightHolder: ""
     property alias appLicense: license.text
     property string appLicenseFile: ""
-    property url appCustomLicense
+    property string appCustomLicense
 
-    property url privacyPolicyQmlFile: ""
+    property string privacyPolicyQmlFile: ""
 
     property ListModel changelogModel: null
     property string bugTrackerBaseUrl: ""
@@ -85,7 +85,6 @@ Page {
         VerticalScrollDecorator { flickable: aboutFlick; page: about }
 
         PullDownMenu {
-            visible: appHomepage.toString().length > 0 || privacyPolicyQmlFile.toString().length > 0 || changelogModel !== null || contributorsModel !== null
             MenuItem {
                 //% "Homepage"
                 text: qsTrId("btsc-homepage")
