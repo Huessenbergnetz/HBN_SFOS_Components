@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message id="btsc-homepage">
-        <location filename="../qml/AboutPage.qml" line="+91"/>
+        <location filename="../qml/AboutPage.qml" line="+90"/>
         <source>Homepage</source>
         <translation type="unfinished"></translation>
     </message>

@@ -63,7 +63,7 @@
         <location line="+9"/>
         <source>%1 uses the following components:</source>
         <oldsource>%1 uses the following third party components.</oldsource>
-        <translation type="unfinished"/>
+        <translation>%1 nutzt die folgenden Komponenten:</translation>
     </message>
     <message id="btsc-new">
         <location filename="../qml/Changelog.qml" line="+22"/>
