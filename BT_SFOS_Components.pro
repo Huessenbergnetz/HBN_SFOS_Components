@@ -14,7 +14,8 @@ DISTFILES += \
     qml/licenses/LGPLv3.qml \
     qml/licenses/BSD-3.qml \
     qml/licenses/GPLv3.qml \
-    qml/licenses/CC-BY-4_0.qml
+    qml/licenses/CC-BY-4_0.qml \
+    qml/licenses/GPLv2.qml
 
 OTHER_FILES += \
     qmldir.in
