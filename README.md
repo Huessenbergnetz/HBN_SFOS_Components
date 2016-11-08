@@ -10,7 +10,7 @@ A better, and on the long run more comfortable solution, is to clone this reposi
 branch/tag to work with. Or integrate it as a submodule into your project.
 
 ### Cloning and branching
-    git clone --branch v1.0.2 https://github.com/Buschtrommel/BT_SFOS_Components.git
+    git clone --branch v1.0.3 https://github.com/Buschtrommel/BT_SFOS_Components.git
 
 ### Integrate into your project
 You can copy the files or, the better way, organize your project as subdirs project.
@@ -40,7 +40,8 @@ Optionally you can define the installation directories independently, but settin
     
 ### Optional variables
 By default, all license page files will be installed. You can use the `BTSC_LICENSES` variable to specify the
-license pages you want to install. Have a look into the [qml/licenses](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/qml/licenses) directory for the available licen page files and their names. To select only some pages to install, set their
+license pages you want to install. Have a look into the [qml/licenses](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/qml/licenses)
+directory for the available license page files and their names. To select only some pages to install, set their
 base names withouth the extensions to the `BTSC_LICENSES` variable.
 
     BTSC_LICENSES="GPLv3 LGPLv3"
@@ -65,7 +66,7 @@ your QGuiApplication). The base name of the translation files is *btsc*, the del
 
 ### PaypalChooser
 
-The *PaypalChooser* can be used to offer an ComboBox that lets the user choose from a list of currecies. If the user
+The *PaypalChooser* can be used to offer an ComboBox that lets the user choose from a list of currencies. If the user
 chooses a currency, a browser window will be opened with a PayPal donation site.
 
     import harbour.myapp.btsc
