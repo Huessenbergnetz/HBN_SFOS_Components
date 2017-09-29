@@ -71,12 +71,15 @@ Page {
 
     property alias licensesModel: licensesRepeater.model
 
-    property alias paypalOrganization: donation.organization
-    property alias paypalItem: donation.item
-    property alias paypalEmail: donation.email
-    property alias paypalMessage: donation.message
-    property alias paypalLabel: donation.label
-    property alias paypalDescription: donation.description
+    property alias paypalOrganization: paypalDonation.organization
+    property alias paypalItem: paypalDonation.item
+    property alias paypalEmail: paypalDonation.email
+    property alias paypalMessage: paypalDonation.message
+    property alias paypalLabel: paypalDonation.label
+    property alias paypalDescription: paypalDonation.description
+
+    property url bitcoinURI
+    property url bitcoinQRImage
 
     SilicaFlickable {
         id: aboutFlick
@@ -285,7 +288,7 @@ Page {
             SectionHeader {
                 //% "Contribute"
                 text: qsTrId("btsc-contribute")
-                visible: translateUrl.toString().length > 0 || bugUrl.toString().length > 0 || donation.visible
+                visible: translateUrl.toString().length > 0 || bugUrl.toString().length > 0
             }
 
             Row {
@@ -311,20 +314,43 @@ Page {
             }
 
             SectionHeader {
-                //% "Donate"
-                text: qsTrId("btsc-donate")
-                visible: donation.visible
+                //% "Donate via PayPal"
+                text: qsTrId("btsc-donate-via-paypal")
+                visible: paypalDonation.visible
             }
 
             PaypalChooser {
-                id: donation
+                id: paypalDonation
                 anchors { left: parent.left; leftMargin: -Theme.horizontalPageMargin; right: parent.right }
-                organization: paypalOrganization
-                item: paypalItem
-                email: paypalEmail
-                message: paypalMessage
-                label: paypalLabel
+                //% "Select currency"
+                label: qsTrId("btsc-select-currency")
                 visible: email && organization
+            }
+
+            SectionHeader {
+                //% "Donate via Bitcoin"
+                text: qsTrId("btsc-donate-via-bitcoin")
+                visible: (bitcoinQr.status === Image.Ready || bitcoinQr.status === Image.Loading) || (bitcoinURI.toString() !== "")
+            }
+
+            Image {
+                id: bitcoinQr
+                anchors.horizontalCenter: parent.horizontalCenter
+                visible: bitcoinQRImage.toString() !== ""
+                source: bitcoinQRImage
+            }
+
+            Text {
+                id: bitcoinLink
+                width: parent.width - Theme.horizontalPageMargin
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                text: String("<a href='%1'>%2</a>").arg(bitcoinURI.toString()).arg(bitcoinURI.toString().slice(bitcoinURI.toString().indexOf(':') + 1, bitcoinURI.toString().lastIndexOf('?')))
+                visible: bitcoinURI.toString() !== ""
+                onLinkActivated: Qt.openUrlExternally(link)
+                textFormat: Text.StyledText
+                linkColor: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeSmall
+                horizontalAlignment: (bitcoinQr.status === Image.Ready || bitcoinQr.status === Image.Loading) ? Text.AlignHCenter : Text.AlignLeft
             }
         }
 

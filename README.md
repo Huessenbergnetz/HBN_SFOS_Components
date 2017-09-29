@@ -84,7 +84,7 @@ chooses a currency, a browser window will be opened with a PayPal donation site.
         // message shown to the donator (optional)
         message: "Thank you for your donation."
         
-        // label shown on the ComboBox (optional), default is "Donate"
+        // label shown on the ComboBox (optional), default is "Donate via PayPal in"
         label: "Donate"
         
         // description below the ComboBox (optional)
@@ -182,7 +182,7 @@ Implements an about page and optionally pages about contributors, changelog and 
         // look further down to see an example for a licenses model
         licensesModel: UsedComponentsModel {}
         
-        // information to show a PaypalChooser on the AboutPage (optiona)
+        // information to show a PaypalChooser on the AboutPage (optional)
         // have a look up the page for more information about the properties
         paypalOrganization: "Me or my organization"
         paypalItem: "MyApp"
@@ -190,6 +190,12 @@ Implements an about page and optionally pages about contributors, changelog and 
         paypalMessage: "Thank you for your donation."
         paypalLabel: "Donate"
         paypalDescription: "A donation would be nice."
+
+	// information to show a Bitcoin donation link on the AboutPage (optional)
+	// a bitcoin URI that will show the bitcoin address linked to the URI
+	bitcoinURI: "bitcoin:12TmPhHeEoc5htME4D6aaGLsgTMfWNm6re?label=BT%20SFOS%20Components&message=Thank%20you%20for%20your%20donation%21"
+	// URL of a bitcoin QR code image
+	bitcoinQRImage: Qt.resolvedUrl("/usr/share/harbour-myapp/images/bitcoin-qr-code.png")
     }
     
 ### Changelog model example

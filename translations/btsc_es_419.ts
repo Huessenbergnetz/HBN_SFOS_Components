@@ -2,7 +2,7 @@
 <context>
     <name/>
     <message id="btsc-homepage">
-        <location filename="../qml/AboutPage.qml" line="+90"/>
+        <location filename="../qml/AboutPage.qml" line="+93"/>
         <source>Homepage</source>
         <translation>Inicio</translation>
     </message>
@@ -48,13 +48,23 @@
         <source>Report bugs</source>
         <translation>Reporta errores</translation>
     </message>
-    <message id="btsc-donate">
+    <message id="btsc-donate-via-paypal">
         <location line="+8"/>
-        <source>Donate</source>
-        <translation>Dona</translation>
+        <source>Donate via PayPal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="btsc-select-currency">
+        <location line="+8"/>
+        <source>Select currency</source>
+        <translation type="unfinished"/>
+    </message>
+    <message id="btsc-donate-via-bitcoin">
+        <location line="+6"/>
+        <source>Donate via Bitcoin</source>
+        <translation type="unfinished"/>
     </message>
     <message id="btsc-third-party">
-        <location line="+22"/>
+        <location line="+31"/>
         <source>3rd party components</source>
         <translation>Componentes de 3ros</translation>
     </message>
