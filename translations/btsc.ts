@@ -52,7 +52,6 @@
     </message>
     <message id="btsc-donate">
         <location line="+8"/>
-        <location filename="../qml/PaypalChooser.qml" line="+216"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -93,7 +92,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="btsc-currency">
-        <location filename="../qml/PaypalChooser.qml" line="-54"/>
+        <location filename="../qml/PaypalChooser.qml" line="+161"/>
         <source>Currency</source>
         <translation type="unfinished"></translation>
     </message>
@@ -210,6 +209,11 @@
     <message id="btsc-huf">
         <location line="+2"/>
         <source>Hungarian Forint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="btsc-donate-via-paypal-in">
+        <location line="+8"/>
+        <source>Donate via PayPal in</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="btsec-lic-item-text">

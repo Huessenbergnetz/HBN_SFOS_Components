@@ -47,13 +47,12 @@ Item {
     function openDonation(currency)
     {
         var lang = "";
-        var locale = new String(Qt.locale().name);
-        var cc = locale.slice(3, 5);
+        var cc = Qt.locale().name.slice(3, 5);
 
-        console.log(locale)
+        console.log(Qt.locale().name)
         console.log(cc)
 
-        switch (locale) {
+        switch (Qt.locale().name) {
         case "da_DK":
         case "he_IL":
         case "id_ID":
@@ -67,7 +66,7 @@ Item {
         case "zh_CN":
         case "zh_HK":
         case "zh_TW":
-            lang = locale;
+            lang = Qt.locale().name;
             break;
         default:
             lang = "";
@@ -212,8 +211,8 @@ Item {
     ComboBox {
         id: donation
         anchors { left: parent.left; right: parent.right }
-        //% "Donate"
-        label: qsTrId("btsc-donate")
+        //% "Donate via PayPal in"
+        label: qsTrId("btsc-donate-via-paypal-in")
         menu: ContextMenu {
             Repeater {
                 model: donationModel

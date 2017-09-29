@@ -2,7 +2,7 @@
 <context>
     <name/>
     <message id="btsc-homepage">
-        <location filename="../qml/AboutPage.qml" line="+91"/>
+        <location filename="../qml/AboutPage.qml" line="+90"/>
         <source>Homepage</source>
         <translation>Internetseite</translation>
     </message>
@@ -50,7 +50,6 @@
     </message>
     <message id="btsc-donate">
         <location line="+8"/>
-        <location filename="../qml/PaypalChooser.qml" line="+216"/>
         <source>Donate</source>
         <translation>Spenden</translation>
     </message>
@@ -91,7 +90,7 @@
         <translation>Internetseite</translation>
     </message>
     <message id="btsc-currency">
-        <location filename="../qml/PaypalChooser.qml" line="-54"/>
+        <location filename="../qml/PaypalChooser.qml" line="+161"/>
         <source>Currency</source>
         <translation>Währung</translation>
     </message>
@@ -209,6 +208,11 @@
         <location line="+2"/>
         <source>Hungarian Forint</source>
         <translation>Forint</translation>
+    </message>
+    <message id="btsc-donate-via-paypal-in">
+        <location line="+8"/>
+        <source>Donate via PayPal in</source>
+        <translation>Spenden über PayPal in</translation>
     </message>
     <message id="btsec-lic-item-text">
         <location filename="../qml/LicenseDelegate.qml" line="+60"/>
