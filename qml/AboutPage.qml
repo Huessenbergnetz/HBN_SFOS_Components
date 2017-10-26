@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2015, Buschtrommel
+Copyright (c) 2015-2017, Matthias Fehring
+https://github.com/Buschtrommel/BT_SFOS_Components
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -65,6 +66,7 @@ Page {
     property alias contactCountry: country.text
     property string contactEmail: ""
     property string contactWebsite: ""
+    property url contactWebsiteLink: ""
 
     property url bugUrl: ""
     property url translateUrl: ""
@@ -270,7 +272,7 @@ Page {
             Text {
                 id: website
                 width: parent.width - Theme.horizontalPageMargin
-                text: "<a href='http://" + contactWebsite + "'>" + contactWebsite + "</a>"
+                text: "<a href='" + contactWebsiteLink + "'>" + contactWebsite + "</a>"
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 textFormat: Text.StyledText
