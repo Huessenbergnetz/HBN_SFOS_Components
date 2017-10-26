@@ -1,5 +1,5 @@
 # BT SFOS Components
-A set of QML components to use on Sailfish OS. 
+A set of QML components to use on Sailfish OS.
 
 ## Integrate into your Sailfish OS application
 The easiest way is to simple download the latest release tarball. You can than copy the files you want to use
@@ -10,13 +10,13 @@ A better, and on the long run more comfortable solution, is to clone this reposi
 branch/tag to work with. Or integrate it as a submodule into your project.
 
 ### Cloning and branching
-    git clone --branch v1.1.0 https://github.com/Buschtrommel/BT_SFOS_Components.git
+    git clone --branch v1.1.2 https://github.com/Buschtrommel/BT_SFOS_Components.git
 
 ### Integrate into your project
 You can copy the files or, the better way, organize your project as subdirs project.
 
     TEMPLATE = subdirs
-    
+
     SUBDIRS += my-saylfish-app
     SUBDIRS += BT_SFOS_COMPONENTS
 
@@ -37,7 +37,7 @@ Optionally you can define the installation directories independently, but settin
 
     BTSC_INSTALL_ICONS_DIR // install path for the icons
     INSTALL_TRANSLATIONS_DIR // install path for the translation files (*.qm)
-    
+
 ### Optional variables
 By default, all license page files will be installed. You can use the `BTSC_LICENSES` variable to specify the
 license pages you want to install. Have a look into the [qml/licenses](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/qml/licenses)
@@ -45,7 +45,7 @@ directory for the available license page files and their names. To select only s
 base names withouth the extensions to the `BTSC_LICENSES` variable.
 
     BTSC_LICENSES="GPLv3 LGPLv3"
-    
+
 This will only include the license page files for GPL and LGPL in version 3.
 
 ## Integrate translations
@@ -56,7 +56,7 @@ your application, you have to load them into a QTranslator for your application 
 your QGuiApplication). The base name of the translation files is *btsc*, the delimeter is an underscore.
 
     QGuiApplication *app = SailfishApp::application(argc, argv);
-    
+
     QTranslator *btscTrans = new QTranslator(app);
     if (btscTrans->load(QLocale(), QStringLiteral("btsc"), QStringLiteral("_"), SailfishApp::pathTo(QStringLiteral("translations")).toString(QUrl::RemoveScheme)) {
         app->installTranslator(btscTrans)
@@ -66,27 +66,27 @@ your QGuiApplication). The base name of the translation files is *btsc*, the del
 
 ### PaypalChooser
 
-The *PaypalChooser* can be used to offer an ComboBox that lets the user choose from a list of currencies. If the user
+The *PaypalChooser* can be used to offer a ComboBox that lets the user choose from a list of currencies. If the user
 chooses a currency, a browser window will be opened with a PayPal donation site.
 
     import harbour.myapp.btsc
-    
+
     PaypalChooser {
         // address of the PayPal account that will receive the donation (mandatory)
         email: me@exmaple.com
-        
+
         // name of your organization or yourself (mandatory, but free definable)
         organization: "Me myself"
-        
+
         // name of your app or whatever (optional)
         item: "My App"
-        
+
         // message shown to the donator (optional)
         message: "Thank you for your donation."
-        
+
         // label shown on the ComboBox (optional), default is "Donate via PayPal in"
         label: "Donate"
-        
+
         // description below the ComboBox (optional)
         description: "We like donations."
     }
@@ -96,69 +96,69 @@ chooses a currency, a browser window will be opened with a PayPal donation site.
 Implements an about page and optionally pages about contributors, changelog and third party components.
 
     import harbour.myapp.btsc
-    
+
     AboutPage {
-        
+
         // the title of the about page, default is "About" (optional)
         pageTitle: "About"
-        
+
         // the name of you app (mandatory)
         appTitle: "My App"
-        
+
         // cover image, will be displayed in the page header (optional)
         appCover: "/usr/share/harbour-myapp/images/cover.jpg"
-        
+
         // description what your app is doing (optional)
         appDescription: "Performs really awesome stuff."
-        
+
         // link to the homepage of the app, will be shown in the pull down menu (optional)
         appHomepage: "https://www.example.com"
-        
+
         // the copyright year of your app (optional)
         appCopyrightYear: "2016"
-        
+
         // the copyright holder, your name or whoever (optional)
         appCopyrightHolder: "Me"
-        
+
         // name of the license your app is licensed under (optional)
         appLicense: "GNU General Public License, Version 3"
-        
+
         // name of a license page file in qml/licenses (optional)
         // will be opened when the user presses the license string
         // if you define a appCustomLicense, that will take precedence
         appLicenseFile: "GPLv3.qml"
-        
+
         // url to a custom license page file (optional)
         // will be opened when the user presses the license string
         // takes precedence above appLicenseFile
         appCustomLicense: Qt.resolvedUrl("MyOwnLicense.qml")
-        
+
         // url to a page that shows you privacy policy (optional)
         // will show an entry in the pull down menu
         privacyPolicyQmlFile: Qt.resolvedUrl("MyPrivacyPolicy.qml")
-        
+
         // ListModel containing your changelog (optional)
         // will show a MenuItem in the PullDownMenu to show the changelog
         // look further down to see an example for a changelog model
         changelogModel: MyChangeLogModel {}
-        
+
         // url to which the issue numbers from the changelog model will be appended (optional)
         // most bugtrackers follow a specific scheme for their issue links (like githubg)
         bugTrackerBaseUrl: "https://github.com/Buschtrommel/BT_SFOS_Components/issues/"
-        
+
         // ListModel containing your contributors (optional)
         // will show a MenuItem in the PullDownMenu to show the changelog
         // look further down to see an example for a contributors model
         contributorsModel: MyContributorsModel {}
-        
+
         // base path to the avatar images of your contributors (optional)
         // used inside the delegate displaying the contributor
         contributorsAvatarBasePath: "/usr/share/harbour-myapp/images/contributors"
-        
+
         // full path to a placeholder image for contributor entries without avatar (optional)
         // used inside the delegate displaying the contributor
         contributorsPlaceholderPath: "/usr/share/harbour-myapp/images/contributors/placeholder.png"
-        
+
         // contact information (optional)
         contactCompany: "Little Company"
         contactName: "Me"
@@ -167,21 +167,25 @@ Implements an about page and optionally pages about contributors, changelog and 
         contactZIP: "12345"
         contactCity: "Smaller city"
         contactCountry: "Smallest country"
-        contactEmail: "contact@example.org"
-        contactWebsite: "http://www.example.org"
-        
+        contactEmail: "contact@example.com"
+        // the website of the developer/company, this is part visible to the user
+        contactWebsite: "example.com"
+        // the link to the website of the developer/company, this is the link that
+        // will be opened if the user clicks on the visible part
+        contactWebsiteLink: "https://www.example.com"
+
         // url to your bug tracker (optional)
         // will show a button opening the url
         bugUrl: "https://github.com/Buschtrommel/BT_SFOS_Components/issues"
-        
+
         // url to your online translation system (optional)
         // will show a button opening the url
         translateUrl: "https://www.transifex.com/buschtrommel/bt-sfos-components"
-        
+
         // ListModel containing information about used 3rd party stuff (optional)
         // look further down to see an example for a licenses model
         licensesModel: UsedComponentsModel {}
-        
+
         // information to show a PaypalChooser on the AboutPage (optional)
         // have a look up the page for more information about the properties
         paypalOrganization: "Me or my organization"
@@ -197,7 +201,7 @@ Implements an about page and optionally pages about contributors, changelog and 
 	// URL of a bitcoin QR code image
 	bitcoinQRImage: Qt.resolvedUrl("/usr/share/harbour-myapp/images/bitcoin-qr-code.png")
     }
-    
+
 ### Changelog model example
 ListModel used to show changelog entries. Used at AboutPage::changelogModel
 
@@ -212,21 +216,21 @@ Changelog entry types:
         ListElement {
             // simple version string
             version: "0.0.2"
-        
+
             // release date unix timestamp
             date: 1476809072000
-            
+
             // entries list
             entries: [
                 ListElement {
-                
+
                     // entry type
                     type: 2
-                    
+
                     // bug tracker issue number
                     // bugTrackerBaseUrl on AboutPage has to be set to create a link
                     issue: "23"
-                    
+
                     description: "fixed aweful bug"
                 },
                 ListElement {
@@ -238,90 +242,90 @@ Changelog entry types:
         }
     }
 ```
-    
+
 ### Contributors model example
 ListModel containing a list of contributors. Used at AboutPage::contributorsModel
 
      ListModel {
         ListElement {
-        
+
             // name of the contributor (mandatory)
             name: "Buschmann"
-            
+
             // role of the contributor (mandatory)
             role: "BT SFOS creator, main developer"
-            
+
             // will show a section header (mandatory)
             section: "Author"
-            
+
             // contributor avatar (optional)
             // should be inside AboutPage::contributorsAvatarBasePath
             // if no image is set the image at AboutPage::contributorsPlaceholderPath will be used
             image: "buschmann.png"
-            
+
             // contributor's website url (optional)
             website: "https://www.buschmann23.de"
-            
+
             // twitter username (optional)
             // part of https://twitter.com/USERNAME
             twitter: "buschmann23"
-            
+
             // github username (optional)
             // part of https://github/USERNAME
             github: "buschmann23"
-            
+
             // bitbucket username (optional)
             // part of https://bitbucket.org/USERNAME
             bitbucket: ""
-            
+
             // linkedin id (optional)
             // part of https://www.linkedin.com/profile/view?id=USERID
             linkedin: ""
-            
+
             // sina weibo username (optional)
             // part of http://www.weibo.com/USERNAME
             weibo: ""
-            
+
             // talk.maemo.org profile (optional)
             // part of https://talk.maemo.org/member.php?u=USERID
             tmo: ""
         }
      }
-     
+
 ### 3rd party components model example
 Used to show a list of 3rd party components. Used on AboutPage::licensesModel
 
     ListModel {
-    
+
         // name of the component (mandatory)
         name: "libfuoten"
-        
+
         // author of the component (mandatory)
         author: "Buschtrommel"
-        
+
         // version of the component (optional)
         version: "0.0.1"
-        
+
         // license of the component (mandatory)
         license: "GNU Lesser General Public License, Version 3"
-        
+
         // one of the license files in qml/licenses (optional)
         // takes precedence over customLicenseFile
         licenseFile: "LGPLv3.qml"
-        
+
         // custom license page file (optional)
         customLicenseFile: Qt.resolvedUrl("CustomLicense.qml")
-        
+
         // website of the component (optional)
         website: "https://github.com/Buschtrommel/libfuoten"
-        
+
         // description of the component
         description: "Libfuoten is a Qt based library that provides access the ownCloud/Nextcloud News App API."
     }
-    
-    
+
+
 ## License
-Copyright (c) 2015-2016, Buschtrommel
+Copyright (c) 2015-2017, Matthias Fehring
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
