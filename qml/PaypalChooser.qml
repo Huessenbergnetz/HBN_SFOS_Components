@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2015, Buschtrommel
+Copyright (c) 2015-2017, Matthias Fehring
+https://github.com/Buschtrommel/BT_SFOS_Components
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
