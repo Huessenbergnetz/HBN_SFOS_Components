@@ -17,7 +17,8 @@ DISTFILES += \
     qml/licenses/CC-BY-4_0.qml \
     qml/licenses/GPLv2.qml \
     qml/licenses/Apache-2_0.qml \
-    qml/licenses/LGPLv2_1.qml
+    qml/licenses/LGPLv2_1.qml \
+    qml/licenses/SIL-OFL-1_1.qml
 
 OTHER_FILES += \
     qmldir.in
