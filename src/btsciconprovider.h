@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015-2018, Matthias Fehring
+Copyright (c) 2015-2018, Hüssenbergnetz/Matthias Fehring
 https://github.com/Buschtrommel/BT_SFOS_Components
 All rights reserved.
 
@@ -37,6 +37,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QColor>
 #include <QStringBuilder>
 #include <QVector>
+#include <QDir>
+#include <QFileInfoList>
 #include <initializer_list>
 
 class BtscIconProvider : public QQuickImageProvider
