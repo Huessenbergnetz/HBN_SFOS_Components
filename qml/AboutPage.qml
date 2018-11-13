@@ -55,7 +55,6 @@ Page {
 
     property ListModel contributorsModel: null
     property string contributorsAvatarBasePath: ""
-    property string contributorsPlaceholderPath: ""
 
     property alias contactCompany: company.text
     property alias contactName: name.text
@@ -111,7 +110,7 @@ Page {
             MenuItem {
                 //% "Contributors"
                 text: qsTrId("btsc-contributors")
-                onClicked: pageStack.push(Qt.resolvedUrl("Contributors.qml"), { avatarBasePath: contributorsAvatarBasePath, model: contributorsModel, avatarPlaceholderPath: contributorsPlaceholderPath })
+                onClicked: pageStack.push(Qt.resolvedUrl("Contributors.qml"), { avatarBasePath: contributorsAvatarBasePath, model: contributorsModel })
                 visible: contributorsModel !== null
             }
         }

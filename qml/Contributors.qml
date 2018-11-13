@@ -36,7 +36,6 @@ Page {
     id: contributorsPage
 
     property string avatarBasePath
-    property string avatarPlaceholderPath
     property alias model: contributorsList.model
 
 
@@ -59,7 +58,7 @@ Page {
             }
         }
 
-        delegate: ContributorsDelegate { avatarPath: contributorsPage.avatarBasePath; placeHolderPath: contributorsPage.avatarPlaceholderPath }
+        delegate: ContributorsDelegate { avatarPath: contributorsPage.avatarBasePath }
     }
 }
 

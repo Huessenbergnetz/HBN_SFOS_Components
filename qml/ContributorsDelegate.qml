@@ -39,15 +39,15 @@ ListItem {
     contentWidth: parent.width
 
     property string avatarPath
-    property string placeHolderPath
+    property color theColor: root.highlighted ? Theme.highlightColor : Theme.primaryColor
 
-    enabled: (model.website !== undefined || model.twitter !== undefined || model.github !== undefined || model.bitbucket !== undefined || model.linkedin !== undefined || model.weibo !== undefined || model.tmo !== undefined)
+    enabled: serviceImages.visibleChildren.length
 
     showMenuOnPressAndHold: true
 
     menu: root.enabled ? contextMenu : null
 
-    onClicked: root.menuOpen ? hideMenu() : showMenu()
+    onClicked: root.menuOpen ? closeMenu() : openMenu()
 
     Row {
         id: contentRow
@@ -56,11 +56,9 @@ ListItem {
 
         Image {
             id:contribImage
-            source: model.image ? avatarPath + "/" + model.image : placeHolderPath
-            sourceSize.height: 86
-            sourceSize.width: 86
-            width: 86
-            height: 86
+            source: model.image ? avatarPath + "/" + model.image : "image://theme/icon-l-people"
+            width: Theme.iconSizeLarge
+            height: Theme.iconSizeLarge
             anchors.verticalCenter: parent.verticalCenter
         }
 
@@ -73,7 +71,7 @@ ListItem {
                 font.pixelSize: Theme.fontSizeSmall
                 width: parent.width
                 wrapMode: Text.WordWrap
-                color: root.highlighted ? Theme.highlightColor : Theme.primaryColor
+                color: theColor
             }
 
             Label {
@@ -81,53 +79,65 @@ ListItem {
                 font.pixelSize: Theme.fontSizeExtraSmall
                 width: parent.width
                 wrapMode: Text.WordWrap
-                color: root.highlighted ? Theme.highlightColor : Theme.primaryColor
+                color: theColor
             }
 
             Row {
                 id: serviceImages
-                spacing: Theme.paddingSmall
+                spacing: Theme.paddingMedium
 
                 Image {
-                    sourceSize.width: 32; sourceSize.height: 32
-                    source: "icons/icon-s-browser.png"
+                    source: "image://btsc/icon-s-browser?" + theColor
                     visible: model.website !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    sourceSize.width: 32; sourceSize.height: 32
-                    source: "icons/icon-s-twitter.png"
-                    visible: model.twitter !== undefined
-                }
-
-                Image {
-                    sourceSize.width: 32; sourceSize.height: 32
-                    source: "icons/icon-s-github.png"
-                    visible: model.github !== undefined
-                }
-
-                Image {
-                    sourceSize.width: 32; sourceSize.height: 32
-                    source: "icons/icon-s-bitbucket.png"
+                    source: "image://btsc/icon-s-bitbucket?" + theColor
                     visible: model.bitbucket !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    sourceSize.width: 32; sourceSize.height: 32
-                    source: "icons/icon-s-linkedin.png"
+                    source: "image://btsc/icon-s-facebook?" + theColor
+                    visible: model.facebook !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
+                }
+
+                Image {
+                    source: "image://btsc/icon-s-github?" + theColor
+                    visible: model.github !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
+                }
+
+                Image {
+                    source: "image://btsc/icon-s-google-plus?" + theColor
+                    visible: model.googleplus !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
+                }
+
+                Image {
+                    source: "image://btsc/icon-s-linkedin?" + theColor
                     visible: model.linkedin !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    sourceSize.width: 32; sourceSize.height: 32
-                    source: "icons/icon-s-weibo.png"
-                    visible: model.weibo !== undefined
-                }
-
-                Image {
-                    sourceSize.width: 32; sourceSize.height: 32
-                    source: "icons/icon-s-tmo.png"
+                    source: "image://btsc/icon-s-tmo?" + theColor
                     visible: model.tmo !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
+                }
+
+                Image {
+                    source: "image://btsc/icon-s-twitter?" + theColor
+                    visible: model.twitter !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
+                }
+
+                Image {
+                    source: "image://btsc/icon-s-weibo?" + theColor
+                    visible: model.weibo !== undefined
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
             }
         }
@@ -143,9 +153,14 @@ ListItem {
                 onClicked: Qt.openUrlExternally(model.website)
             }
             MenuItem {
-                text: "Twitter"
-                visible: model.twitter !== undefined
-                onClicked: Qt.openUrlExternally("https://twitter.com/" + model.twitter)
+                text: "Bitbucket"
+                visible: model.bitbucket !== undefined
+                onClicked: Qt.openUrlExternally("https://bitbucket.org/" + model.bitbucket)
+            }
+            MenuItem {
+                text: "Facebook"
+                visible: model.facebook !== undefined
+                onClicked: Qt.openUrlExternally("https://www.facebook.com/" + model.facebook)
             }
             MenuItem {
                 text: "GitHub"
@@ -153,9 +168,9 @@ ListItem {
                 onClicked: Qt.openUrlExternally("https://github.com/" + model.github)
             }
             MenuItem {
-                text: "Bitbucket"
-                visible: model.bitbucket !== undefined
-                onClicked: Qt.openUrlExternally("https://bitbucket.org/" + model.bitbucket)
+                text: "Google+"
+                visible: model.googleplus !== undefined
+                onClicked: Qt.openUrlExternally("https://plus.google.com/" + model.googleplus)
             }
             MenuItem {
                 text: "LinkedIn"
@@ -163,14 +178,19 @@ ListItem {
                 onClicked: Qt.openUrlExternally("http://www.linkedin.com/profile/view?id=" + model.linkedin)
             }
             MenuItem {
-                text: "Sina Weibo"
-                visible: model.weibo !== undefined
-                onClicked: Qt.openUrlExternally("http://www.weibo.com/" + model.weibo)
-            }
-            MenuItem {
                 text: "TMO"
                 visible: model.tmo !== undefined
                 onClicked: Qt.openUrlExternally("https://talk.maemo.org/member.php?u=" + model.tmo)
+            }
+            MenuItem {
+                text: "Twitter"
+                visible: model.twitter !== undefined
+                onClicked: Qt.openUrlExternally("https://twitter.com/" + model.twitter)
+            }
+            MenuItem {
+                text: "Sina Weibo"
+                visible: model.weibo !== undefined
+                onClicked: Qt.openUrlExternally("http://www.weibo.com/" + model.weibo)
             }
         }
     }
