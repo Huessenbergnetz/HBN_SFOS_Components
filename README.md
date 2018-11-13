@@ -7,33 +7,23 @@ into your source tree. You should keep the directory layout of BT SFOS component
 directory.
 
 A better, and on the long run more comfortable solution, is to clone this repository and checkout the current stable
-branch/tag to work with. Or integrate it as a submodule into your project.
+branch/tag to work with. Or integrate it as a submodule into your project git tree.
 
 ### Cloning and branching
-    git clone --branch v1.1.3 https://github.com/Buschtrommel/BT_SFOS_Components.git
+    git clone --branch v1.2.0 https://github.com/Buschtrommel/BT_SFOS_Components.git
 
 ### Integrate into your project
-You can copy the files or, the better way, organize your project as subdirs project.
+You can copy the files or, the better way, include the configuration into your project.
 
-    TEMPLATE = subdirs
+    include(BT_SFOS_Components/BT_SFOS_Components.pri)
 
-    SUBDIRS += my-saylfish-app
-    SUBDIRS += BT_SFOS_COMPONENTS
-
-To install the files of the BT SFOS Components into the right location, you only have to specify the correct
-value for `BTSC_APP_NAME` variable. You can set this value on the Projects page in the Saiflish OS SDK as
-additional argument for qmake. You have to do this for every build target. If the name of you app is for example
-MyApp, than the target for Sailfish OS is named harbour-myapp and all the stuff will be installed to
-*/usr/share/harbour-myapp*. The correct value for `BTSC_APP_NAME` would than be *myapp*, what
-would make BT SFOS Components importable as `import harbour.myapp.btsc`.
-For more information see the [Harbour FAQ](https://harbour.jolla.com/faq#QML_API).
-
-If you only set `BTSC_APP_NAME` to, for example *myapp*, the following installation paths will be used:
-* qml files go into */usr/share/harbour-myapp/harbour/myapp/btsc*
-* icon files go into */usr/share/harbour-myapp/harbour/myapp/btsc/icons*
+To install the files of the BT SFOS Components into the right location, you have nothing to do. If your app
+for example is named *harbour-myapp*, the following installation paths will be used:
+* qml files go into */usr/share/harbour-myapp/de/huessenbergnetz/btsc*
+* icon files go into */usr/share/harbour-myapp/de/huessenbergnetz/btsc/icons*
 * translations go into */usr/share/harbour-myapp/translations*
 
-Optionally you can define the installation directories independently, but setting `BTSC_APP_NAME` is sufficient.
+Optionally you can define the installation directories independently.
 
     BTSC_INSTALL_ICONS_DIR // install path for the icons
     INSTALL_TRANSLATIONS_DIR // install path for the translation files (*.qm)
@@ -48,18 +38,69 @@ base names withouth the extensions to the `BTSC_LICENSES` variable.
 
 This will only include the license page files for GPL and LGPL in version 3.
 
+## Build the icons
+
+The icons included in the source tarball are SVG files that have to be converted into PNG files. There is a a Bash script called
+[createIcons.sh](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/images/createIcons.sh) in the *images* directory
+that will do the job for you. It will automatically create the required icons for different resolution scales. To convert the
+icons, [Inkscape](https://inkscape.org/) has to available. It is also recommended to have [GNU parallel](https://www.gnu.org/software/parallel/) installed to speed up the conversion. Another recommendation is [zopflipng](https://github.com/google/zopfli) that will
+further improve the size of the created PNG files.
+
+    cd BT_SFOS_Components/images
+    ./createIcons.sh
+
+That will create icons for the following scalings: 1, 1.25, 1.5, 1.75 and 2.
+
 ## Integrate translations
 
 Unless you specify a different value for `INSTALL_TRANSLATIONS_DIR` the translation files of BT SFOS Components will be
-installed into */usr/share/harbour-$$BTSC_APP_NAME/translations*. To include the translations (they are ID based) into
+installed into */usr/share/harbour-myapp/translations*. To include the translations (they are ID based) into
 your application, you have to load them into a QTranslator for your application (in your main.cpp or wherever you define
 your QGuiApplication). The base name of the translation files is *btsc*, the delimeter is an underscore.
 
-    QGuiApplication *app = SailfishApp::application(argc, argv);
+    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
     QTranslator *btscTrans = new QTranslator(app);
     if (btscTrans->load(QLocale(), QStringLiteral("btsc"), QStringLiteral("_"), SailfishApp::pathTo(QStringLiteral("translations")).toString(QUrl::RemoveScheme)) {
         app->installTranslator(btscTrans)
+    }
+
+## Integrate icon provider
+
+To show the included icons with the appropriate size and scaling, add [btsciconprovider.h](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/src/btsciconprovider.h) to your project. To select the correct scaling, you should also include
+libsailfishsilica.
+
+Add the following to you project file:
+
+    PKGCONFIG += sailfishsilica
+    INCLUDEPATH += /usr/include/libsailfishsilica
+
+To automatically install the devel files in the SDK, add the follwing to your YAML RPM spec file into the *PkgConfigBR* section:
+
+    PkgConfigBR:
+      - sailfishsilica
+
+Then in your main function file or where you load your application, include the headers and install the icon provider:
+
+    #include <silicatheme.h>
+    #include <btsciconprovider.h>
+
+    int main(int argc, char *argv[])
+    {
+
+        // .... other stuff ...
+
+        QScopedPointer<QQuickView> view(SailfishApp::createView());
+
+        auto theme = Silica::Theme::instance();
+
+        // BtscIconProvider requires a list of available scales,
+        // if you used the createIcons.sh script, the follwing scales are available.
+        // You should also set the pixel ratio returned by Silica::Theme.
+        QScopedPointer<BtscIconProvider> iconProvider(new BtscIconProvider({1.0, 1.25, 1.5, 1.75, 2.0}, theme->pixelRatio()));
+
+        // Now install the new provider under the name btsc
+        view->engine()->addImageProvider(QStringLiteral("btsc"), iconProvider.data());
     }
 
 ## Components API
@@ -69,7 +110,7 @@ your QGuiApplication). The base name of the translation files is *btsc*, the del
 The *PaypalChooser* can be used to offer a ComboBox that lets the user choose from a list of currencies. If the user
 chooses a currency, a browser window will be opened with a PayPal donation site.
 
-    import harbour.myapp.btsc
+    import de.huessenbergnetz.btsc
 
     PaypalChooser {
         // address of the PayPal account that will receive the donation (mandatory)
@@ -95,7 +136,7 @@ chooses a currency, a browser window will be opened with a PayPal donation site.
 
 Implements an about page and optionally pages about contributors, changelog and third party components.
 
-    import harbour.myapp.btsc
+    import de.huessenbergnetz.btsc
 
     AboutPage {
 
@@ -154,10 +195,6 @@ Implements an about page and optionally pages about contributors, changelog and 
         // base path to the avatar images of your contributors (optional)
         // used inside the delegate displaying the contributor
         contributorsAvatarBasePath: "/usr/share/harbour-myapp/images/contributors"
-
-        // full path to a placeholder image for contributor entries without avatar (optional)
-        // used inside the delegate displaying the contributor
-        contributorsPlaceholderPath: "/usr/share/harbour-myapp/images/contributors/placeholder.png"
 
         // contact information (optional)
         contactCompany: "Little Company"
@@ -260,7 +297,7 @@ ListModel containing a list of contributors. Used at AboutPage::contributorsMode
 
             // contributor avatar (optional)
             // should be inside AboutPage::contributorsAvatarBasePath
-            // if no image is set the image at AboutPage::contributorsPlaceholderPath will be used
+            // if no image is set, "image://theme/icon-l-people" will be used
             image: "buschmann.png"
 
             // contributor's website url (optional)
@@ -289,6 +326,14 @@ ListModel containing a list of contributors. Used at AboutPage::contributorsMode
             // talk.maemo.org profile (optional)
             // part of https://talk.maemo.org/member.php?u=USERID
             tmo: ""
+
+            // facebook profile (optional)
+            // part of https://www.facebook.com/PROFILE.NAME
+            facebook: ""
+
+            // google plus profile (optional)
+            // part of https://plus.google.com/PROFILE.NAME
+            googleplus: ""
         }
      }
 
@@ -325,7 +370,7 @@ Used to show a list of 3rd party components. Used on AboutPage::licensesModel
 
 
 ## License
-Copyright (c) 2015-2017, Matthias Fehring
+Copyright (c) 2015-2018, Hüssenbergnetz/Matthias Fehring
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
