@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   viewBox="0 0 64 64"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     transform="translate(-559.43 -723.22)"
+     id="layer1">
+    <path
+       d="m 591.43,723.22 c -17.7472,0 -32,14.45008 -32,32.0128 0,17.56272 14.25216,31.9872 32,31.9872 17.74784,0 32,-14.42496 32,-31.9872 0,-17.5632 -14.25216,-32.0128 -32,-32.0128 z m 0,4.66272 c 14.87088,0 27.0368,12.12736 27.0368,27.3504 0,12.3768 -8.05008,22.6912 -19.056,26.1216 v -8.64864 c 0,-2.6944 -0.99078,-5.1024 -2.56896,-6.7184 h 1.4466 c 6.36721,0 11.4981,-5.15696 11.4981,-11.55664 v -3.0584 c 0,-3.30784 -1.38914,-6.27088 -3.59153,-8.37296 v -6.8688 l -6.50977,3.78528 c -0.45989,-0.0558 -0.92137,-0.10016 -1.39672,-0.10016 h -12.29617 c -0.95763,0 -1.88032,0.1312 -2.76848,0.35094 l -6.95872,-4.036 v 9.09984 c -1.10959,1.77808 -1.77088,3.87936 -1.77088,6.14176 v 3.0584 c 0,6.39952 5.13088,11.55664 11.49808,11.55664 h 1.29697 c -1.31669,1.35407 -2.20896,3.27184 -2.46927,5.43984 -5.46,2.09952 -6.38,-4.32592 -13.34369,-5.28944 8.32225,6.79856 4.16337,8.63344 13.244,9.09984 v 6.4928 c -11.65055,-3.00384 -20.328,-13.6448 -20.328,-26.4976 0,-15.2224 12.16577,-27.3504 27.03681,-27.3504 z m 0.94778,42.7424 c 0.44217,0 0.79813,3.93552 0.79813,8.82416 v 1.77984 c 0,0.45498 -0.0186,0.86122 -0.025,1.2785 -0.51599,0.0331 -1.02318,0.0717 -1.54635,0.0754 -0.0161,-0.44117 -0.025,-0.87202 -0.025,-1.3537 v -1.77984 c 0,-4.88864 0.35595,-8.82416 0.79811,-8.82416 z m -4.14033,0.65181 c 0.44217,0 0.79812,3.93552 0.79812,8.82416 v 1.75488 c 0,0.214 0.003,0.40406 0,0.60165 -0.53618,-0.0472 -1.06927,-0.097 -1.59625,-0.17544 -0.002,-0.14192 0,-0.27456 0,-0.42618 v -1.75472 c 0,-4.88864 0.35596,-8.82416 0.79813,-8.82416 z m 7.98129,0 c 0.44217,0 0.79813,3.93552 0.79813,8.82416 v 1.75488 c 0,0.0446 2.3e-4,0.0818 0,0.12528 -0.52862,0.11232 -1.05704,0.19494 -1.59626,0.27576 -0.002,-0.13424 0,-0.25842 0,-0.40111 v -1.75488 c 0,-4.88864 0.35597,-8.82416 0.79813,-8.82416 z"
+       style="color:#000000;text-indent:0;text-transform:none;fill:#ffffff;stroke-width:1.60000014;fill-opacity:0.50588238"
+       id="path3162" />
+    <circle
+       r="29.516907"
+       cy="755.21997"
+       cx="591.42999"
+       id="path842"
+       style="opacity:1;fill:none;fill-opacity:0.50588223;fill-rule:nonzero;stroke:#ececec;stroke-width:4.96618748;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <metadata
+     id="metadata34">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title></dc:title>
+        <dc:date>2011-05-04T18:49:55</dc:date>
+        <dc:description>Based on the &quot;Free Social Media Icon Set&quot; by: http://www.elegantthemes.com/blog/resources/free-social-media-icon-set</dc:description>
+        <dc:source>https://openclipart.org/detail/135733/github-by-spktkpkt</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>spktkpkt</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>github</rdf:li>
+            <rdf:li>icon</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>
