@@ -56,4 +56,4 @@ btscTranslations.files = $$PWD/translations/*.qm
 btscQmlDir.path = $$BTSC_INSTALL_QML_DIR
 btscQmlDir.files = $$PWD/qml/qmldir
 
-INSTALLS = btscQml btscQmlDir btscIcons btscTranslations btscLicenses
+INSTALLS += btscQml btscQmlDir btscIcons btscTranslations btscLicenses
