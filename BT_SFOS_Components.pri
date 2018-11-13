@@ -1,8 +1,6 @@
-isEmpty(BTSC_APP_NAME): BTSC_APP_NAME = buschtrommel
-BTSC_MODULE_NAME = harbour.$${BTSC_APP_NAME}.btsc
-BTSC_INSTALL_QML_DIR = /usr/share/harbour-$$BTSC_APP_NAME/harbour/$$BTSC_APP_NAME/btsc
+BTSC_INSTALL_QML_DIR = /usr/share/$$TARGET/de/huessenbergnetz/btsc
 isEmpty(BTSC_INSTALL_ICONS_DIR): BTSC_INSTALL_ICONS_DIR = $$BTSC_INSTALL_QML_DIR/icons
-isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = /usr/share/harbour-$$BTSC_APP_NAME/translations
+isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = /usr/share/$$TARGET/translations
 
 DEFINES += BTSC_ICONS_DIR=\"\\\"$${BTSC_INSTALL_ICONS_DIR}/\\\"\"
 
@@ -40,24 +38,22 @@ isEmpty(BTSC_LICENSES) {
     btscLicenses.files = $$PWD/qml/licenses/LicenseBase.qml
 
     for(l, BTSC_LICENSES) {
-        btscLicenses.files += $$PWD/qml/licenses/$${l}.qml
+        exists($$PWD/qml/licenses/$${l}.qml) {
+            btscLicenses.files += $$PWD/qml/licenses/$${l}.qml
+        }
     }
 }
 
 btscQml.path = $$BTSC_INSTALL_QML_DIR
-btscQml.files = qml/*.qml
+btscQml.files = $$PWD/qml/*.qml
 
 btscIcons.path = $$BTSC_INSTALL_ICONS_DIR
 btscIcons.files = $$PWD/images/z*
 
 btscTranslations.path = $$INSTALL_TRANSLATIONS_DIR
-btscTranslations.files = translations/*.qm
+btscTranslations.files = $$PWD/translations/*.qm
 
-btscQmlDir.input = $$PWD/qmldir.in
-btscQmlDir.output = qmldir
 btscQmlDir.path = $$BTSC_INSTALL_QML_DIR
-btscQmlDir.files = $$btscQmlDir.output
-
-QMAKE_SUBSTITUTES += btscQmlDir
+btscQmlDir.files = $$PWD/qml/qmldir
 
 INSTALLS = btscQml btscQmlDir btscIcons btscTranslations btscLicenses

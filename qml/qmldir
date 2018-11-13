@@ -1,4 +1,4 @@
-module $$BTSC_MODULE_NAME
+module de.huessenbergnetz.btsc
 AboutPage 1.0 AboutPage.qml
 Changelog 1.0 Changelog.qml
 Contributors 1.0 Contributors.qml
