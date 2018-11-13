@@ -51,7 +51,7 @@ ListItem {
 
     Row {
         id: contentRow
-        spacing: 10
+        spacing: Theme.paddingMedium
         anchors { left: parent.left; leftMargin: Theme.horizontalPageMargin; right: parent.right; rightMargin: Theme.horizontalPageMargin }
 
         Image {
