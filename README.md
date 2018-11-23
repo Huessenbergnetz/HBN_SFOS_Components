@@ -363,10 +363,13 @@ Used to show a list of 3rd party components. Used on AboutPage::licensesModel
         customLicenseFile: Qt.resolvedUrl("CustomLicense.qml")
 
         // website of the component (optional)
-        website: "https://github.com/Buschtrommel/libfuoten"
+        website: "https://github.com/Huessenbergnetz/libfuoten"
 
-        // description of the component
+        // description of the component (optional)
         description: "Libfuoten is a Qt based library that provides access the ownCloud/Nextcloud News App API."
+
+	// website of the license (optional)
+	licenseWebsite: "https://github.com/Huessenbergnetz/libfuoten/blob/master/LICENSE"
     }
 
 

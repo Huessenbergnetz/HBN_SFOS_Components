@@ -39,7 +39,21 @@ BackgroundItem {
 
     onClicked: {
         if (model.licenseFile) {
-            pageStack.push("licenses/"+model.licenseFile, {componentName: model.name, componentAuthor: model.author, componentDescription: model.description ? model.description : "", componentUrl: model.website ? model.website : ""})
+            var args = {
+                componentName: model.name,
+                componentAuthor: model.author,
+            }
+            if (model.description) {
+                args["componentDescription"] = model.description
+            }
+            if (model.website) {
+                args["componentUrl"] = model.website
+            }
+            if (model.licenseWebsite) {
+                args["licenseWebsite"] = model.licenseWebsite
+            }
+
+            pageStack.push("licenses/"+model.licenseFile, args)
         } else if (model.customLicenseFile) {
             pageStack.push(model.customLicenseFile)
         }
