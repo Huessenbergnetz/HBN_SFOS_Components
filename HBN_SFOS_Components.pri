@@ -25,7 +25,10 @@ OTHER_FILES += \
     $$PWD/qml/licenses/GPLv2.qml \
     $$PWD/qml/licenses/Apache-2_0.qml \
     $$PWD/qml/licenses/LGPLv2_1.qml \
-    $$PWD/qml/licenses/SIL-OFL-1_1.qml
+    $$PWD/qml/licenses/SIL-OFL-1_1.qml \
+    $$PWD/qml/licenses/SQLite.qml \
+    $$PWD/qml/licenses/OpenSSL.qml \
+    $$PWD/qml/licenses/zlib.qml \
     $$PWD/qmldir.in
 
 INCLUDEPATH += $$PWD/src
