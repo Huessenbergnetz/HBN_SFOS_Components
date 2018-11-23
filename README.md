@@ -1,74 +1,75 @@
-# BT SFOS Components
+# HBN SFOS Components
 A set of QML components to use on Sailfish OS.
 
 ## Integrate into your Sailfish OS application
 The easiest way is to simple download the latest release tarball. You can than copy the files you want to use
-into your source tree. You should keep the directory layout of BT SFOS components, at least the one in the qml
+into your source tree. You should keep the directory layout of HBN SFOS components, at least the one in the qml
 directory.
 
 A better, and on the long run more comfortable solution, is to clone this repository and checkout the current stable
 branch/tag to work with. Or integrate it as a submodule into your project git tree.
 
 ### Cloning and branching
-    git clone --branch v1.2.1 https://github.com/Buschtrommel/BT_SFOS_Components.git
+    git clone --branch v1.2.2 https://github.com/Huessenbergnetz/HBN_SFOS_Components.git
 
 ### Integrate into your project
 You can copy the files or, the better way, include the configuration into your project.
 
-    include(BT_SFOS_Components/BT_SFOS_Components.pri)
+    include(HBN_SFOS_Components/HBN_SFOS_Components.pri)
 
-To install the files of the BT SFOS Components into the right location, you have nothing to do. If your app
+To install the files of the HBN SFOS Components into the right location, you have nothing to do. If your app
 for example is named *harbour-myapp*, the following installation paths will be used:
-* qml files go into */usr/share/harbour-myapp/de/huessenbergnetz/btsc*
-* icon files go into */usr/share/harbour-myapp/de/huessenbergnetz/btsc/icons*
+* qml files go into */usr/share/harbour-myapp/de/huessenbergnetz/hbnsc*
+* icon files go into */usr/share/harbour-myapp/de/huessenbergnetz/hbnsc/icons*
 * translations go into */usr/share/harbour-myapp/translations*
 
 Optionally you can define the installation directories independently.
 
-    BTSC_INSTALL_ICONS_DIR // install path for the icons
+    HBNSC_INSTALL_ICONS_DIR // install path for the icons
     INSTALL_TRANSLATIONS_DIR // install path for the translation files (*.qm)
 
 ### Optional variables
-By default, all license page files will be installed. You can use the `BTSC_LICENSES` variable to specify the
-license pages you want to install. Have a look into the [qml/licenses](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/qml/licenses)
+By default, all license page files will be installed. You can use the `HBNSC_LICENSES` variable to specify the
+license pages you want to install. Have a look into the [qml/licenses](https://github.com/Huessenbergnetz/HBN_SFOS_Components/tree/master/qml/licenses)
 directory for the available license page files and their names. To select only some pages to install, set their
-base names withouth the extensions to the `BTSC_LICENSES` variable.
+base names withouth the extensions to the `HBNSC_LICENSES` variable.
 
-    BTSC_LICENSES="GPLv3 LGPLv3"
+    HBNSC_LICENSES="GPLv3 LGPLv3"
 
 This will only include the license page files for GPL and LGPL in version 3.
 
 ## Build the icons
 
 The icons included in the source tarball are SVG files that have to be converted into PNG files. There is a a Bash script called
-[createIcons.sh](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/images/createIcons.sh) in the *images* directory
+[createIcons.sh](https://github.com/Huessenbergnetz/HBN_SFOS_Components/tree/master/images/createIcons.sh) in the *images* directory
 that will do the job for you. It will automatically create the required icons for different resolution scales. To convert the
-icons, [Inkscape](https://inkscape.org/) has to available. It is also recommended to have [GNU parallel](https://www.gnu.org/software/parallel/) installed to speed up the conversion. Another recommendation is [zopflipng](https://github.com/google/zopfli) that will
+icons, [Inkscape](https://inkscape.org/) has to available. It is also recommended to have [GNU parallel](https://www.gnu.org/software/parallel/)
+installed to speed up the conversion. Another recommendation is [zopflipng](https://github.com/google/zopfli) that will
 further improve the size of the created PNG files.
 
-    cd BT_SFOS_Components/images
+    cd HBN_SFOS_Components/images
     ./createIcons.sh
 
 That will create icons for the following scalings: 1, 1.25, 1.5, 1.75 and 2.
 
 ## Integrate translations
 
-Unless you specify a different value for `INSTALL_TRANSLATIONS_DIR` the translation files of BT SFOS Components will be
+Unless you specify a different value for `INSTALL_TRANSLATIONS_DIR` the translation files of HBN SFOS Components will be
 installed into */usr/share/harbour-myapp/translations*. To include the translations (they are ID based) into
 your application, you have to load them into a QTranslator for your application (in your main.cpp or wherever you define
-your QGuiApplication). The base name of the translation files is *btsc*, the delimeter is an underscore.
+your QGuiApplication). The base name of the translation files is *hbnsc*, the delimeter is an underscore.
 
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
-    QTranslator *btscTrans = new QTranslator(app);
-    if (btscTrans->load(QLocale(), QStringLiteral("btsc"), QStringLiteral("_"), SailfishApp::pathTo(QStringLiteral("translations")).toString(QUrl::RemoveScheme)) {
-        app->installTranslator(btscTrans)
+    QTranslator *hbnscTrans = new QTranslator(app);
+    if (hbnscTrans->load(QLocale(), QStringLiteral("btsc"), QStringLiteral("_"), SailfishApp::pathTo(QStringLiteral("translations")).toString(QUrl::RemoveScheme)) {
+        app->installTranslator(hbnscTrans)
     }
 
 ## Integrate icon provider
 
-To show the included icons with the appropriate size and scaling, add [btsciconprovider.h](https://github.com/Buschtrommel/BT_SFOS_Components/tree/master/src/btsciconprovider.h) to your project. To select the correct scaling, you should also include
-libsailfishsilica.
+To show the included icons with the appropriate size and scaling, add [hbnciconprovider.h](https://github.com/Huessenbergnetz/HBN_SFOS_Components/tree/master/src/hbnsciconprovider.h)
+to your project. To select the correct scaling, you should also include libsailfishsilica.
 
 Add the following to you project file:
 
@@ -83,7 +84,7 @@ To automatically install the devel files in the SDK, add the follwing to your YA
 Then in your main function file or where you load your application, include the headers and install the icon provider:
 
     #include <silicatheme.h>
-    #include <btsciconprovider.h>
+    #include <hbnsciconprovider.h>
 
     int main(int argc, char *argv[])
     {
@@ -94,13 +95,13 @@ Then in your main function file or where you load your application, include the 
 
         auto theme = Silica::Theme::instance();
 
-        // BtscIconProvider requires a list of available scales,
+        // HbnscIconProvider requires a list of available scales,
         // if you used the createIcons.sh script, the follwing scales are available.
         // You should also set the pixel ratio returned by Silica::Theme.
-        QScopedPointer<BtscIconProvider> iconProvider(new BtscIconProvider({1.0, 1.25, 1.5, 1.75, 2.0}, theme->pixelRatio()));
+        QScopedPointer<BtscIconProvider> iconProvider(new HbnscIconProvider({1.0, 1.25, 1.5, 1.75, 2.0}, theme->pixelRatio()));
 
         // Now install the new provider under the name btsc
-        view->engine()->addImageProvider(QStringLiteral("btsc"), iconProvider.data());
+        view->engine()->addImageProvider(QStringLiteral("hbnsc"), iconProvider.data());
     }
 
 ## Components API
@@ -110,7 +111,7 @@ Then in your main function file or where you load your application, include the 
 The *PaypalChooser* can be used to offer a ComboBox that lets the user choose from a list of currencies. If the user
 chooses a currency, a browser window will be opened with a PayPal donation site.
 
-    import de.huessenbergnetz.btsc
+    import de.huessenbergnetz.hbnsc 1.0
 
     PaypalChooser {
         // address of the PayPal account that will receive the donation (mandatory)
@@ -136,7 +137,7 @@ chooses a currency, a browser window will be opened with a PayPal donation site.
 
 Implements an about page and optionally pages about contributors, changelog and third party components.
 
-    import de.huessenbergnetz.btsc
+    import de.huessenbergnetz.hbnsc 1.0
 
     AboutPage {
 
@@ -213,11 +214,11 @@ Implements an about page and optionally pages about contributors, changelog and 
 
         // url to your bug tracker (optional)
         // will show a button opening the url
-        bugUrl: "https://github.com/Buschtrommel/BT_SFOS_Components/issues"
+        bugUrl: "https://github.com/Huessenbergnetz/HBN_SFOS_Components/issues"
 
         // url to your online translation system (optional)
         // will show a button opening the url
-        translateUrl: "https://www.transifex.com/buschtrommel/bt-sfos-components"
+        translateUrl: "https://www.transifex.com/huessenbergnetz/hbn-sfos-components"
 
         // ListModel containing information about used 3rd party stuff (optional)
         // look further down to see an example for a licenses model

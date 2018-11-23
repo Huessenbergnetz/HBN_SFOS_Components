@@ -29,8 +29,8 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef BTSCICONPROVIDER_H
-#define BTSCICONPROVIDER_H
+#ifndef HBNSCICONPROVIDER_H
+#define HBNSCICONPROVIDER_H
 
 #include <QQuickImageProvider>
 #include <QPainter>
@@ -41,10 +41,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QFileInfoList>
 #include <initializer_list>
 
-class BtscIconProvider : public QQuickImageProvider
+class HbnscIconProvider : public QQuickImageProvider
 {
 public:
-    BtscIconProvider(std::initializer_list<qreal> scales, qreal pixelRatio = 1.0, bool large = false) : QQuickImageProvider(QQuickImageProvider::Pixmap)
+    HbnscIconProvider(std::initializer_list<qreal> scales, qreal pixelRatio = 1.0, bool large = false) : QQuickImageProvider(QQuickImageProvider::Pixmap)
     {
         qreal nearestScale = 1.0;
 
@@ -73,14 +73,14 @@ public:
             nearestScale = pixelRatio;
         }
 
-        m_iconsDir = QStringLiteral(BTSC_ICONS_DIR) % QLatin1Char('z') % QString::number(nearestScale) % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
+        m_iconsDir = QStringLiteral(HBNSC_ICONS_DIR) % QLatin1Char('z') % QString::number(nearestScale) % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
 
-        qDebug("Constructing a new BtscIconProvider object for a pixel ratio of %.2f on a %s screen. Loading icons from \"%s\".", nearestScale, large ? "large" : "small", qUtf8Printable(m_iconsDir));
+        qDebug("Constructing a new HbnscIconProvider object for a pixel ratio of %.2f on a %s screen. Loading icons from \"%s\".", nearestScale, large ? "large" : "small", qUtf8Printable(m_iconsDir));
     }
 
-    ~BtscIconProvider() override
+    ~HbnscIconProvider() override
     {
-        qDebug("Deconstructing the BtscIconProvider object.");
+        qDebug("Deconstructing the HbnscIconProvider object.");
     }
 
     QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override
@@ -112,6 +112,7 @@ public:
 
 private:
     QString m_iconsDir;
+    Q_DISABLE_COPY(HbnscIconProvider)
 };
 
-#endif // BTSCICONPROVIDER_H
+#endif // HBNSCICONPROVIDER_H

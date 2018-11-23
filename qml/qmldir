@@ -1,4 +1,4 @@
-module de.huessenbergnetz.btsc
+module de.huessenbergnetz.hbnsc
 AboutPage 1.0 AboutPage.qml
 Changelog 1.0 Changelog.qml
 Contributors 1.0 Contributors.qml

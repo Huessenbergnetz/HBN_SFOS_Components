@@ -1,8 +1,8 @@
 [main]
 host = https://www.transifex.com
 
-[bt-sfos-components.main]
-file_filter = translations/btsc_<lang>.ts
-source_file = translations/btsc.ts
+[hbn-sfos-components.main]
+file_filter = translations/hbnsc_<lang>.ts
+source_file = translations/hbnsc.ts
 source_lang = en
 type = QT
