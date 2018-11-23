@@ -66,9 +66,16 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                onClicked: licenseBaseFlick.scrollToTop()
-                //% "Back to top"
-                text: qsTrId("btsc-back-to-top")
+                onClicked: Qt.openUrlExternally(licenseWebsite)
+                //% "License website"
+                text: qsTrId("btsc-license-web")
+            }
+            MenuItem {
+                visible: componentUrl !== ""
+                onClicked: Qt.openUrlExternally(componentUrl)
+                //: %1 is the name of the 3rd party component
+                //% "Visit %1"
+                text: qsTrId("btsc-comp-web").arg(componentName)
             }
         }
 
