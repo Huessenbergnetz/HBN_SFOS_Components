@@ -199,10 +199,6 @@
         <extracomment>%1 is the name of the 3rd party component</extracomment>
         <translation>Visiter %1</translation>
     </message>
-    <message id="btsc-back-to-top">
-        <source>Back to top</source>
-        <translation>Retour au début</translation>
-    </message>
     <message id="btsc-license-intro">
         <source>%1 is available under the terms of the following license:</source>
         <extracomment>%1 is the name of the 3rd party app/lib/component</extracomment>
