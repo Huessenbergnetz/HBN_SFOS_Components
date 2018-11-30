@@ -157,6 +157,7 @@ Page {
                 textFormat: Text.PlainText
                 color: Theme.secondaryHighlightColor
                 visible: text
+                font.pixelSize: Theme.fontSizeMedium
             }
 
             Text {
@@ -167,6 +168,7 @@ Page {
                 color: Theme.primaryColor
                 text: appCopyrightYear !== "" ? String("© %1, %2").arg(appCopyrightYear).arg(appCopyrightHolder) : String("© %1").arg(appCopyrightHolder)
                 visible: appCopyrightHolder
+                font.pixelSize: Theme.fontSizeMedium
             }
 
             BackgroundItem {
