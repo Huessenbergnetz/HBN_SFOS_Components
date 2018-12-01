@@ -88,7 +88,7 @@
     </message>
     <message id="btsc-usd">
         <source>US Dollar</source>
-        <translation>US Dollar</translation>
+        <translation>US-Dollar</translation>
     </message>
     <message id="btsc-aud">
         <source>Australian Dollar</source>
