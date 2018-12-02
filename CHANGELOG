@@ -1,0 +1,61 @@
+HBN SFOS Components 1.3.1 - 2018-11-30
+- fix font sizes on About page
+- translation updates
+
+HBN SFOS Components 1.3.0 - 2018-11-23
+- Rename to HBN SFOS Components
+- Make PushUp and PullDown menus on licenses pages the same
+- Add option to set a custom license website in the licenses model
+- Add OpenSSL, SQLite and zlib license files
+
+BT SFOS Components 1.2.1 - 2018-11-13
+- fixed: resource installation
+
+BT SFOS Components 1.2.0 - 2018-11-13
+- new: custom icon provider to select appropriate icon
+  for the besst fitting scale
+- new: icon creation script to create scaled icons from
+  SVG source files
+- new: Spanish translation by Jenny Esmeralda Robles Escamilla
+- new: french translation by Antoine Vacher
+- improved: easier inclusion in projects by using a pri
+  instead of a pro file
+- improved: translation updates
+
+BT SFOS Components 1.1.3 - 2017-11-23
+- new: SIL OFL 1.1 License file
+
+BT SFOS Components 1.1.2 - 2017-10-26
+- changed: use new contactWebsiteLink property on AboutPage to separate
+  the link to open from the text string displayed to the user
+
+BT SFOS Components 1.1.1 - 2017-10-08
+- new: LGPL 2.1 License File
+
+BT SFOS Components 1.1.0 - 2017-09-27
+- add optinal Bitcoin donations to the About page
+
+BT SFOS Components 1.0.7 - 2017-09-01
+- new: Apache License Version 2 text file
+
+BT SFOS Components 1.0.6 - 2017-03-19
+- new: Dutch translation by Nathan Follens
+
+BT SFOS Components 1.0.5 - 2017-0129
+- new: Spanish (Latin America) translation by Paola Aristizabal
+
+BT SFOS Components 1.0.4 - 2016-11-10
+- new: partly Danish translation by Peter Jespersen
+- new: Swedish translation by Åke Engelbrektson
+
+BT SFOS Components 1.0.3 - 2016-11-08
+- new: GPLv2 license file
+
+BT SFOS Components 1.0.2 - 2016-10-19
+- AboutPage: fixed donates section was shown by default
+
+BT SFOS Components 1.0.1 - 2016-10-19
+- some fixes in the AboutPage
+
+BT SFOS Components 1.0.0 - 2016-10-19
+- first fixed release
