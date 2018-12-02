@@ -8,13 +8,16 @@ Please note that your contribution has to be compatible with the licenses used b
 HBN SFOS Components are licensed under the terms of the
 [BSD 3-Clause "New" or "Revised" License](https://github.com/Huessenbergnetz/HBN_SFOS_Components/blob/master/LICENSE).
 
-## Translating Fuoten
+## Translating HBN SFOS Components
 
 HBN SFOS Components translations are managed via [Transifex](https://www.transifex.com/huessenbergnetz/hbn-sfos-components/),
 a web based translation platform.
 
 If you do not want to use Transifex, you can also fork HBN SFOS Components and submit your translation view pull
 requests.
+
+When writing translations and your target language uses a [T–V distinction](https://en.wikipedia.org/wiki/T–V_distinction),
+like Sie and Du in German, please use formal/respectful variant.
 
 Translations for HBN SFOS Components are released under the terms of the
 [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/).
