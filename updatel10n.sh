@@ -5,5 +5,3 @@ if [ ! -d translations ]; then
 fi
 
 lupdate-qt5 -no-obsolete -source-language en -target-language en -locations none qml -ts translations/hbnsc.ts
-lupdate-qt5 -no-obsolete -pluralonly -source-language en -target-language en_GB -locations none qml -ts translations/hbnsc_en_GB.ts
-lupdate-qt5 -no-obsolete -pluralonly -source-language en -target-language en_US -locations none qml -ts translations/hbnsc_en_US.ts
