@@ -87,55 +87,55 @@ ListItem {
                 spacing: Theme.paddingMedium
 
                 Image {
-                    source: "image://hbnsc/icon-s-browser?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-browser?" + theColor : ""
                     visible: model.website !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-bitbucket?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-bitbucket?" + theColor : ""
                     visible: model.bitbucket !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-facebook?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-facebook?" + theColor : ""
                     visible: model.facebook !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-github?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-github?" + theColor : ""
                     visible: model.github !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-google-plus?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-google-plus?" + theColor : ""
                     visible: model.googleplus !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-linkedin?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-linkedin?" + theColor : ""
                     visible: model.linkedin !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-tmo?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-tmo?" + theColor : ""
                     visible: model.tmo !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-twitter?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-twitter?" + theColor : ""
                     visible: model.twitter !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
                 Image {
-                    source: "image://hbnsc/icon-s-weibo?" + theColor
+                    source: visible ? "image://hbnsc/icon-s-weibo?" + theColor : ""
                     visible: model.weibo !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
