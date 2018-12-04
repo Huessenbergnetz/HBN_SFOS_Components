@@ -36,25 +36,40 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QPainter>
 #include <QColor>
 #include <QStringBuilder>
-#include <QVector>
-#include <QDir>
-#include <QFileInfoList>
+#include <QQmlEngine>
+#include <QUrl>
 #include <initializer_list>
+#ifndef CLAZY
+#include <sailfishapp.h>
+#include <silicatheme.h>
+#include <silicascreen.h>
+#endif
 
-class HbnscIconProvider : public QQuickImageProvider
+namespace Hbnsc {
+
+class BaseIconProvider : public QQuickImageProvider
 {
+    Q_DISABLE_COPY(BaseIconProvider)
+    QString m_iconsDir;
 public:
-    HbnscIconProvider(std::initializer_list<qreal> scales, qreal pixelRatio = 1.0, bool large = false) : QQuickImageProvider(QQuickImageProvider::Pixmap)
+    BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr) : QQuickImageProvider(QQuickImageProvider::Pixmap)
     {
+#ifndef CLAZY
+        const QString _iconsDir = !iconsDir.trimmed().isEmpty() ? iconsDir : SailfishApp::pathTo(QStringLiteral("icons")).toString(QUrl::RemoveScheme);
+        const qreal pixelRatio = Silica::Theme::instance()->pixelRatio();
+        const bool large = largeAvailable ? (Silica::Screen::instance()->sizeCategory() >= Silica::Screen::Large) : false;
+#else
+        const QString _iconsDir;
+        const qreal pixelRatio = 1.0;
+        const bool large = false;
+#endif
+
         qreal nearestScale = 1.0;
 
         if (scales.size() > 1) {
             qreal lastDiff = 999.0;
             for (qreal currentScale : scales) {
-                qreal diff = (currentScale - pixelRatio);
-                if (diff < 0) {
-                    diff *= -1.0;
-                }
+                const qreal diff = std::abs(currentScale - pixelRatio);
                 if (diff < lastDiff) {
                     nearestScale = currentScale;
                     lastDiff = diff;
@@ -73,21 +88,32 @@ public:
             nearestScale = pixelRatio;
         }
 
-        m_iconsDir = QStringLiteral(HBNSC_ICONS_DIR) % QLatin1Char('z') % QString::number(nearestScale) % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
+        m_iconsDir = _iconsDir % (iconsDir.endsWith(QLatin1Char('/')) ? QStringLiteral("z") : QStringLiteral("/z")) % QString::number(nearestScale) % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
 
-        qDebug("Constructing a new HbnscIconProvider object for a pixel ratio of %.2f on a %s screen. Loading icons from \"%s\".", nearestScale, large ? "large" : "small", qUtf8Printable(m_iconsDir));
+        if (engine) {
+            Q_ASSERT_X(!providerName.trimmed().isEmpty(), "constructing BaseIconProvider", "providerName can not be empty when engine is a valid pointer");
+            engine->addImageProvider(providerName, this);
+        }
+
+        qDebug("Constructing a new icon provider object for a pixel ratio of %.2f on a %s screen. Loading icons from \"%s\".", nearestScale, large ? "large" : "small", qUtf8Printable(m_iconsDir));
     }
 
-    ~HbnscIconProvider() override
+    ~BaseIconProvider() override
     {
-        qDebug("Deconstructing the HbnscIconProvider object.");
+        qDebug("%s", "Deconstructing the icon provider.");
     }
+
 
     QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override
     {
-        const QStringList parts = id.split(QLatin1Char('?'), QString::SkipEmptyParts);
-        const QString filePath = m_iconsDir % parts.at(0) % QStringLiteral(".png");
-        QPixmap sourcePixmap(filePath);
+        const int qmPos = id.indexOf(QLatin1Char('?'));
+        const QString filePath = m_iconsDir % id.leftRef(qmPos) % QStringLiteral(".png");
+
+#ifdef QT_DEBUG
+        qDebug("Loading image from %s", qUtf8Printable(filePath));
+#endif
+
+        QPixmap sourcePixmap(filePath, "png");
 
         if (!sourcePixmap.isNull()) {
 
@@ -95,24 +121,41 @@ public:
                 *size = sourcePixmap.size();
             }
 
-            if (parts.size() > 1 && QColor::isValidColor(parts.at(1))) {
-                QPainter painter(&sourcePixmap);
-                painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-                painter.fillRect(sourcePixmap.rect(), parts.at(1));
-                painter.end();
+            if (qmPos > -1) {
+                const QColor color(id.mid(qmPos + 1));
+                if (color.isValid()) {
+                    QPainter painter(&sourcePixmap);
+                    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+                    painter.fillRect(sourcePixmap.rect(), color);
+                    painter.end();
+                }
+            }
+
+            if (!requestedSize.isEmpty()) {
+                return sourcePixmap.scaled(requestedSize);
             }
         }
 
-        if (!sourcePixmap.isNull() && requestedSize.width() > 0 && requestedSize.height() > 0 && sourcePixmap.size() != requestedSize) {
-            return sourcePixmap.scaled(requestedSize.width(), requestedSize.height(), Qt::IgnoreAspectRatio);
-        } else {
-            return sourcePixmap;
-        }
+        return sourcePixmap;
+    }
+};
+
+class HbnscIconProvider : public BaseIconProvider
+{
+    Q_DISABLE_COPY(HbnscIconProvider)
+public:
+    HbnscIconProvider(QQmlEngine *engine = nullptr)
+        : BaseIconProvider({1.0, 1.25, 1.5, 1.75, 2.0}, QStringLiteral(HBNSC_ICONS_DIR), false, QStringLiteral("hbnsc"), engine)
+    {
+
     }
 
-private:
-    QString m_iconsDir;
-    Q_DISABLE_COPY(HbnscIconProvider)
+    ~HbnscIconProvider() override
+    {
+
+    }
 };
+
+}
 
 #endif // HBNSCICONPROVIDER_H
