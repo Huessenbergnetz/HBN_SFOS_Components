@@ -61,7 +61,7 @@ public:
 #else
         const QString _iconsDir;
         const qreal pixelRatio = 1.0;
-        const bool large = false;
+        const bool large = largeAvailable;
 #endif
 
         qreal nearestScale = 1.0;
