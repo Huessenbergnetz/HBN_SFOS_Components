@@ -109,9 +109,7 @@ public:
         const int qmPos = id.indexOf(QLatin1Char('?'));
         const QString filePath = m_iconsDir % id.leftRef(qmPos) % QStringLiteral(".png");
 
-#ifdef QT_DEBUG
         qDebug("Loading image from %s", qUtf8Printable(filePath));
-#endif
 
         QPixmap sourcePixmap(filePath, "png");
 
