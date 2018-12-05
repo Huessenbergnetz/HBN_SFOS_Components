@@ -5,6 +5,7 @@ isEmpty(INSTALL_TRANSLATIONS_DIR): INSTALL_TRANSLATIONS_DIR = /usr/share/$$TARGE
 DEFINES += HBNSC_ICONS_DIR=\"\\\"$${HBNSC_INSTALL_ICONS_DIR}/\\\"\"
 
 HEADERS += \
+    $$PWD/src/hbnsc.h \
     $$PWD/src/hbnsciconprovider.h
 
 OTHER_FILES += \
@@ -32,6 +33,10 @@ OTHER_FILES += \
     $$PWD/qmldir.in
 
 INCLUDEPATH += $$PWD/src
+
+!contains(CONFIG, clazy) {
+    PKGCONFIG *= sailfishsilica
+}
 
 hbnscLicenses.path = $$HBNSC_INSTALL_QML_DIR/licenses
 
