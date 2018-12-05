@@ -15,7 +15,7 @@ branch/tag to work with. Or integrate it as a submodule into your project git tr
 ### Integrate into your project
 You can copy the files or, the better way, include the configuration into your project.
 
-    include(HBN_SFOS_Components/HBN_SFOS_Components.pri)
+    include(path/to/HBN_SFOS_Components/HBN_SFOS_Components.pri)
 
 To install the files of the HBN SFOS Components into the right location, you have nothing to do. If your app
 for example is named *harbour-myapp*, the following installation paths will be used:
@@ -38,7 +38,7 @@ base names withouth the extensions to the `HBNSC_LICENSES` variable.
 
 This will only include the license page files for GPL and LGPL in version 3.
 
-## Build the icons
+### Build the icons
 
 The icons included in the source tarball are SVG files that have to be converted into PNG files. There is a a Bash script called
 [createIcons.sh](https://github.com/Huessenbergnetz/HBN_SFOS_Components/tree/master/images/createIcons.sh) in the *images* directory
@@ -52,7 +52,7 @@ further improve the size of the created PNG files.
 
 That will create icons for the following scalings: 1, 1.25, 1.5, 1.75 and 2.
 
-## Integrate translations
+### Integrate translations
 
 Unless you specify a different value for `INSTALL_TRANSLATIONS_DIR` the translation files of HBN SFOS Components will be
 installed into */usr/share/harbour-myapp/translations*. To include the translations (they are ID based) into
@@ -66,25 +66,19 @@ your QGuiApplication). The base name of the translation files is *hbnsc*, the de
         app->installTranslator(hbnscTrans)
     }
 
-## Integrate icon provider
+### Integrate icon provider
 
 To show the included icons with the appropriate size and scaling, add [hbnciconprovider.h](https://github.com/Huessenbergnetz/HBN_SFOS_Components/tree/master/src/hbnsciconprovider.h)
-to your project. To select the correct scaling, you should also include libsailfishsilica.
+to your project. It uses libsailfishsilica to determine the pixel ratio to select the best fitting icon scaling.
 
-Add the following to you project file:
-
-    PKGCONFIG += sailfishsilica
-    INCLUDEPATH += /usr/include/libsailfishsilica
-
-To automatically install the devel files in the SDK, add the follwing to your YAML RPM spec file into the *PkgConfigBR* section:
+To automatically install the devel files of libsailfishsilica in the SDK, add the follwing to your YAML RPM spec file into the *PkgConfigBR* section:
 
     PkgConfigBR:
       - sailfishsilica
 
 Then in your main function file or where you load your application, include the headers and install the icon provider:
 
-    #include <silicatheme.h>
-    #include <hbnsciconprovider.h>
+    #include "hbnsciconprovider.h"
 
     int main(int argc, char *argv[])
     {
@@ -93,15 +87,7 @@ Then in your main function file or where you load your application, include the 
 
         QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-        auto theme = Silica::Theme::instance();
-
-        // HbnscIconProvider requires a list of available scales,
-        // if you used the createIcons.sh script, the follwing scales are available.
-        // You should also set the pixel ratio returned by Silica::Theme.
-        QScopedPointer<BtscIconProvider> iconProvider(new HbnscIconProvider({1.0, 1.25, 1.5, 1.75, 2.0}, theme->pixelRatio()));
-
-        // Now install the new provider under the name btsc
-        view->engine()->addImageProvider(QStringLiteral("hbnsc"), iconProvider.data());
+	QScopedPointer<Hbnsc::HbnscIconProvider> hbnscIconProvider(new Hbnsc::HbnscIconProvider(view->engine()));
     }
 
 ## Components API
