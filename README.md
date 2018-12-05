@@ -142,8 +142,11 @@ Implements an about page and optionally pages about contributors, changelog and 
         // link to the homepage of the app, will be shown in the pull down menu (optional)
         appHomepage: "https://www.example.com"
 
-        // the copyright year of your app (optional)
-        appCopyrightYear: "2016"
+        // the copyright start year of your app
+        appCopyrightYearFrom: "2016"
+
+	// the copyright end year of your app, mostly the current year (optional)
+	appCopyrightYearTo: "2018"
 
         // the copyright holder, your name or whoever (optional)
         appCopyrightHolder: "Me"

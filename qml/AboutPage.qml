@@ -42,7 +42,8 @@ Page {
 
     property alias appDescription: description.text
     property url appHomepage: ""
-    property string appCopyrightYear: ""
+    property string appCopyrightYearFrom: ""
+    property string appCopyrightYearTo: ""
     property string appCopyrightHolder: ""
     property alias appLicense: license.text
     property string appLicenseFile: ""
@@ -166,7 +167,13 @@ Page {
                 wrapMode: Text.WordWrap
                 textFormat: Text.PlainText
                 color: Theme.primaryColor
-                text: appCopyrightYear !== "" ? String("© %1, %2").arg(appCopyrightYear).arg(appCopyrightHolder) : String("© %1").arg(appCopyrightHolder)
+                text: appCopyrightYearTo !== ""
+                      //: %1 will be the start year of the copyright range, %2 will be the end year of the copyright range, %3 will be the copyright holder. example: © 2017–2018, Small Company Inc.
+                      //% "© %1–%2, %3"
+                      ? qsTrId("btsc-copyrigth-from-to").arg(appCopyrightYearFrom).arg(appCopyrightYearTo).arg(appCopyrightHolder)
+                      //: %1 will be the copyright year, %2 will be the copyright holder. Example: © 2018, Small Company Inc.
+                      //% "© %1, %2"
+                      : qsTrId("btsc-copyright-from-only").arg(appCopyrightYearFrom).arg(appCopyrightHolder)
                 visible: appCopyrightHolder
                 font.pixelSize: Theme.fontSizeMedium
             }
