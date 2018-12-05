@@ -95,7 +95,7 @@ public:
             engine->addImageProvider(providerName, this);
         }
 
-        qDebug("Constructing a new icon provider object for a pixel ratio of %.2f on a %s screen. Loading icons from \"%s\".", nearestScale, large ? "large" : "small", qUtf8Printable(m_iconsDir));
+        qDebug("Constructing a new icon provider \"%s\" for a pixel ratio of %.2f on a %s screen. Loading icons from \"%s\".", qUtf8Printable(providerName), nearestScale, large ? "large" : "small", qUtf8Printable(m_iconsDir));
     }
 
     ~BaseIconProvider() override
