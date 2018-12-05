@@ -5,6 +5,7 @@
 #include <QStringList>
 #include <QStringBuilder>
 #include <QCoreApplication>
+#include <QVersionNumber>
 
 #ifndef CLAZY
 #include <silicatheme.h>
@@ -53,6 +54,11 @@ static QString getLauncherIcon(std::initializer_list<int> sizes)
     qDebug("Found app launcher icon for size %i at \"%s\".", size, qUtf8Printable(iconPath));
 
     return iconPath;
+}
+
+static QVersionNumber version()
+{
+    return QVersionNumber::fromString(QStringLiteral(HBNSC_VERSION));
 }
 
 }
