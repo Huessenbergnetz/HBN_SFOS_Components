@@ -126,6 +126,8 @@ Item {
 
             url += "&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHostedGuest"
 
+            donation.currentIndex = 0;
+
             Qt.openUrlExternally(encodeURI(url))
         }
 
