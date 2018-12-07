@@ -384,10 +384,10 @@ Page {
                 wrapMode: Text.WordWrap
             }
 
-            Repeater {
+            ColumnView {
                 id: licensesRepeater
                 width: parent.width
-
+                itemHeight: Theme.itemSizeMedium
                 delegate: LicenseDelegate {}
             }
         }
