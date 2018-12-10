@@ -1,3 +1,14 @@
+HBN SFOS Components 1.4.0 - 2018-12-10
+* new: add function to get best fitting launcher icon
+* new: add Hbnsc::version() function
+* improved: make the icon provider more flexible so that it is
+  reusable
+* improved: only load icons on ContributorsDelegate.qml if they
+  are used
+* changed: differentiate between copyright year from and to
+  on AboutPage.qml
+* changed: reset selection after opening PayPal website
+
 HBN SFOS Components 1.3.3 - 2018-12-04
 * fixed: missing translation strings for en_US and en_GB
 
