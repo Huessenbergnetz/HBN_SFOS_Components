@@ -39,11 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QQmlEngine>
 #include <QUrl>
 #include <initializer_list>
-#ifndef CLAZY
-#include <sailfishapp.h>
-#include <silicatheme.h>
-#include <silicascreen.h>
-#endif
+#include "hbnsc.h"
 
 namespace Hbnsc {
 
@@ -52,50 +48,17 @@ class BaseIconProvider : public QQuickImageProvider
     Q_DISABLE_COPY(BaseIconProvider)
     QString m_iconsDir;
 public:
-    BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr) : QQuickImageProvider(QQuickImageProvider::Pixmap)
+    BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr)
+        : QQuickImageProvider(QQuickImageProvider::Pixmap)
     {
-#ifndef CLAZY
-        const QString _iconsDir = !iconsDir.trimmed().isEmpty() ? iconsDir : SailfishApp::pathTo(QStringLiteral("icons")).toString(QUrl::RemoveScheme);
-        const qreal pixelRatio = Silica::Theme::instance()->pixelRatio();
-        const bool large = largeAvailable ? (Silica::Screen::instance()->sizeCategory() >= Silica::Screen::Large) : false;
-#else
-        const QString _iconsDir;
-        const qreal pixelRatio = 1.0;
-        const bool large = largeAvailable;
-#endif
-
-        qreal nearestScale = 1.0;
-
-        if (scales.size() > 1) {
-            qreal lastDiff = 999.0;
-            for (qreal currentScale : scales) {
-                const qreal diff = std::abs(currentScale - pixelRatio);
-                if (diff < lastDiff) {
-                    nearestScale = currentScale;
-                    lastDiff = diff;
-                }
-                if (lastDiff == 0.0) {
-                    break;
-                }
-            }
-
-        } else if (scales.size() == 1) {
-
-            auto scalesIt = scales.begin();
-            nearestScale = *scalesIt;
-
-        } else {
-            nearestScale = pixelRatio;
-        }
-
-        m_iconsDir = _iconsDir % (iconsDir.endsWith(QLatin1Char('/')) ? QStringLiteral("z") : QStringLiteral("/z")) % QString::number(nearestScale) % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
+        m_iconsDir = Hbnsc::getIconsDir(scales, iconsDir, largeAvailable);
 
         if (engine) {
             Q_ASSERT_X(!providerName.trimmed().isEmpty(), "constructing BaseIconProvider", "providerName can not be empty when engine is a valid pointer");
             engine->addImageProvider(providerName, this);
         }
 
-        qDebug("Constructing a new icon provider \"%s\" for a pixel ratio of %.2f on a %s screen. Loading icons from \"%s\".", qUtf8Printable(providerName), nearestScale, large ? "large" : "small", qUtf8Printable(m_iconsDir));
+        qDebug("Constructing a new icon provider \"%s\" loading icons from \"%s\".", qUtf8Printable(providerName), qUtf8Printable(m_iconsDir));
     }
 
     ~BaseIconProvider() override
