@@ -9,6 +9,8 @@
 
 #ifndef CLAZY
 #include <silicatheme.h>
+#include <silicascreen.h>
+#include <sailfishapp.h>
 #endif
 
 #include <initializer_list>
@@ -54,6 +56,49 @@ static QString getLauncherIcon(std::initializer_list<int> sizes)
     qDebug("Found app launcher icon for size %i at \"%s\".", size, qUtf8Printable(iconPath));
 
     return iconPath;
+}
+
+static QString getIconsDir(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false)
+{
+    QString ret;
+
+#ifndef CLAZY
+    const QString _iconsDir = !iconsDir.trimmed().isEmpty() ? iconsDir : SailfishApp::pathTo(QStringLiteral("icons")).toString(QUrl::RemoveScheme);
+    const qreal pixelRatio = Silica::Theme::instance()->pixelRatio();
+    const bool large = largeAvailable ? (Silica::Screen::instance()->sizeCategory() >= Silica::Screen::Large) : false;
+#else
+    const QString _iconsDir;
+    const qreal pixelRatio = 1.0;
+    const bool large = largeAvailable;
+#endif
+
+    qreal nearestScale = 1.0;
+
+    if (scales.size() > 1) {
+        qreal lastDiff = 999.0;
+        for (qreal currentScale : scales) {
+            const qreal diff = std::abs(currentScale - pixelRatio);
+            if (diff < lastDiff) {
+                nearestScale = currentScale;
+                lastDiff = diff;
+            }
+            if (lastDiff == 0.0) {
+                break;
+            }
+        }
+
+    } else if (scales.size() == 1) {
+
+        auto scalesIt = scales.begin();
+        nearestScale = *scalesIt;
+
+    } else {
+        nearestScale = pixelRatio;
+    }
+
+    ret = _iconsDir % (iconsDir.endsWith(QLatin1Char('/')) ? QStringLiteral("z") : QStringLiteral("/z")) % QString::number(nearestScale) % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
+
+    return ret;
 }
 
 static QVersionNumber version()
