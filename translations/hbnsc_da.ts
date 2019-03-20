@@ -207,12 +207,12 @@
     <message id="btsc-copyrigth-from-to">
         <source>© %1–%2, %3</source>
         <extracomment>%1 will be the start year of the copyright range, %2 will be the end year of the copyright range, %3 will be the copyright holder. example: © 2017–2018, Small Company Inc.</extracomment>
-        <translation type="unfinished"/>
+        <translation>© %1–%2, %3</translation>
     </message>
     <message id="btsc-copyright-from-only">
         <source>© %1, %2</source>
         <extracomment>%1 will be the copyright year, %2 will be the copyright holder. Example: © 2018, Small Company Inc.</extracomment>
-        <translation type="unfinished"/>
+        <translation>© %1, %2</translation>
     </message>
 </context>
 </TS>
