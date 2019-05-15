@@ -1,3 +1,6 @@
+HBN SFOS Components 1.4.3 - 2019-05-15
+* improved: do not use fixed icon size on changelog page and delegate
+
 HBN SFOS Components 1.4.2 - 2019-05-15
 * new: add Hbnsc::loadTranslations() to load the appropriate translation
 
