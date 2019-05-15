@@ -62,7 +62,7 @@ your QGuiApplication). The base name of the translation files is *hbnsc*, the de
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
     QTranslator *hbnscTrans = new QTranslator(app);
-    if (hbnscTrans->load(QLocale(), QStringLiteral("btsc"), QStringLiteral("_"), SailfishApp::pathTo(QStringLiteral("translations")).toString(QUrl::RemoveScheme)) {
+    if (hbnscTrans->load(QLocale(), QStringLiteral("hbnsc"), QStringLiteral("_"), SailfishApp::pathTo(QStringLiteral("translations")).toString(QUrl::RemoveScheme)) {
         app->installTranslator(hbnscTrans)
     }
 
