@@ -87,7 +87,7 @@ Item {
 
                 Image {
                     id: typeIcon
-                    width: 32; height: 32
+                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall;
                     source: model.type === 0 ? "image://theme/icon-m-add" : model.type === 1 ? "image://theme/icon-m-favorite" : model.type === 2 ? "image://theme/icon-m-crash-reporter" : "image://theme/icon-s-high-importance"
                     anchors { left: parent.left; top: parent.top; }
                 }

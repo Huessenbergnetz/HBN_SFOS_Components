@@ -59,7 +59,7 @@ Page {
                     width: parent.width/4
 
                     Image {
-                        width: 32; height: 32;
+                        width: Theme.iconSizeMedium; height: Theme.iconSizeMedium;
                         anchors.horizontalCenter: parent.horizontalCenter
                         source: "image://theme/icon-m-add"
                     }
@@ -79,7 +79,7 @@ Page {
                     width: parent.width/4
 
                     Image {
-                        width: 32; height: 32;
+                        width: Theme.iconSizeMedium; height: Theme.iconSizeMedium;
                         anchors.horizontalCenter: parent.horizontalCenter
                         source: "image://theme/icon-m-favorite"
                     }
@@ -99,7 +99,7 @@ Page {
                     width: parent.width/4
 
                     Image {
-                        width: 32; height: 32;
+                        width: Theme.iconSizeMedium; height: Theme.iconSizeMedium;
                         anchors.horizontalCenter: parent.horizontalCenter
                         source: "image://theme/icon-m-crash-reporter"
                     }
@@ -119,7 +119,7 @@ Page {
                     width: parent.width/4
 
                     Image {
-                        width: 32; height: 32;
+                        width: Theme.iconSizeMedium; height: Theme.iconSizeMedium;
                         anchors.horizontalCenter: parent.horizontalCenter
                         source: "image://theme/icon-s-high-importance"
                     }
