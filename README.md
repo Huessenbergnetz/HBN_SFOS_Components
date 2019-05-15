@@ -58,6 +58,9 @@ The source tarball only includes Qt TS XML translation source files that have to
 called [releasel10n.sh](https://github.com/Huessenbergnetz/HBN_SFOS_Components/blob/master/releasel10n.sh) in the root source directory
 that will do the job for you. Qt's lrelease tool has to be installed to compile the files.
 
+    cd HBN_SFOS_Components
+    ./releasel10n.sh
+
 ### Integrate translations
 
 Unless you specify a different value for `INSTALL_TRANSLATIONS_DIR` the translation files of HBN SFOS Components will be
