@@ -1,6 +1,6 @@
 /*
-Copyright (c) 2015-2018, Hüssenbergnetz/Matthias Fehring
-https://github.com/Buschtrommel/BT_SFOS_Components
+Copyright (c) 2015-2019, Hüssenbergnetz/Matthias Fehring
+https://github.com/Huessenbergnetz/HBN_SFOS_Components
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
