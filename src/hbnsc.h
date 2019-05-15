@@ -106,6 +106,16 @@ static QVersionNumber version()
     return QVersionNumber::fromString(QStringLiteral(HBNSC_VERSION));
 }
 
+static bool loadTranslations(const QLocale &locale = QLocale())
+{
+    auto t = new QTranslator(qApp);
+    if (t->load(locale, QStringLiteral("hbnsc"), QStringLiteral("_"), QStringLiteral(HBNSC_L10N_DIR))) {
+        qApp->installTranslator(t);
+        return true;
+    }
+    return false;
+}
+
 }
 
 #endif // HBNSC_H
