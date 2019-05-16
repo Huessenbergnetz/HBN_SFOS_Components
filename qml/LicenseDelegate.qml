@@ -74,7 +74,7 @@ BackgroundItem {
                         //% "%1 %2 by %3"
                       ? qsTrId("btsec-lic-item-text").arg(model.name).arg(model.version).arg(model.author)
                         //: %1 is the name of the sofware, %2 is the author's name
-                        //% "%1 by %2."
+                        //% "%1 by %2"
                       : qsTrId("btsec-lic-item-without-version-text").arg(model.name).arg(model.author)
         }
 
