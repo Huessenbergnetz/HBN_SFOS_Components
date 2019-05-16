@@ -12,7 +12,11 @@ DEFINES += HBNSC_L10N_DIR=\"\\\"$${INSTALL_TRANSLATIONS_DIR}\\\"\"
 
 HEADERS += \
     $$PWD/src/hbnsc.h \
-    $$PWD/src/hbnsciconprovider.h
+    $$PWD/src/hbnsciconprovider.h \
+    $$PWD/src/hbnsclicensemodel.h
+
+SOURCES += \
+    $$PWD/src/hbnsclicensemodel.cpp
 
 OTHER_FILES += \
     $$PWD/qml/InfoHint.qml \

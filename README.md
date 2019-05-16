@@ -349,9 +349,12 @@ ListModel {
 }
 ```
 
-### 3rd party components model example
-Used to show a list of 3rd party components. Used on AboutPage::licensesModel
+### 3rd party components model examples
+Used to show a list of 3rd party components. Used on AboutPage::licensesModel. There are two approaches to create this model.
+You can creat a QML ListModel or use a Qt/C++ based model by subclassing [src/hbnsclicensemodel.h](https://github.com/Huessenbergnetz/HBN_SFOS_Components/tree/master/src/hbnsclicensemodel.h).
+The latter approach has the advantage that it already includes some default items like Qt, Sailfish Silica UI, etc.
 
+#### QML ListModel example
 ```qml
 ListModel {
     ListElement {
@@ -359,7 +362,7 @@ ListModel {
         name: "libfuoten"
 
         // author of the component (mandatory)
-        author: "Buschtrommel"
+        author: "Hüssenbergnetz"
 
         // version of the component (optional)
         version: "0.0.1"
@@ -383,6 +386,74 @@ ListModel {
         // website of the license (optional)
         licenseWebsite: "https://github.com/Huessenbergnetz/libfuoten/blob/master/LICENSE"
     }
+}
+```
+
+#### Qt/C++ example
+```cpp
+// the header file mylicensesmodel.h
+
+#ifndef MYLICENSESMODEL_H
+#define MYLICENSESMODEL_H
+
+#include "hbnsclicensemodel.h"
+
+class MyLicensesModel : public Hbnsc::LicenseModel
+{
+public:
+    explicit MyLicensesModel(QObject *parent = nullptr);
+    ~MyLicensesModel() override;
+};
+
+#endif // LICENSESMODEL_H
+
+// the implementation mylicensesmodel.cpp
+
+#include "licensesmodel.h"
+
+MyLicensesModel::MyLicensesModel(QObject *parent) : Hbnsc::LicenseModel(parent)
+{
+    add(// name of the component (mandatory)
+        QStringLiteral("libfuoten"),
+        // author of the component (mandatory)
+        QStringLiteral("Hüssenbergnetz"),
+        // version of the component (optional)
+        QStringLiteral("0.0.1"),
+        // url to the components website (optional)
+        QUrl(QStringLiteral("https://github.com/Huessenbergnetz/libfuoten")),
+        // description of the component (optional)
+        QStringLiteral("Libfuoten is a Qt based library that provides access the ownCloud/Nextcloud News App API."),
+        // licens of the component (mandatory)
+        QStringLiteral("GNU Lesser General Public License, Version 3"),
+        // one of the license files in qml/licenses (optional),
+        // takes precedence over the custom license file
+        QStringLiteral("LGPLv3.qml"),
+        // url to website of the component's license (optional)
+        QUrl(QStringLiteral("https://github.com/Huessenbergnetz/libfuoten/blob/master/LICENSE")),
+        // local url to a custom license file (optional),
+        // if you do not want to use one of the licenses from qml/licenses
+        QUrl());
+
+    // call this after adding your licenses to sort the list by component name
+    sortLicenses();
+}
+
+MyLicensesModel::~MyLicensesModel()
+{
+
+}
+
+// in your main.cpp
+
+#include "mylicensesmodel.h"
+
+int main(int argc, char *argv[])
+{
+    // other stuff
+
+    qmlRegisterType<MyLicensesModel>("harbour.myapp.models", 1, 0, "MyLicensesModel");
+
+    // more other stuff
 }
 ```
 
