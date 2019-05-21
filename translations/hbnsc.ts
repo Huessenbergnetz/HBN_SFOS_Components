@@ -231,5 +231,15 @@
         <extracomment>Description for the HBN SFOS Components translations in the list of used 3rd party components.</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message id="hbnsc-lang-picker-label">
+        <source>Language</source>
+        <extracomment>Label for a combobox (drop down menu) to choose the application language</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="hbnsc-lang-picker-desc">
+        <source>To change the language, you have to restart the application.</source>
+        <extracomment>Description for a combobox (drop down menu) to choose the application language</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
