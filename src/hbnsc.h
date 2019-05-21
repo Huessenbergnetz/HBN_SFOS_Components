@@ -37,6 +37,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QStringBuilder>
 #include <QCoreApplication>
 #include <QVersionNumber>
+#include <QLocale>
+#include <QTranslator>
 
 #ifndef CLAZY
 #include <silicatheme.h>
