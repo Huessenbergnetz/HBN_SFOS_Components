@@ -21,29 +21,31 @@ SOURCES += \
     $$PWD/src/hbnsclanguagemodel.cpp
 
 OTHER_FILES += \
-    $$PWD/qml/InfoHint.qml \
-    $$PWD/qml/IconWithHint.qml \
-    $$PWD/qml/Contributors.qml \
-    $$PWD/qml/Changelog.qml \
-    $$PWD/qml/AboutPage.qml \
-    $$PWD/qml/PaypalChooser.qml \
-    $$PWD/qml/LanguagePicker.qml \
-    $$PWD/qml/ChangelogDelegate.qml \
-    $$PWD/qml/ContributorsDelegate.qml \
-    $$PWD/qml/LicenseDelegate.qml \
-    $$PWD/qml/licenses/LicenseBase.qml \
-    $$PWD/qml/licenses/LGPLv3.qml \
-    $$PWD/qml/licenses/BSD-3.qml \
-    $$PWD/qml/licenses/GPLv3.qml \
-    $$PWD/qml/licenses/CC-BY-4_0.qml \
-    $$PWD/qml/licenses/GPLv2.qml \
-    $$PWD/qml/licenses/Apache-2_0.qml \
-    $$PWD/qml/licenses/LGPLv2_1.qml \
-    $$PWD/qml/licenses/SIL-OFL-1_1.qml \
-    $$PWD/qml/licenses/SQLite.qml \
-    $$PWD/qml/licenses/OpenSSL.qml \
-    $$PWD/qml/licenses/zlib.qml \
-    $$PWD/qmldir.in
+    $$PWD/qml/de/huessenbergnetz/hbnsc/InfoHint.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/IconWithHint.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/Contributors.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/Changelog.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/AboutPage.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/PaypalChooser.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/LanguagePicker.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/ChangelogDelegate.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/ContributorsDelegate.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/LicenseDelegate.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/LicenseBase.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/LGPLv3.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/BSD-3.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/GPLv3.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/CC-BY-4_0.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/GPLv2.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/Apache-2_0.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/LGPLv2_1.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/SIL-OFL-1_1.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/SQLite.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/OpenSSL.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/zlib.qml \
+    $$PWD/de/huessenbergnetz/hbnsc/qmldir.in
+
+QML_IMPORT_PATH += $$PWD/qml
 
 INCLUDEPATH += $$PWD/src
 
