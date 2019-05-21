@@ -36,27 +36,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using namespace Hbnsc;
 
-struct LanguageModel::Language {
-    QString code;
-    QString name;
-
-    Language(const QString &_code, const QString &_name) :
-        code(std::move(_code)), name(std::move(_name))
-    {
-
-    }
-
-    Language(const Language &other) = default;
-
-    Language(Language &&other) :
-        code(std::move(other.code)), name(std::move(other.name))
-    {
-
-    }
-
-    Language& operator=(const Language &other) = default;
-};
-
 LanguageModel::LanguageModel(const QStringList &supportedLangs, QObject *parent) :
     QAbstractListModel(parent)
 {
@@ -69,16 +48,30 @@ LanguageModel::LanguageModel(const QStringList &supportedLangs, QObject *parent)
             m_langs.emplace_back(lang, name);
         }
 
-        std::sort(m_langs.begin(), m_langs.end(), [](const Language &a, const Language &b){
-            return QString::localeAwareCompare(a.name, b.name) < 0;
+        std::sort(m_langs.begin(), m_langs.end(), [](const std::pair<QString,QString> &a, const std::pair<QString,QString> &b){
+            return QString::localeAwareCompare(a.second, b.second) < 0;
         });
     }
 
     QString syslang;
-    for (const QString &lang : QLocale::system().uiLanguages()) {
+    const QStringList uiLangs = QLocale::system().uiLanguages();
+    for (const QString &lang : uiLangs) {
         if (supportedLangs.contains(lang)) {
             syslang = lang;
             break;
+        }
+    }
+
+    if (syslang.isEmpty()) {
+        for (const QString &lang : uiLangs) {
+            const int underScoreIdx = lang.indexOf(QLatin1Char('-'));
+            if (underScoreIdx > 0) {
+                const QString langPart = lang.left(underScoreIdx);
+                if (supportedLangs.contains(langPart)) {
+                    syslang = langPart;
+                    break;
+                }
+            }
         }
     }
 
@@ -132,13 +125,13 @@ QVariant LanguageModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    const Language l = m_langs.at(index.row());
+    const std::pair<QString,QString> l = m_langs.at(index.row());
 
     switch(role) {
     case Code:
-        return QVariant::fromValue(l.code);
+        return QVariant::fromValue(l.first);
     case Name:
-        return QVariant::fromValue(l.name);
+        return QVariant::fromValue(l.second);
     default:
         return QVariant();
     }
@@ -153,7 +146,7 @@ int LanguageModel::findIndex(const QString &langCode) const
     int idx = -1;
     int size = static_cast<int>(m_langs.size());
     for (int i = 0; i < size; ++i) {
-        if (m_langs.at(i).code == langCode) {
+        if (m_langs.at(i).first == langCode) {
             idx = i;
             break;
         }

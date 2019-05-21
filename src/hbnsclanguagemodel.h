@@ -34,6 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <QAbstractListModel>
 #include <vector>
+#include <utility>
 
 namespace Hbnsc {
 
@@ -41,8 +42,7 @@ class LanguageModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_DISABLE_COPY(LanguageModel)
-    struct Language;
-    std::vector<Language> m_langs;
+    std::vector<std::pair<QString,QString>> m_langs;
 public:
     explicit LanguageModel(const QStringList &supportedLangs, QObject *parent = nullptr);
     ~LanguageModel() override;
