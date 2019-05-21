@@ -1,3 +1,10 @@
+HBN SFOS Components 1.5.0 - 2019-05-21
+* new: Qt/C++ based licenses model
+* new: Qt/c++ based languages model
+* new: QML LanguagePicker component
+* changed: move QML files into correct import path and set that path
+  to QML_IMPORT_PATH
+
 HBN SFOS Components 1.4.3 - 2019-05-15
 * improved: do not use fixed icon size on changelog page and delegate
 
