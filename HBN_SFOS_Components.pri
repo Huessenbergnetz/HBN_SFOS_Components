@@ -27,6 +27,7 @@ OTHER_FILES += \
     $$PWD/qml/Changelog.qml \
     $$PWD/qml/AboutPage.qml \
     $$PWD/qml/PaypalChooser.qml \
+    $$PWD/qml/LanguagePicker.qml \
     $$PWD/qml/ChangelogDelegate.qml \
     $$PWD/qml/ContributorsDelegate.qml \
     $$PWD/qml/LicenseDelegate.qml \

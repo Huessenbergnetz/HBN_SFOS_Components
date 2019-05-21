@@ -5,3 +5,4 @@ Contributors 1.0 Contributors.qml
 IconWithHint 1.0 IconWithHint.qml
 InfoHint 1.0 InfoHint.qml
 PaypalChooser 1.0 PaypalChooser.qml
+LanguagePicker 1.0 LanguagePicker.qml
