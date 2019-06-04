@@ -1,3 +1,8 @@
+HBN SFOS Components 1.5.1 - 2019-06-04
+* new: functions to add optional predefined 3rd party components to
+  the licenses model
+* fixed: installation of QML files
+
 HBN SFOS Components 1.5.0 - 2019-05-21
 * new: Qt/C++ based licenses model
 * new: Qt/c++ based languages model
