@@ -206,6 +206,45 @@ void LicenseModel::add(const QString &name, const QString &author, const QString
     m_items.emplace_back(name, author, version, website, description, license, licenseFile, licenseWebsite, customLicenseFile);
 }
 
+void LicenseModel::addSQLite()
+{
+    m_items.emplace_back(QStringLiteral("SQLite"),
+                         QStringLiteral("SQLite Team"),
+                         QString(),
+                         QUrl(QStringLiteral("https://www.sqlite.org")),
+                         QString(),
+                         QStringLiteral("Public Domain"),
+                         QStringLiteral("SQLite.qml"),
+                         QUrl(QStringLiteral("https://www.sqlite.org/copyright.html")),
+                         QUrl());
+}
+
+void LicenseModel::addNemoNotifications()
+{
+    m_items.emplace_back(QStringLiteral("nemonotifications"),
+                         QStringLiteral("Jolla Ltd."),
+                         QString(),
+                         QUrl(QStringLiteral("https://sailfishos.org/develop/docs/nemo-qml-plugin-notifications/notification.html/")),
+                         QString(),
+                         QStringLiteral("Modified BSD License"),
+                         QStringLiteral("BSD-3.qml"),
+                         QUrl(),
+                         QUrl());
+}
+
+void LicenseModel::addOpenSSL()
+{
+    m_items.emplace_back(QStringLiteral("OpenSSL"),
+                         QStringLiteral("OpenSSL Development Team"),
+                         QString(),
+                         QUrl(QStringLiteral("https://www.openssl.org")),
+                         QString(),
+                         QStringLiteral("OpenSSL & SSLeay License"),
+                         QStringLiteral("OpenSSL.qml"),
+                         QUrl(QStringLiteral("https://www.openssl.org/source/license.html")),
+                         QUrl());
+}
+
 void LicenseModel::sortLicenses()
 {
     std::sort(m_items.begin(), m_items.end(), [](const Item &a, const Item &b){

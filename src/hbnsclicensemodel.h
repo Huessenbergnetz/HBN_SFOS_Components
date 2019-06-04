@@ -67,6 +67,9 @@ public:
 
 protected:
     void add(const QString &name, const QString &author, const QString &version, const QUrl &website, const QString &description, const QString &license, const QString &licenseFile, const QUrl &licenseWebsite, const QUrl &customLicenseFile);
+    void addSQLite();
+    void addNemoNotifications();
+    void addOpenSSL();
     void sortLicenses();
 };
 
