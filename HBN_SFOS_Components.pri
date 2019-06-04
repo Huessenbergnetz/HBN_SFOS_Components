@@ -43,7 +43,7 @@ OTHER_FILES += \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/SQLite.qml \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/OpenSSL.qml \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/zlib.qml \
-    $$PWD/de/huessenbergnetz/hbnsc/qmldir.in
+    $$PWD/qml/de/huessenbergnetz/hbnsc/qmldir
 
 QML_IMPORT_PATH += $$PWD/qml
 
@@ -56,19 +56,19 @@ INCLUDEPATH += $$PWD/src
 hbnscLicenses.path = $$HBNSC_INSTALL_QML_DIR/licenses
 
 isEmpty(HBNSC_LICENSES) {
-    hbnscLicenses.files = $$PWD/qml/licenses/*.qml
+    hbnscLicenses.files = $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/*.qml
 } else {
-    hbnscLicenses.files = $$PWD/qml/licenses/LicenseBase.qml
+    hbnscLicenses.files = $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/LicenseBase.qml
 
     for(l, HBNSC_LICENSES) {
         exists($$PWD/qml/licenses/$${l}.qml) {
-            hbnscLicenses.files += $$PWD/qml/licenses/$${l}.qml
+            hbnscLicenses.files += $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/$${l}.qml
         }
     }
 }
 
 hbnscQml.path = $$HBNSC_INSTALL_QML_DIR
-hbnscQml.files = $$PWD/qml/*.qml
+hbnscQml.files = $$PWD/qml/de/huessenbergnetz/hbnsc/*.qml
 
 hbnscIcons.path = $$HBNSC_INSTALL_ICONS_DIR
 hbnscIcons.files = $$PWD/images/z*
@@ -77,6 +77,6 @@ hbnscTranslations.path = $$INSTALL_TRANSLATIONS_DIR
 hbnscTranslations.files = $$PWD/translations/*.qm
 
 hbnscQmlDir.path = $$HBNSC_INSTALL_QML_DIR
-hbnscQmlDir.files = $$PWD/qml/qmldir
+hbnscQmlDir.files = $$PWD/qml/de/huessenbergnetz/hbnsc/qmldir
 
 INSTALLS += hbnscQml hbnscQmlDir hbnscIcons hbnscTranslations hbnscLicenses
