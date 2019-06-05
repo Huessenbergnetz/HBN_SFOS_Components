@@ -10,7 +10,7 @@ A better, and on the long run more comfortable solution, is to clone this reposi
 branch/tag to work with. Or integrate it as a submodule into your project git tree.
 
 ### Cloning and branching
-    git clone --branch v1.5.2 https://github.com/Huessenbergnetz/HBN_SFOS_Components.git
+    git clone --branch v1.5.3 https://github.com/Huessenbergnetz/HBN_SFOS_Components.git
 
 ### Integrate into your project
 You can copy the files or, the better way, include the configuration into your project.
