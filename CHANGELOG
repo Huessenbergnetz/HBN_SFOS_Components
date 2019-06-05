@@ -1,3 +1,6 @@
+HBN SFOS Components 1.5.2 - 2019-06-05
+* new: easier creation of icon providers
+
 HBN SFOS Components 1.5.1 - 2019-06-04
 * new: functions to add optional predefined 3rd party components to
   the licenses model
