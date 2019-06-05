@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
-    QScopedPointer<Hbnsc::HbnscIconProvider> hbnscIconProvider(new Hbnsc::HbnscIconProvider(view->engine()));
+    auto hbnscIconProv = Hbnsc::HbnscIconProvider::createProvider(view->engine());
 }
 ```
 

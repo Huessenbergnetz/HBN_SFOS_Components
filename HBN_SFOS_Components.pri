@@ -53,6 +53,9 @@ INCLUDEPATH += $$PWD/src
     PKGCONFIG *= sailfishsilica
 }
 
+CONFIG *= c++11
+CONFIG *= c++14
+
 hbnscLicenses.path = $$HBNSC_INSTALL_QML_DIR/licenses
 
 isEmpty(HBNSC_LICENSES) {

@@ -39,6 +39,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QQmlEngine>
 #include <QUrl>
 #include <initializer_list>
+#include <memory>
 #include "hbnsc.h"
 
 namespace Hbnsc {
@@ -63,7 +64,7 @@ public:
 
     ~BaseIconProvider() override
     {
-        qDebug("%s", "Deconstructing the icon provider.");
+        qDebug("Deconstructing the icon provider loading icons from \"%s\".", qUtf8Printable(m_iconsDir));
     }
 
 
@@ -99,6 +100,11 @@ public:
 
         return sourcePixmap;
     }
+
+    Q_REQUIRED_RESULT static std::unique_ptr<BaseIconProvider> createProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr)
+    {
+        return std::make_unique<BaseIconProvider>(scales, iconsDir, largeAvailable, providerName, engine);
+    }
 };
 
 class HbnscIconProvider : public BaseIconProvider
@@ -114,6 +120,11 @@ public:
     ~HbnscIconProvider() override
     {
 
+    }
+
+    Q_REQUIRED_RESULT static std::unique_ptr<HbnscIconProvider> createProvider(QQmlEngine *engine = nullptr)
+    {
+        return std::make_unique<HbnscIconProvider>(engine);
     }
 };
 
