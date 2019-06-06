@@ -81,7 +81,7 @@ static QString getLauncherIcon(std::initializer_list<int> sizes)
 
     for (const QString &dir : dirs) {
         if (dir.contains(sizeStr)) {
-            iconPath = dir % qApp->applicationName() % QStringLiteral(".png");
+            iconPath = dir % QCoreApplication::instance()->applicationName() % QStringLiteral(".png");
             break;
         }
     }
@@ -141,9 +141,10 @@ static QVersionNumber version()
 
 static bool loadTranslations(const QLocale &locale = QLocale())
 {
-    auto t = new QTranslator(qApp);
+    auto t = new QTranslator(QCoreApplication::instance());
     if (t->load(locale, QStringLiteral("hbnsc"), QStringLiteral("_"), QStringLiteral(HBNSC_L10N_DIR))) {
-        qApp->installTranslator(t);
+        QCoreApplication::installTranslator(t);
+//        qApp->installTranslator(t);
         return true;
     }
     return false;
