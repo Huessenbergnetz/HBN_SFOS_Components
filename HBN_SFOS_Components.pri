@@ -53,7 +53,9 @@ QML_IMPORT_PATH += $$PWD/qml
 INCLUDEPATH += $$PWD/src
 
 !contains(CONFIG, clazy) {
+    CONFIG *= link_pkgconfig
     PKGCONFIG *= sailfishsilica
+    INCLUDEPATH *= /usr/include/libsailfishsilica
 }
 
 CONFIG *= c++11
