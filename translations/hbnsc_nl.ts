@@ -188,7 +188,7 @@
         <source>%1 by %2</source>
         <oldsource>%1 by %2.</oldsource>
         <extracomment>%1 is the name of the sofware, %2 is the author's name</extracomment>
-        <translation type="unfinished"/>
+        <translation>%1 door %2</translation>
     </message>
     <message id="btsc-license-web">
         <source>License website</source>
@@ -217,27 +217,27 @@
     <message id="hbnsc-default-locale">
         <source>Default</source>
         <extracomment>Means the default language of the system</extracomment>
-        <translation type="unfinished"/>
+        <translation>Standaard</translation>
     </message>
     <message id="hbnsc-components-desc">
         <source>HBN SFOS Components are a set of reusable C++ and QML components for Sailfish OS like the About page.</source>
         <extracomment>Description for the HBN SFOS Components in the list of used 3rd party components.</extracomment>
-        <translation type="unfinished"/>
+        <translation>HBN-SFOS-onderdelen zijn een verzameling herbruikbare C++- en QML-onderdelen voor Sailfish OS, zoals de Info-pagina.</translation>
     </message>
     <message id="hbnsc-components-trans-desc">
         <source>HBN SFOS Components are a set of reusable C++ and QML components for Sailfish OS like the About page. The translations are provided by the community.</source>
         <extracomment>Description for the HBN SFOS Components translations in the list of used 3rd party components.</extracomment>
-        <translation type="unfinished"/>
+        <translation>HBN-SFOS-onderdelen zijn een verzameling herbruikbare C++- en QML-onderdelen voor Sailfish OS, zoals de Info-pagina. De vertalingen worden geleverd door de gemeenschap.</translation>
     </message>
     <message id="hbnsc-lang-picker-label">
         <source>Language</source>
         <extracomment>Label for a combobox (drop down menu) to choose the application language</extracomment>
-        <translation type="unfinished"/>
+        <translation>Taal</translation>
     </message>
     <message id="hbnsc-lang-picker-desc">
         <source>To change the language, you have to restart the application.</source>
         <extracomment>Description for a combobox (drop down menu) to choose the application language</extracomment>
-        <translation type="unfinished"/>
+        <translation>Om de taal te wijzigen, dien je de app opnieuw op te starten.</translation>
     </message>
 </context>
 </TS>
