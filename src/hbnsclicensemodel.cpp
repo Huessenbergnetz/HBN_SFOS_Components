@@ -251,3 +251,5 @@ void LicenseModel::sortLicenses()
         return QString::localeAwareCompare(a.name, b.name) < 0;
     });
 }
+
+#include "moc_hbnsclicensemodel.cpp"
