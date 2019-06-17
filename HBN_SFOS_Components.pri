@@ -18,7 +18,8 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/src/hbnsclicensemodel.cpp \
-    $$PWD/src/hbnsclanguagemodel.cpp
+    $$PWD/src/hbnsclanguagemodel.cpp \
+    $$PWD/src/hbnsc.cpp
 
 OTHER_FILES += \
     $$PWD/qml/de/huessenbergnetz/hbnsc/InfoHint.qml \
@@ -53,7 +54,6 @@ QML_IMPORT_PATH += $$PWD/qml
 INCLUDEPATH += $$PWD/src
 
 !contains(CONFIG, clazy) {
-    CONFIG *= link_pkgconfig
     PKGCONFIG *= sailfishsilica
     INCLUDEPATH *= /usr/include/libsailfishsilica
 }
