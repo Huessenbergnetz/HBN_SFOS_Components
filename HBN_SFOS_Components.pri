@@ -62,6 +62,10 @@ contains(PKGCONFIG, openssl) {
     DEFINES += HBNSC_WITH_OPENSSL
 }
 
+contains(PKGCONFIG, nemonotifications-qt5) {
+    DEFINES += HBNSC_WITH_NEMONOTIFY
+}
+
 CONFIG *= c++11
 CONFIG *= c++14
 

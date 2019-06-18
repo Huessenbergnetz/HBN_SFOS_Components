@@ -145,6 +145,20 @@ LicenseModel::LicenseModel(QObject *parent) : QAbstractListModel(parent)
                 QUrl()
                 );
 #endif
+
+#ifdef HBNSC_WITH_NEMONOTIFY
+    m_items.emplace_back(
+                QStringLiteral("nemonotifications"),
+                QStringLiteral("Jolla Ltd."),
+                QString(),
+                QUrl(QStringLiteral("https://sailfishos.org/develop/docs/nemo-qml-plugin-notifications/notification.html/")),
+                QString(),
+                QStringLiteral("Modified BSD License"),
+                QStringLiteral("BSD-3.qml"),
+                QUrl(),
+                QUrl()
+                );
+#endif
 }
 
 LicenseModel::~LicenseModel()
@@ -233,19 +247,6 @@ void LicenseModel::addSQLite()
                          QStringLiteral("Public Domain"),
                          QStringLiteral("SQLite.qml"),
                          QUrl(QStringLiteral("https://www.sqlite.org/copyright.html")),
-                         QUrl());
-}
-
-void LicenseModel::addNemoNotifications()
-{
-    m_items.emplace_back(QStringLiteral("nemonotifications"),
-                         QStringLiteral("Jolla Ltd."),
-                         QString(),
-                         QUrl(QStringLiteral("https://sailfishos.org/develop/docs/nemo-qml-plugin-notifications/notification.html/")),
-                         QString(),
-                         QStringLiteral("Modified BSD License"),
-                         QStringLiteral("BSD-3.qml"),
-                         QUrl(),
                          QUrl());
 }
 
