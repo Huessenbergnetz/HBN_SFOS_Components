@@ -38,6 +38,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef HBNSC_WITH_SQLITE
 #include <sqlite3.h>
 #endif
+#ifdef HBNSC_WITH_DBUS
+#include <dbus/dbus.h>
+#endif
 
 using namespace Hbnsc;
 
@@ -173,6 +176,25 @@ LicenseModel::LicenseModel(QObject *parent) : QAbstractListModel(parent)
                 QStringLiteral("Public Domain"),
                 QStringLiteral("SQLite.qml"),
                 QUrl(QStringLiteral("https://www.sqlite.org/copyright.html")),
+                QUrl()
+                );
+#endif
+
+#ifdef HBNSC_WITH_DBUS
+    int dbus_maj_ver = 0;
+    int dbus_min_ver = 0;
+    int dbus_mic_ver = 0;
+    dbus_get_version(&dbus_maj_ver, &dbus_min_ver, &dbus_mic_ver);
+    QVersionNumber dbusVersion(dbus_maj_ver, dbus_min_ver, dbus_mic_ver);
+    m_items.emplace_back(
+                QStringLiteral("libdbus-1"),
+                QStringLiteral("D-Bus-Team"),
+                dbusVersion.toString(),
+                QUrl(QStringLiteral("http://freedesktop.org/wiki/Software/dbus")),
+                QString(),
+                QStringLiteral("GNU General Public License, Version 2"),
+                QStringLiteral("GPLv2.qml"),
+                QUrl(QStringLiteral("https://gitlab.freedesktop.org/dbus/dbus/blob/master/COPYING")),
                 QUrl()
                 );
 #endif

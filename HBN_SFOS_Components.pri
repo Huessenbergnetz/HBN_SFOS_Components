@@ -70,6 +70,12 @@ contains(QT, sql) {
     DEFINES += HBNSC_WITH_SQLITE
 }
 
+contains(QT, dbus) {
+    DEFINES += HBNSC_WITH_DBUS
+    PKGCONFIG *= dbus-1
+    INCLUDEPATH *= /usr/include/dbus-1.0
+}
+
 CONFIG *= c++11
 CONFIG *= c++14
 
