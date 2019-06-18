@@ -32,59 +32,42 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "hbnsclanguagemodel.h"
 #include <QLocale>
 #include <QStringBuilder>
+#include <QDir>
+#include <QFileInfo>
 #include <algorithm>
+#ifndef CLAZY
+#include <sailfishapp.h>
+#endif
 
 using namespace Hbnsc;
 
 LanguageModel::LanguageModel(const QStringList &supportedLangs, QObject *parent) :
     QAbstractListModel(parent)
 {
-    m_langs.reserve(supportedLangs.size() + 1);
+    populate(supportedLangs);
+}
 
-    if (!supportedLangs.empty()) {
-        for (const QString &lang : supportedLangs) {
-            QLocale locale(lang);
-            const QString name = locale.nativeLanguageName() % QStringLiteral(" (") % QLocale::languageToString(locale.language()) % QLatin1Char(')');
-            m_langs.emplace_back(lang, name);
-        }
+LanguageModel::LanguageModel(const QString &transDir, const QString &transName, QObject *parent) :
+    QAbstractListModel(parent)
+{
+#ifndef CLAZY
+    const QString _transDir = transDir.startsWith(QLatin1Char('/')) ? transDir : SailfishApp::pathTo(transDir).toString(QUrl::RemoveScheme);
+#else
+    const QString _transDir = transDir;
+#endif
 
-        std::sort(m_langs.begin(), m_langs.end(), [](const std::pair<QString,QString> &a, const std::pair<QString,QString> &b){
-            return QString::localeAwareCompare(a.second, b.second) < 0;
-        });
+    const QDir dir(_transDir);
+    const QString searchGlob = transName % QStringLiteral("*.qm");
+    const QFileInfoList files = dir.entryInfoList(QStringList(searchGlob), QDir::Files);
+    const int suffixIdx = transName.size() - 1;
+    QStringList supportedLangs;
+    for (const QFileInfo &file : files) {
+        const QString base = file.baseName();
+        const QString lc = base.right(base.size() - suffixIdx - 1);
+        qDebug("Adding \"%s\" to the list of supported translations.", qUtf8Printable(lc));
+        supportedLangs << lc;
     }
-
-    QString syslang;
-    const QStringList uiLangs = QLocale::system().uiLanguages();
-    for (const QString &lang : uiLangs) {
-        if (supportedLangs.contains(lang)) {
-            syslang = lang;
-            break;
-        }
-    }
-
-    if (syslang.isEmpty()) {
-        for (const QString &lang : uiLangs) {
-            const int underScoreIdx = lang.indexOf(QLatin1Char('-'));
-            if (underScoreIdx > 0) {
-                const QString langPart = lang.left(underScoreIdx);
-                if (supportedLangs.contains(langPart)) {
-                    syslang = langPart;
-                    break;
-                }
-            }
-        }
-    }
-
-    if (syslang.isEmpty()) {
-        syslang = QStringLiteral("en");
-    }
-
-    QLocale locale(syslang);
-
-    //: Means the default language of the system
-    //% "Default"
-    const QString defName = qtTrId("hbnsc-default-locale") % QStringLiteral(" (") % locale.nativeLanguageName() % QLatin1Char(')');
-    m_langs.emplace(m_langs.begin(), QString(), defName);
+    populate(supportedLangs);
 }
 
 LanguageModel::~LanguageModel()
@@ -154,5 +137,56 @@ int LanguageModel::findIndex(const QString &langCode) const
 
     return idx;
 }
+
+void LanguageModel::populate(const QStringList &supportedLangs)
+{
+    m_langs.reserve(supportedLangs.size() + 1);
+
+    if (!supportedLangs.empty()) {
+        for (const QString &lang : supportedLangs) {
+            QLocale locale(lang);
+            const QString name = locale.nativeLanguageName() % QStringLiteral(" (") % QLocale::languageToString(locale.language()) % QLatin1Char(')');
+            m_langs.emplace_back(lang, name);
+        }
+
+        std::sort(m_langs.begin(), m_langs.end(), [](const std::pair<QString,QString> &a, const std::pair<QString,QString> &b){
+            return QString::localeAwareCompare(a.second, b.second) < 0;
+        });
+    }
+
+    QString syslang;
+    const QStringList uiLangs = QLocale::system().uiLanguages();
+    for (const QString &lang : uiLangs) {
+        if (supportedLangs.contains(lang)) {
+            syslang = lang;
+            break;
+        }
+    }
+
+    if (syslang.isEmpty()) {
+        for (const QString &lang : uiLangs) {
+            const int underScoreIdx = lang.indexOf(QLatin1Char('-'));
+            if (underScoreIdx > 0) {
+                const QString langPart = lang.left(underScoreIdx);
+                if (supportedLangs.contains(langPart)) {
+                    syslang = langPart;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (syslang.isEmpty()) {
+        syslang = QStringLiteral("en");
+    }
+
+    QLocale locale(syslang);
+
+    //: Means the default language of the system
+    //% "Default"
+    const QString defName = qtTrId("hbnsc-default-locale") % QStringLiteral(" (") % locale.nativeLanguageName() % QLatin1Char(')');
+    m_langs.emplace(m_langs.begin(), QString(), defName);
+}
+
 
 #include "moc_hbnsclanguagemodel.cpp"

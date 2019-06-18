@@ -45,6 +45,7 @@ class LanguageModel : public QAbstractListModel
     std::vector<std::pair<QString,QString>> m_langs;
 public:
     explicit LanguageModel(const QStringList &supportedLangs, QObject *parent = nullptr);
+    LanguageModel(const QString &transDir, const QString &transName, QObject *parent = nullptr);
     ~LanguageModel() override;
 
     enum Roles {
@@ -61,6 +62,9 @@ public:
      * \brief Returns the index of the language identified by \a langCode.
      */
     Q_INVOKABLE int findIndex(const QString &langCode) const;
+
+private:
+    void populate(const QStringList &supportedLangs);
 };
 
 }
