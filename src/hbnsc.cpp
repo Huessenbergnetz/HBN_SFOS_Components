@@ -104,8 +104,7 @@ bool Hbnsc::loadTranslations(const QLocale &locale)
 {
     auto t = new QTranslator(QCoreApplication::instance());
     if (t->load(locale, QStringLiteral("hbnsc"), QStringLiteral("_"), QStringLiteral(HBNSC_L10N_DIR))) {
-        QCoreApplication::installTranslator(t);
-        return true;
+        return QCoreApplication::installTranslator(t);
     }
     return false;
 }
