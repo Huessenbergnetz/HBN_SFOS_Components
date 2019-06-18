@@ -66,6 +66,10 @@ contains(PKGCONFIG, nemonotifications-qt5) {
     DEFINES += HBNSC_WITH_NEMONOTIFY
 }
 
+contains(QT, sql) {
+    DEFINES += HBNSC_WITH_SQLITE
+}
+
 CONFIG *= c++11
 CONFIG *= c++14
 

@@ -35,6 +35,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef HBNSC_WITH_OPENSSL
 #include <openssl/opensslv.h>
 #endif
+#ifdef HBNSC_WITH_SQLITE
+#include <sqlite3.h>
+#endif
 
 using namespace Hbnsc;
 
@@ -159,6 +162,20 @@ LicenseModel::LicenseModel(QObject *parent) : QAbstractListModel(parent)
                 QUrl()
                 );
 #endif
+
+#ifdef HBNSC_WITH_SQLITE
+    m_items.emplace_back(
+                QStringLiteral("SQLite"),
+                QStringLiteral("SQLite Team"),
+                QStringLiteral(SQLITE_VERSION),
+                QUrl(QStringLiteral("https://www.sqlite.org")),
+                QString(),
+                QStringLiteral("Public Domain"),
+                QStringLiteral("SQLite.qml"),
+                QUrl(QStringLiteral("https://www.sqlite.org/copyright.html")),
+                QUrl()
+                );
+#endif
 }
 
 LicenseModel::~LicenseModel()
@@ -235,19 +252,6 @@ QVariant LicenseModel::data(const QModelIndex &index, int role) const
 void LicenseModel::add(const QString &name, const QString &author, const QString &version, const QUrl &website, const QString &description, const QString &license, const QString &licenseFile, const QUrl &licenseWebsite, const QUrl &customLicenseFile)
 {
     m_items.emplace_back(name, author, version, website, description, license, licenseFile, licenseWebsite, customLicenseFile);
-}
-
-void LicenseModel::addSQLite()
-{
-    m_items.emplace_back(QStringLiteral("SQLite"),
-                         QStringLiteral("SQLite Team"),
-                         QString(),
-                         QUrl(QStringLiteral("https://www.sqlite.org")),
-                         QString(),
-                         QStringLiteral("Public Domain"),
-                         QStringLiteral("SQLite.qml"),
-                         QUrl(QStringLiteral("https://www.sqlite.org/copyright.html")),
-                         QUrl());
 }
 
 void LicenseModel::sortLicenses()
