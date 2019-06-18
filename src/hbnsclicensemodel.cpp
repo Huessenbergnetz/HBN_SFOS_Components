@@ -32,6 +32,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "hbnsclicensemodel.h"
 #include "hbnsc.h"
 #include <algorithm>
+#ifdef HBNSC_WITH_OPENSSL
+#include <openssl/opensslv.h>
+#endif
 
 using namespace Hbnsc;
 
@@ -128,6 +131,20 @@ LicenseModel::LicenseModel(QObject *parent) : QAbstractListModel(parent)
                 QUrl(QStringLiteral("https://github.com/Huessenbergnetz/HBN_SFOS_Components/blob/master/LICENSE.translations")),
                 QUrl()
                 );
+
+#ifdef HBNSC_WITH_OPENSSL
+    m_items.emplace_back(
+                QStringLiteral("OpenSSL"),
+                QStringLiteral("OpenSSL Development Team"),
+                QStringLiteral(SHLIB_VERSION_NUMBER),
+                QUrl(QStringLiteral("https://www.openssl.org")),
+                QString(),
+                QStringLiteral("OpenSSL & SSLeay License"),
+                QStringLiteral("OpenSSL.qml"),
+                QUrl(QStringLiteral("https://www.openssl.org/source/license.html")),
+                QUrl()
+                );
+#endif
 }
 
 LicenseModel::~LicenseModel()
@@ -229,19 +246,6 @@ void LicenseModel::addNemoNotifications()
                          QStringLiteral("Modified BSD License"),
                          QStringLiteral("BSD-3.qml"),
                          QUrl(),
-                         QUrl());
-}
-
-void LicenseModel::addOpenSSL()
-{
-    m_items.emplace_back(QStringLiteral("OpenSSL"),
-                         QStringLiteral("OpenSSL Development Team"),
-                         QString(),
-                         QUrl(QStringLiteral("https://www.openssl.org")),
-                         QString(),
-                         QStringLiteral("OpenSSL & SSLeay License"),
-                         QStringLiteral("OpenSSL.qml"),
-                         QUrl(QStringLiteral("https://www.openssl.org/source/license.html")),
                          QUrl());
 }
 

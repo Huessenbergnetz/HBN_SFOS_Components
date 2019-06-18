@@ -58,6 +58,10 @@ INCLUDEPATH += $$PWD/src
     INCLUDEPATH *= /usr/include/libsailfishsilica
 }
 
+contains(PKGCONFIG, openssl) {
+    DEFINES += HBNSC_WITH_OPENSSL
+}
+
 CONFIG *= c++11
 CONFIG *= c++14
 
