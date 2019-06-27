@@ -41,6 +41,8 @@ Page {
     property alias licenseName: name.text
     property alias licenseModel: licenseRep.model
     property url licenseWebsite
+    readonly property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { color: '" + Theme.secondaryHighlightColor + "' }</style><body>";
+    readonly property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
 
     SilicaFlickable {
         id: licenseBaseFlick
@@ -134,7 +136,7 @@ Page {
                     font.pixelSize: model.header ? Theme.fontSizeMedium : Theme.fontSizeSmall
                     textFormat: model.format ? model.format : Text.PlainText
                     onLinkActivated: Qt.openUrlExternally(link)
-                    text: model.text
+                    text: (model.format === Text.RichText && model.hasLinks) ? licenseBase._RICHTEXT_STYLESHEET_PREAMBLE + model.text + licenseBase._RICHTEXT_STYLESHEET_APPENDIX : model.text
                     wrapMode: Text.WordWrap
                     linkColor: Theme.highlightColor
                 }

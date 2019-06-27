@@ -38,6 +38,7 @@ OTHER_FILES += \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/GPLv3.qml \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/CC-BY-3_0.qml \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/CC-BY-4_0.qml \
+    $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/CC-BY-NC-SA-4_0.qml \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/CC0-1_0.qml \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/CC-SP-1_0.qml \
     $$PWD/qml/de/huessenbergnetz/hbnsc/licenses/GPLv2.qml \
