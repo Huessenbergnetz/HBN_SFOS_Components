@@ -1,3 +1,7 @@
+HBN SFOS Components 1.5.7 - 2019-06-27
+* new: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+  International Public License
+
 HBN SFOS Components 1.5.6 - 2019-06-18
 * improved: automatically add some entries to the Qt/C++ licenses
   model if they are used (currently: OpenSSL, nemonotifications-qt5,
