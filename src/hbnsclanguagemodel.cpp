@@ -61,6 +61,7 @@ LanguageModel::LanguageModel(const QString &transDir, const QString &transName, 
     const QFileInfoList files = dir.entryInfoList(QStringList(searchGlob), QDir::Files);
     const int suffixIdx = transName.size() - 1;
     QStringList supportedLangs;
+    supportedLangs.reserve(files.size());
     for (const QFileInfo &file : files) {
         const QString base = file.baseName();
         const QString lc = base.right(base.size() - suffixIdx - 1);
