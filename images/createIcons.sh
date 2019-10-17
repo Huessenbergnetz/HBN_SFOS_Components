@@ -3,10 +3,31 @@
 SCALES="1 1.25 1.5 1.75 2"
 SIZES="32"
 
-if [ ! -x /usr/bin/inkscape ]
+INKSCAPE=`which inkscape`
+export ZOPFLIPNG=`which zopflipng`
+BC=`which bc`
+PARALLEL=`which parallel`
+
+if [ ! -x $INKSCAPE ]
 then
     echo "Can not find inkscape executable"
     exit 1
+fi
+
+if [ ! -x $BC ]
+then
+    echo "Can not find bc executable"
+    exit 1
+fi
+
+if [ ! -x $ZOPFLIPNG ]
+then
+    echo "zopflipng not found. Disabling PNG compression using zopfli."
+fi
+
+if [ ! -x $PARALLEL ]
+then
+    echo "GNU parallel not found. It is recommended for speeding up the icon creation."
 fi
 
 for SCALE in $SCALES
@@ -48,12 +69,17 @@ processSvg() {
         FNAME=icon-l-$BASENAME.png
     fi
 
-    echo "Creating $SCALEDIR/$FNAME (${SIZE}x${SIZE})"
-
-    inkscape -z -e $SCALEDIR/$FNAME -w $SIZE -h $SIZE $SVGFILE &> /dev/null
-    if [ -x /usr/bin/zopflipng ]
+    if [ -r $SCALEDIR/$FNAME -a -s $SCALEDIR/$FNAME ]
     then
-        zopflipng -y --iterations=500 --filters=01234mepb --lossy_transparent $SCALEDIR/$FNAME $SCALEDIR/$FNAME
+        echo "$SCALEDIR/$FNAME already exists. Doing nothing."
+    else
+        echo "Creating $SCALEDIR/$FNAME (${SIZE}x${SIZE})"
+
+        inkscape -z -e $SCALEDIR/$FNAME -w $SIZE -h $SIZE $SVGFILE &> /dev/null
+        if [ -x $ZOPFLIPNG ]
+        then
+            zopflipng -y --iterations=500 --filters=01234mepb --lossy_transparent $SCALEDIR/$FNAME $SCALEDIR/$FNAME
+        fi
     fi
 }
 export -f processSvg
@@ -63,7 +89,7 @@ if [ "$1" == "" ]; then
 
     SVGFILES=`ls src/*.svg`
 
-    if [ -x /usr/bin/parallel ]
+    if [ -x $PARALLEL ]
     then
         parallel processSvg ::: $SCALES ::: $SIZES ::: $SVGFILES
     else
@@ -81,7 +107,7 @@ if [ "$1" == "" ]; then
 
 else
 
-    if [ -x /usr/bin/parallel ]
+    if [ -x $PARALLEL ]
     then
         parallel processSvg ::: $SCALES ::: $SIZES ::: $1
     else
