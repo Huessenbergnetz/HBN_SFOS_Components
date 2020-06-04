@@ -17,6 +17,7 @@ HEADERS += \
     $$PWD/src/hbnsclanguagemodel.h
 
 SOURCES += \
+    $$PWD/src/hbnsciconprovider.cpp \
     $$PWD/src/hbnsclicensemodel.cpp \
     $$PWD/src/hbnsclanguagemodel.cpp \
     $$PWD/src/hbnsc.cpp

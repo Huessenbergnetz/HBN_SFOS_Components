@@ -55,21 +55,26 @@ struct LicenseModel::Item {
     QUrl customLicenseFile;
     QUrl licenseWebsite;
 
+    Item() = default;
+
     Item(const QString &_name, const QString &_author, const QString &_version, const QUrl &_website, const QString &_desc, const QString &_license, const QString &_licenseFile, const QUrl &_licenseWebsite, const QUrl &_customLicenseFile) :
-        name(std::move(_name)), author(std::move(_author)), version(std::move(_version)), description(std::move(_desc)), license(std::move(_license)), licenseFile(std::move(_licenseFile)), website(std::move(_website)), customLicenseFile(std::move(_customLicenseFile)), licenseWebsite(std::move(_licenseWebsite))
+        name(_name), author(_author), version(_version), description(_desc), license(_license), licenseFile(_licenseFile), website(_website), customLicenseFile(_customLicenseFile), licenseWebsite(_licenseWebsite)
     {
 
     }
 
     Item(const Item &other) = default;
 
-    Item(Item &&other) :
-        name(std::move(other.name)), author(std::move(other.author)), version(std::move(other.version)), description(std::move(other.description)), license(std::move(other.license)), licenseFile(std::move(other.licenseFile)), website(std::move(other.website)), customLicenseFile(std::move(other.customLicenseFile)), licenseWebsite(std::move(other.licenseWebsite))
-    {
+//    Item(Item &&other) :
+//        name(std::move(other.name)), author(std::move(other.author)), version(std::move(other.version)), description(std::move(other.description)), license(std::move(other.license)), licenseFile(std::move(other.licenseFile)), website(std::move(other.website)), customLicenseFile(std::move(other.customLicenseFile)), licenseWebsite(std::move(other.licenseWebsite))
+//    {
 
-    }
+//    }
+    Item(Item &&other) = default;
 
     Item& operator=(const Item &other) = default;
+
+    Item& operator=(Item &&other) = default;
 };
 
 LicenseModel::LicenseModel(QObject *parent) : QAbstractListModel(parent)

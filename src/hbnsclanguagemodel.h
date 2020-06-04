@@ -41,8 +41,6 @@ namespace Hbnsc {
 class LanguageModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_DISABLE_COPY(LanguageModel)
-    std::vector<std::pair<QString,QString>> m_langs;
 public:
     explicit LanguageModel(const QStringList &supportedLangs, QObject *parent = nullptr);
     LanguageModel(const QString &transDir, const QString &transName, QObject *parent = nullptr);
@@ -53,10 +51,10 @@ public:
         Name
     };
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override final;
-    QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex()) const override final;
-    QHash<int, QByteArray> roleNames() const override final;
-    QVariant data(const QModelIndex &index, int role = Qt::UserRole) const override final;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const final;
+    QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex()) const final;
+    QHash<int, QByteArray> roleNames() const final;
+    QVariant data(const QModelIndex &index, int role = Qt::UserRole) const final;
 
     /*!
      * \brief Returns the index of the language identified by \a langCode.
@@ -65,6 +63,12 @@ public:
 
 private:
     void populate(const QStringList &supportedLangs);
+
+    Q_DISABLE_COPY(LanguageModel)
+    LanguageModel(LanguageModel &&other) = delete;
+    LanguageModel &operator=(LanguageModel &&other) = delete;
+
+    std::vector<std::pair<QString,QString>> m_langs;
 };
 
 }

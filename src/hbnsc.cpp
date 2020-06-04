@@ -42,7 +42,7 @@ QString Hbnsc::getLauncherIcon(std::initializer_list<int> sizes)
 
     for (const QString &dir : dirs) {
         if (dir.contains(sizeStr)) {
-            iconPath = dir % QCoreApplication::instance()->applicationName() % QStringLiteral(".png");
+            iconPath = dir % QCoreApplication::applicationName() % QStringLiteral(".png");
             break;
         }
     }

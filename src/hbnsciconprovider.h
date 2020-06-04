@@ -46,86 +46,35 @@ namespace Hbnsc {
 
 class BaseIconProvider : public QQuickImageProvider
 {
-    Q_DISABLE_COPY(BaseIconProvider)
-    QString m_iconsDir;
 public:
-    BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr)
-        : QQuickImageProvider(QQuickImageProvider::Pixmap)
-    {
-        m_iconsDir = Hbnsc::getIconsDir(scales, iconsDir, largeAvailable);
+    BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr);
 
-        if (engine) {
-            Q_ASSERT_X(!providerName.trimmed().isEmpty(), "constructing BaseIconProvider", "providerName can not be empty when engine is a valid pointer");
-            engine->addImageProvider(providerName, this);
-        }
+    ~BaseIconProvider() override;
 
-        qDebug("Constructing a new icon provider \"%s\" loading icons from \"%s\".", qUtf8Printable(providerName), qUtf8Printable(m_iconsDir));
-    }
+    QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override;
 
-    ~BaseIconProvider() override
-    {
-        qDebug("Deconstructing the icon provider loading icons from \"%s\".", qUtf8Printable(m_iconsDir));
-    }
+    Q_REQUIRED_RESULT static std::unique_ptr<BaseIconProvider> createProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr);
 
+    Q_DISABLE_COPY(BaseIconProvider)
+    BaseIconProvider(BaseIconProvider &&other) = delete;
+    BaseIconProvider &operator=(BaseIconProvider &&other) = delete;
 
-    QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override
-    {
-        const int qmPos = id.indexOf(QLatin1Char('?'));
-        const QString filePath = m_iconsDir % id.leftRef(qmPos) % QStringLiteral(".png");
-
-        qDebug("Loading image from %s", qUtf8Printable(filePath));
-
-        QPixmap sourcePixmap(filePath, "png");
-
-        if (!sourcePixmap.isNull()) {
-
-            if (size) {
-                *size = sourcePixmap.size();
-            }
-
-            if (qmPos > -1) {
-                const QColor color(id.mid(qmPos + 1));
-                if (color.isValid()) {
-                    QPainter painter(&sourcePixmap);
-                    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-                    painter.fillRect(sourcePixmap.rect(), color);
-                    painter.end();
-                }
-            }
-
-            if (!requestedSize.isEmpty()) {
-                return sourcePixmap.scaled(requestedSize);
-            }
-        }
-
-        return sourcePixmap;
-    }
-
-    Q_REQUIRED_RESULT static std::unique_ptr<BaseIconProvider> createProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr)
-    {
-        return std::make_unique<BaseIconProvider>(scales, iconsDir, largeAvailable, providerName, engine);
-    }
+private:
+    QString m_iconsDir;
 };
 
 class HbnscIconProvider : public BaseIconProvider
 {
-    Q_DISABLE_COPY(HbnscIconProvider)
 public:
-    HbnscIconProvider(QQmlEngine *engine = nullptr)
-        : BaseIconProvider({1.0, 1.25, 1.5, 1.75, 2.0}, QStringLiteral(HBNSC_ICONS_DIR), false, QStringLiteral("hbnsc"), engine)
-    {
+    HbnscIconProvider(QQmlEngine *engine = nullptr);
 
-    }
+    ~HbnscIconProvider() override;
 
-    ~HbnscIconProvider() override
-    {
+    Q_REQUIRED_RESULT static std::unique_ptr<HbnscIconProvider> createProvider(QQmlEngine *engine = nullptr);
 
-    }
-
-    Q_REQUIRED_RESULT static std::unique_ptr<HbnscIconProvider> createProvider(QQmlEngine *engine = nullptr)
-    {
-        return std::make_unique<HbnscIconProvider>(engine);
-    }
+    Q_DISABLE_COPY(HbnscIconProvider)
+    HbnscIconProvider(HbnscIconProvider &&other) = delete;
+    HbnscIconProvider &operator=(HbnscIconProvider &&other) = delete;
 };
 
 }
