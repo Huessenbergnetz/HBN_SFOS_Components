@@ -55,10 +55,8 @@ QML_IMPORT_PATH += $$PWD/qml
 
 INCLUDEPATH += $$PWD/src
 
-!contains(CONFIG, clazy) {
-    PKGCONFIG *= sailfishsilica
-    INCLUDEPATH *= /usr/include/libsailfishsilica
-}
+PKGCONFIG *= sailfishsilica
+INCLUDEPATH *= /usr/include/libsailfishsilica
 
 contains(PKGCONFIG, openssl) {
     DEFINES += HBNSC_WITH_OPENSSL

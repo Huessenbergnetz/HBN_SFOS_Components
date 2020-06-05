@@ -35,9 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDir>
 #include <QFileInfo>
 #include <algorithm>
-#ifndef CLAZY
 #include <sailfishapp.h>
-#endif
 
 using namespace Hbnsc;
 
@@ -50,11 +48,7 @@ LanguageModel::LanguageModel(const QStringList &supportedLangs, QObject *parent)
 LanguageModel::LanguageModel(const QString &transDir, const QString &transName, QObject *parent) :
     QAbstractListModel(parent)
 {
-#ifndef CLAZY
     const QString _transDir = transDir.startsWith(QLatin1Char('/')) ? transDir : SailfishApp::pathTo(transDir).toString(QUrl::RemoveScheme);
-#else
-    const QString _transDir = transDir;
-#endif
 
     const QDir dir(_transDir);
     const QString searchGlob = transName % QStringLiteral("*.qm");

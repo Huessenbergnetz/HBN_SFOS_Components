@@ -4,24 +4,16 @@
 #include <QStringList>
 #include <QStringBuilder>
 #include <QCoreApplication>
-
-#ifndef CLAZY
 #include <silicatheme.h>
 #include <silicascreen.h>
 #include <sailfishapp.h>
-#endif
 
 QString Hbnsc::getLauncherIcon(std::initializer_list<int> sizes)
 {
     QString iconPath;
 
-#ifndef CLAZY
     const int size = static_cast<int>(Silica::Theme::instance()->iconSizeLauncher());
     const QStringList dirs = Silica::Theme::instance()->launcherIconDirectories();
-#else
-    const int size = 86;
-    const QStringList dirs;
-#endif
 
     int nearestSize = 86;
     int lastDiff = 999;
@@ -56,15 +48,9 @@ QString Hbnsc::getIconsDir(std::initializer_list<qreal> scales, const QString &i
 {
     QString ret;
 
-#ifndef CLAZY
     const QString _iconsDir = !iconsDir.trimmed().isEmpty() ? iconsDir : SailfishApp::pathTo(QStringLiteral("icons")).toString(QUrl::RemoveScheme);
     const qreal pixelRatio = Silica::Theme::instance()->pixelRatio();
     const bool large = largeAvailable ? (Silica::Screen::instance()->sizeCategory() >= Silica::Screen::Large) : false;
-#else
-    const QString _iconsDir;
-    const qreal pixelRatio = 1.0;
-    const bool large = largeAvailable;
-#endif
 
     qreal nearestScale = 1.0;
 
