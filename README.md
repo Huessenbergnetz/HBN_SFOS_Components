@@ -43,7 +43,7 @@ This will only include the license page files for GPL and LGPL in version 3.
 The icons included in the source tarball are SVG files that have to be converted into PNG files. There is a Bash script called
 [createIcons.sh](https://github.com/Huessenbergnetz/HBN_SFOS_Components/tree/master/images/createIcons.sh) in the *images* directory
 that will do the job for you. It will automatically create the required icons for different resolution scales. To convert the
-icons, [Inkscape](https://inkscape.org/) has to available. It is also recommended to have [GNU parallel](https://www.gnu.org/software/parallel/)
+icons, [CairoSVG](https://cairosvg.org/) has to be available. It is also recommended to have [GNU parallel](https://www.gnu.org/software/parallel/)
 installed to speed up the conversion. Another recommendation is [zopflipng](https://github.com/google/zopfli) that will
 further improve the size of the created PNG files.
 
@@ -458,7 +458,7 @@ int main(int argc, char *argv[])
 ```
 
 ## License
-Copyright (c) 2015-2019, Hüssenbergnetz/Matthias Fehring
+Copyright (c) 2015-2021, Hüssenbergnetz/Matthias Fehring
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
