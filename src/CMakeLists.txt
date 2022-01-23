@@ -13,31 +13,31 @@ set(HBN_SFOS_Comps_HEADERS
    hbnsclanguagemodel.h
    hbnsc.h)
 
-add_library(HbnSfosComponents${QT_VERSION_MAJOR}
+add_library(HbnSfosComponentsQt${QT_VERSION_MAJOR}
     ${HBN_SFOS_Comps_SRCS}
     ${HBN_SFOS_Comps_HEADERS}
 )
 
-add_library(HbnSfosComponents${QT_VERSION_MAJOR}::Core ALIAS HbnSfosComponents${QT_VERSION_MAJOR})
+add_library(HbnSfosComponentsQt${QT_VERSION_MAJOR}::Core ALIAS HbnSfosComponentsQt${QT_VERSION_MAJOR})
 
-target_compile_features(HbnSfosComponents${QT_VERSION_MAJOR} PUBLIC cxx_std_14)
+target_compile_features(HbnSfosComponentsQt${QT_VERSION_MAJOR} PUBLIC cxx_std_14)
 
-target_link_libraries(HbnSfosComponents${QT_VERSION_MAJOR}}
+target_link_libraries(HbnSfosComponentsQt${QT_VERSION_MAJOR}
     PUBLIC
+        Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
         ${SAILFISH_LDFLAGS}
+        ${SILICA_LDFLAGS}
 )
 
-target_compile_definitions(HbnSfosComponents${QT_VERSION_MAJOR}
+target_compile_definitions(HbnSfosComponentsQt${QT_VERSION_MAJOR}
     PRIVATE
-        QT_NO_KEYWORDS
         QT_NO_CAST_TO_ASCII
         QT_NO_CAST_FROM_ASCII
         QT_STRICT_ITERATORS
         QT_NO_URL_CAST_FROM_STRING
         QT_NO_CAST_FROM_BYTEARRAY
         QT_USE_QSTRINGBUILDER
-        QT_NO_SIGNALS_SLOTS_KEYWORDS
         QT_USE_FAST_OPERATOR_PLUS
         QT_DISABLE_DEPRECATED_BEFORE=0x050500
         HBNSC_VERSION="${PROJECT_VERSION}"
@@ -46,12 +46,12 @@ target_compile_definitions(HbnSfosComponents${QT_VERSION_MAJOR}
 )
 
 if(ENABLE_MAINTAINER_FLAGS)
-    target_compile_definitions(HbnSfosComponents${QT_VERSION_MAJOR}
+    target_compile_definitions(HbnSfosComponentsQt${QT_VERSION_MAJOR}
         PRIVATE
             QT_DEPRECATED_WARNINGS
             $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
     )
-    target_compile_options(HbnSfosComponents${QT_VERSION_MAJOR}
+    target_compile_options(HbnSfosComponentsQt${QT_VERSION_MAJOR}
         PRIVATE
             -Wall
             -Wcast-align
@@ -63,20 +63,21 @@ if(ENABLE_MAINTAINER_FLAGS)
     )
 endif(ENABLE_MAINTAINER_FLAGS)
 
-target_include_directories(HbnSfosComponents${QT_VERSION_MAJOR} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/HbnSfosComponents-qt${QT_VERSION_MAJOR}>
-    $<BUILD_INTERFACE:${SAILFISH_INCLUDE_DIRS}>
+target_include_directories(HbnSfosComponentsQt${QT_VERSION_MAJOR} PUBLIC
+    "$<BUILD_INTERFACE:${SAILFISH_INCLUDE_DIRS}>"
+    "$<BUILD_INTERFACE:${SILICA_INCLUDE_DIRS}>"
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/HbnSfosComponents-qt${QT_VERSION_MAJOR}>"
 )
 
-set_target_properties(HbnSfosComponents${QT_VERSION_MAJOR} PROPERTIES
+set_target_properties(HbnSfosComponentsQt${QT_VERSION_MAJOR} PROPERTIES
     EXPORT_NAME Core
     VERSION ${PROJECT_VERSION}
     SOVERSION ${PROJECT_VERSION_MAJOR}
     PUBLIC_HEADER "${HBN_SFOS_Comps_HEADERS}"
 )
 
-install(TARGETS FuotenQt${QT_VERSION_MAJOR}
+install(TARGETS HbnSfosComponentsQt${QT_VERSION_MAJOR}
     EXPORT HbnSfosComponentsTargets
     DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT runtime

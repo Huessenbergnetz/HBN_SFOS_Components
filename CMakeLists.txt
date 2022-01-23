@@ -10,13 +10,14 @@ project(libHbnSfosComponents
         LANGUAGES CXX)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Qml Gui Quick LinguistTools)
-find_package(Qt{QT_VERSION_MAJOR} 5.6.0 REQUIRED COMPONENTS Core Qml Gui Quick LinguistTools)
+find_package(Qt${QT_VERSION_MAJOR} 5.6.0 REQUIRED COMPONENTS Core Qml Gui Quick LinguistTools)
 
 include(FindPkgConfig)
 pkg_search_module(SAILFISH sailfishapp REQUIRED)
+pkg_search_module(SILICA sailfishsilica REQUIRED)
 
 # Include our cmake modules
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 # Auto generate moc files
 set(CMAKE_AUTOMOC ON)
@@ -45,12 +46,12 @@ set(I18NDIR "${CMAKE_INSTALL_DATADIR}/libHbnSfosComponentsQt${QT_VERSION_MAJOR}/
 set(ICONSDIR "${CMAKE_INSTALL_DATADIR}/libHbnSfosComponentsQt${QT_VERSION_MAJOR}/icons" CACHE PATH "Directory to install icon")
 set(QMLDIR "${CMAKE_INSTALL_LIBDIR}/qt${QT_VERSION_MAJOR}/qml" CACHE PATH "Directory to install QML files.")
 
-configure_file(${CMAKE_MODULE_PATH}/hbnSfosComponents-config.cmake.in
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/hbnSfosComponents-config.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/HbnSfosComponents${QT_VERSION_MAJOR}Config.cmake
     @ONLY
 )
 
-configure_file(${CMAKE_MODULE_PATH}/hbnSfosComponents-config-version.cmake.in
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/hbnSfosComponents-config-version.cmake.in
     ${CMAKE_CURRENT_BINARY_DIR}/HbnSfosComponentsQt${QT_VERSION_MAJOR}ConfigVersion.cmake
     @ONLY
 )

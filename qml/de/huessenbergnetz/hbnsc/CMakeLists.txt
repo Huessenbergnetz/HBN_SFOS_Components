@@ -10,7 +10,7 @@ set(QML_FILES licenses/Apache-2_0.qml
         licenses/LGPLv2_1.qml
         licenses/LGPLv3.qml
         licenses/LicenseBase.qml
-        licenses/OpenSSl.qml
+        licenses/OpenSSL.qml
         licenses/SIL-OFL-1_1.qml
         licenses/SQLite.qml
         licenses/zlib.qml
@@ -19,14 +19,14 @@ set(QML_FILES licenses/Apache-2_0.qml
         ChangelogDelegate.qml
         Contributors.qml
         ContributorsDelegate.qml
-        IconWithHin.qml
+        IconWithHint.qml
         InfoHint.qml
         LanguagePicker.qml
         LicenseDelegate.qml
         PaypalChooser.qml
         qmldir)
 
-add_custom_target(qmlfiles
+add_custom_target(hbnsfoscomponentsqmlfiles
     SOURCES
         ${QML_FILES})
 
