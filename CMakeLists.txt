@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: (C) 2015-2021 Matthias Fehring / www.huessenbergnetz.de
 # SPDX-License-Identifier: BSD-3-Clause
 
-cmake_minimum_required(VERSION 3.11.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.12.4 FATAL_ERROR)
 cmake_policy(SET CMP0048 NEW)
 
 project(libHbnSfosComponents
@@ -11,10 +11,6 @@ project(libHbnSfosComponents
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Qml Gui Quick LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} 5.6.0 REQUIRED COMPONENTS Core Qml Gui Quick LinguistTools)
-
-include(FindPkgConfig)
-pkg_search_module(SAILFISH sailfishapp REQUIRED)
-pkg_search_module(SILICA sailfishsilica REQUIRED)
 
 # Include our cmake modules
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)

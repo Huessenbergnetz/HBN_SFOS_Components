@@ -1,6 +1,10 @@
 # SPDX-FileCopyrightText: (C) 2015-2021 Matthias Fehring / www.huessenbergnetz.de
 # SPDX-License-Identifier:  BSD-3-Clause
 
+include(FindPkgConfig)
+pkg_search_module(Sailfish sailfishapp REQUIRED IMPORTED_TARGET)
+pkg_search_module(Silica sailfishsilica REQUIRED IMPORTED_TARGET)
+
 set(HBN_SFOS_Comps_SRCS
    hbnsciconprovider.cpp
    hbnsclicensemodel.cpp
@@ -26,8 +30,8 @@ target_link_libraries(HbnSfosComponentsQt${QT_VERSION_MAJOR}
     PUBLIC
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
-        ${SAILFISH_LDFLAGS}
-        ${SILICA_LDFLAGS}
+        PkgConfig::Sailfish
+        PkgConfig::Silica
 )
 
 target_compile_definitions(HbnSfosComponentsQt${QT_VERSION_MAJOR}
@@ -64,8 +68,6 @@ if(ENABLE_MAINTAINER_FLAGS)
 endif(ENABLE_MAINTAINER_FLAGS)
 
 target_include_directories(HbnSfosComponentsQt${QT_VERSION_MAJOR} PUBLIC
-    "$<BUILD_INTERFACE:${SAILFISH_INCLUDE_DIRS}>"
-    "$<BUILD_INTERFACE:${SILICA_INCLUDE_DIRS}>"
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/HbnSfosComponents-qt${QT_VERSION_MAJOR}>"
 )
