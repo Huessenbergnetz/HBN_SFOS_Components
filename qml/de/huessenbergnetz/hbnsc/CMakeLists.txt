@@ -31,4 +31,4 @@ add_custom_target(hbnsfoscomponentsqmlfiles
         ${QML_FILES})
 
 install(FILES ${QML_FILES}
-        DESTINATION "${QMLDIR}")
+        DESTINATION "${HBNSC_QMLDIR}/de/huessenbergnetz/hbnsc")

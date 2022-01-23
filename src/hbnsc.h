@@ -38,15 +38,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <initializer_list>
 
+#if defined(libHbnSfosComponents_EXPORT)
+#  define HBNSC_EXPORT Q_DECL_EXPORT
+#else
+#  define HBNSC_EXPORT Q_DECL_IMPORT
+#endif
+
 namespace Hbnsc {
 
-QString getLauncherIcon(std::initializer_list<int> sizes);
+HBNSC_EXPORT QString getLauncherIcon(std::initializer_list<int> sizes);
 
-QString getIconsDir(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false);
+HBNSC_EXPORT QString getIconsDir(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false);
 
-QVersionNumber version();
+HBNSC_EXPORT QVersionNumber version();
 
-bool loadTranslations(const QLocale &locale = QLocale());
+HBNSC_EXPORT bool loadTranslations(const QLocale &locale = QLocale());
 
 }
 

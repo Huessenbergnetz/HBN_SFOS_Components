@@ -5,6 +5,22 @@ include(FindPkgConfig)
 pkg_search_module(Sailfish sailfishapp REQUIRED IMPORTED_TARGET)
 pkg_search_module(Silica sailfishsilica REQUIRED IMPORTED_TARGET)
 
+if(HBNSC_WITH_OPENSSL)
+    find_package(OpenSSL COMPONENTS SSL REQUIRED)
+endif(HBNSC_WITH_OPENSSL)
+
+if(HBNSC_WITH_NEMONOTIFY)
+    pkg_search_module(NemoNotify nemonotifications-qt5 REQUIRED IMPORTED_TARGET)
+endif(HBNSC_WITH_NEMONOTIFY)
+
+if(HBNSC_WITH_SQLITE)
+    find_package(SQLite3 REQUIRED)
+endif(HBNSC_WITH_SQLITE)
+
+if(HBNSC_WITH_DBUS)
+    pkg_search_module(DBus dbus-1 REQUIRED IMPORTED_TARGET)
+endif(HBNSC_WITH_DBUS)
+
 set(HBN_SFOS_Comps_SRCS
    hbnsciconprovider.cpp
    hbnsclicensemodel.cpp
@@ -30,6 +46,10 @@ target_link_libraries(HbnSfosComponentsQt${QT_VERSION_MAJOR}
     PUBLIC
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
+        $<$<BOOL:${HBNSC_WITH_OPENSSL}>:OpenSSL::SSL>
+        $<$<BOOL:${HBNSC_WITH_NEMONOTIFY}>:PkgConfig::NemoNotify>
+        $<$<BOOL:${HBNSC_WITH_SQLITE}>:SQLite::SQLite3>
+        $<$<BOOL:${HBNSC_WITH_DBUS}>:PkgConfig::DBus>
         PkgConfig::Sailfish
         PkgConfig::Silica
 )
@@ -45,8 +65,12 @@ target_compile_definitions(HbnSfosComponentsQt${QT_VERSION_MAJOR}
         QT_USE_FAST_OPERATOR_PLUS
         QT_DISABLE_DEPRECATED_BEFORE=0x050500
         HBNSC_VERSION="${PROJECT_VERSION}"
-        HBNSC_ICONS_DIR="${ICONSDIR}"
-        HBNSC_L10N_DIR="${I18NDIR}"
+        HBNSC_ICONS_DIR="${HBNSC_ICONSDIR}"
+        HBNSC_L10N_DIR="${HBNSC_I18NDIR}"
+        $<$<BOOL:${HBNSC_WITH_OPENSSL}>:HBNSC_WITH_OPENSSL>
+        $<$<BOOL:${HBNSC_WITH_NEMONOTIFY}>:HBNSC_WITH_NEMONOTIFY>
+        $<$<BOOL:${HBNSC_WITH_SQLITE}>:HBNSC_WITH_SQLITE>
+        $<$<BOOL:${HBNSC_WITH_DBUS}>:HBNSC_WITH_DBUS>
 )
 
 if(ENABLE_MAINTAINER_FLAGS)
@@ -83,7 +107,7 @@ install(TARGETS HbnSfosComponentsQt${QT_VERSION_MAJOR}
     EXPORT HbnSfosComponentsTargets
     DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT runtime
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT runtime
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} COMPONENT runtime
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/HbnSfosComponents-qt${QT_VERSION_MAJOR} COMPONENT development
+    LIBRARY DESTINATION ${HBNSC_LIBDIR} COMPONENT runtime
+    ARCHIVE DESTINATION ${HBNSC_LIBDIR} COMPONENT runtime
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/HbnSfosComponents-qt${QT_VERSION_MAJOR} COMPONENT development EXCLUDE_FROM_ALL
 )

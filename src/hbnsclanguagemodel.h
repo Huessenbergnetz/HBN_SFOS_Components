@@ -36,9 +36,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <vector>
 #include <utility>
 
+#if defined(libHbnSfosComponents_EXPORT)
+#  define HBNSC_EXPORT Q_DECL_EXPORT
+#else
+#  define HBNSC_EXPORT Q_DECL_IMPORT
+#endif
+
 namespace Hbnsc {
 
-class LanguageModel : public QAbstractListModel
+class HBNSC_EXPORT LanguageModel : public QAbstractListModel
 {
     Q_OBJECT
 public:

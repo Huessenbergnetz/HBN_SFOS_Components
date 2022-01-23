@@ -44,7 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace Hbnsc {
 
-class BaseIconProvider : public QQuickImageProvider
+class HBNSC_EXPORT BaseIconProvider : public QQuickImageProvider
 {
 public:
     BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr);
@@ -63,7 +63,7 @@ private:
     QString m_iconsDir;
 };
 
-class HbnscIconProvider : public BaseIconProvider
+class HBNSC_EXPORT HbnscIconProvider : public BaseIconProvider
 {
 public:
     HbnscIconProvider(QQmlEngine *engine = nullptr);
