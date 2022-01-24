@@ -38,10 +38,11 @@ endif(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 option(BUILD_SHARED_LIBS "Enable the build of shared libraries" ON)
 option(ENABLE_MAINTAINER_FLAGS "Enables some build flags used for development" OFF)
-set(HBNSC_LIBDIR ${CMAKE_INSTALL_LIBDIR} CACHE PATH "Directory to install libraries.")
-set(HBNSC_I18NDIR ${CMAKE_INSTALL_DATADIR}/libHbnSfosComponentsQt${QT_VERSION_MAJOR}/translations CACHE PATH "Directory to install translations")
-set(HBNSC_ICONSDIR ${CMAKE_INSTALL_DATADIR}/libHbnSfosComponentsQt${QT_VERSION_MAJOR}/icons CACHE PATH "Directory to install icon")
-set(HBNSC_QMLDIR ${CMAKE_INSTALL_LIBDIR}/qt${QT_VERSION_MAJOR}/qml CACHE PATH "Directory to install QML files.")
+set(HBNSC_APPNAME "" CACHE STRING "Name of the application the HBN SFOS Components are used for. Used for installation values.")
+set(HBNSC_LIBDIR ${CMAKE_INSTALL_DATADIR}/${HBNSC_APPNAME}/lib CACHE PATH "Directory to install libraries.")
+set(HBNSC_I18NDIR ${CMAKE_INSTALL_DATADIR}/${HBNSC_APPNAME}/translations CACHE PATH "Directory to install translations")
+set(HBNSC_ICONSDIR ${CMAKE_INSTALL_DATADIR}/${HBNSC_APPNAME}/icons CACHE PATH "Directory to install icon")
+set(HBNSC_QMLDIR ${CMAKE_INSTALL_DATADIR}/${HBNSC_APPNAME} CACHE PATH "Directory to install QML files.")
 
 option(HBNSC_WITH_OPENSSL "Adds the OpenSSL license information to the licenses model. Requires openssl header files." ON)
 option(HBNSC_WITH_NEMONOTIFY "Adds the Nemo Notify lib license information to the licenses model." OFF)
@@ -75,3 +76,4 @@ install(EXPORT HbnSfosComponentsTargets
 
 add_subdirectory(src)
 add_subdirectory(qml)
+add_subdirectory(images)
