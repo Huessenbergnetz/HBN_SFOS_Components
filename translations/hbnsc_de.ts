@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" sourcelanguage="en" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de" sourcelanguage="en">
 <context>
     <name/>
     <message id="btsc-homepage">
@@ -238,6 +238,10 @@
         <source>To change the language, you have to restart the application.</source>
         <extracomment>Description for a combobox (drop down menu) to choose the application language</extracomment>
         <translation>Um die Sprache zu ändern, müssen Sie die Anwendung neu starten.</translation>
+    </message>
+    <message id="btsc-source-code-url">
+        <source>Source code</source>
+        <translation>Quellcode</translation>
     </message>
 </context>
 </TS>

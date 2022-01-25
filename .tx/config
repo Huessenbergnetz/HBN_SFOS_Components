@@ -6,3 +6,4 @@ file_filter = translations/hbnsc_<lang>.ts
 source_file = translations/hbnsc.ts
 source_lang = en
 type = QT
+

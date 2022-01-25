@@ -241,5 +241,9 @@
         <extracomment>Description for a combobox (drop down menu) to choose the application language</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message id="btsc-source-code-url">
+        <source>Source code</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

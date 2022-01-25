@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh" sourcelanguage="en" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh" sourcelanguage="en">
 <context>
     <name/>
     <message id="btsc-homepage">
@@ -237,6 +237,10 @@
     <message id="hbnsc-lang-picker-desc">
         <source>To change the language, you have to restart the application.</source>
         <extracomment>Description for a combobox (drop down menu) to choose the application language</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message id="btsc-source-code-url">
+        <source>Source code</source>
         <translation type="unfinished"/>
     </message>
 </context>

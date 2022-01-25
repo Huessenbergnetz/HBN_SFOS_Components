@@ -70,6 +70,7 @@ Page {
 
     property url bugUrl: ""
     property url translateUrl: ""
+    property url sourceCodeUrl: ""
 
     property alias licensesModel: licensesRepeater.model
 
@@ -167,7 +168,7 @@ Page {
                 wrapMode: Text.WordWrap
                 textFormat: Text.PlainText
                 color: Theme.primaryColor
-                text: appCopyrightYearTo !== ""
+                text: appCopyrightYearTo !== "" && appCopyrightYearFrom !== appCopyrightYearTo
                       //: %1 will be the start year of the copyright range, %2 will be the end year of the copyright range, %3 will be the copyright holder. example: © 2017–2018, Small Company Inc.
                       //% "© %1–%2, %3"
                       ? qsTrId("btsc-copyrigth-from-to").arg(appCopyrightYearFrom).arg(appCopyrightYearTo).arg(appCopyrightHolder)
@@ -298,28 +299,40 @@ Page {
             SectionHeader {
                 //% "Contribute"
                 text: qsTrId("btsc-contribute")
-                visible: translateUrl.toString().length > 0 || bugUrl.toString().length > 0
+                visible: translateUrl.toString().length > 0 || bugUrl.toString().length > 0 || sourceCodeUrl.toString().length > 0
             }
 
-            Row {
-                id: contributeRow
-                width: parent.width - Theme.paddingLarge
+            Column {
+                width: parent.width
                 spacing: Theme.paddingMedium
 
-                Button {
-                    width: (parent.width/2) - (parent.spacing/2)
-                    //% "Translate"
-                    text: qsTrId("btsc-translate")
-                    onClicked: Qt.openUrlExternally(translateUrl)
-                    visible: translateUrl.toString().length > 0
+                Row {
+                    width: parent.width - Theme.paddingLarge
+                    spacing: Theme.paddingMedium
+
+                    Button {
+                        width: (parent.width/2) - (parent.spacing/2)
+                        //% "Translate"
+                        text: qsTrId("btsc-translate")
+                        onClicked: Qt.openUrlExternally(translateUrl)
+                        visible: translateUrl.toString().length > 0
+                    }
+
+                    Button {
+                        width: (parent.width/2) - (parent.spacing/2)
+                        //% "Report bugs"
+                        text: qsTrId("btsc-report-bugs")
+                        onClicked: Qt.openUrlExternally(bugUrl)
+                        visible: bugUrl.toString().length > 0
+                    }
                 }
 
                 Button {
-                    width: (parent.width/2) - (parent.spacing/2)
-                    //% "Report bugs"
-                    text: qsTrId("btsc-report-bugs")
-                    onClicked: Qt.openUrlExternally(bugUrl)
-                    visible: bugUrl.toString().length > 0
+                    width: parent.width - Theme.paddingLarge
+                    //% "Source code"
+                    text: qsTrId("btsc-source-code-url")
+                    onClicked: Qt.openUrlExternally(sourceCodeUrl)
+                    visible: sourceCodeUrl.toString().length > 0
                 }
             }
 
