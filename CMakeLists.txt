@@ -39,6 +39,8 @@ set(HBNSC_LIBDIR ${HBNSC_BASEDIR}/lib CACHE PATH "Directory to install libraries
 set(HBNSC_I18NDIR ${HBNSC_BASEDIR}/translations CACHE PATH "Directory to install translations")
 set(HBNSC_ICONSDIR ${HBNSC_BASEDIR}/icons CACHE PATH "Directory to install icon")
 set(HBNSC_QMLDIR ${HBNSC_BASEDIR} CACHE PATH "Directory to install QML files.")
+set(HBNSC_ICONSIZES "s" CACHE PATH "Semicolon separated list of icon sizes to generate. HBNSC itself only requires small icons.")
+set(HBNSC_LICENSES "" CACHE PATH "Semicolon separated list of licenses to include. By default, all licenses will be included.")
 
 option(HBNSC_WITH_OPENSSL "Adds the OpenSSL license information to the licenses model. Requires openssl header files." ON)
 option(HBNSC_WITH_NEMONOTIFY "Adds the Nemo Notify lib license information to the licenses model." OFF)

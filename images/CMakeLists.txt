@@ -1,6 +1,10 @@
 include(HBNSfosGenerateIcons)
 
-set(ICONSIZES "s")
+if (HBNSC_ICONSIZES)
+    set(ICONSIZES ${HBNSC_ICONSIZES})
+else()
+    set(ICONSIZES s)
+endif()
 
 hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/bitbucket.svg)
 hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/browser.svg)
