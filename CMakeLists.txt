@@ -44,7 +44,8 @@ set(HBNSC_LICENSES "" CACHE PATH "Semicolon separated list of licenses to includ
 
 option(HBNSC_WITH_OPENSSL "Adds the OpenSSL license information to the licenses model. Requires openssl header files." ON)
 option(HBNSC_WITH_NEMONOTIFY "Adds the Nemo Notify lib license information to the licenses model." OFF)
-option(HBNSC_WITH_SQLITE "Adds the SQLite license information to the licenses model. Requires the sqlite header files." OFF)
+option(HBNSC_WITH_FIRFUORIDA "Add libfirfuorida lincense information to the licenses model." OFF)
+option(HBNSC_WITH_SQLITE "Adds the SQLite license information to the licenses model. Requires the sqlite header files." ${HBNSC_WITH_FIRFUORIDA})
 option(HBNSC_WITH_DBUS "Adds hhe DBus license information to the licenses model. Requires the dbus header files." OFF)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/hbnSfosComponents-config.cmake.in

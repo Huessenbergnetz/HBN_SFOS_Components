@@ -41,6 +41,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef HBNSC_WITH_DBUS
 #include <dbus/dbus.h>
 #endif
+#ifdef HBNSC_WITH_FIRFUORIDA
+#include <Firfuorida/Migrator>
+#endif
 
 using namespace Hbnsc;
 
@@ -200,6 +203,22 @@ LicenseModel::LicenseModel(QObject *parent) : QAbstractListModel(parent)
                 QStringLiteral("GNU General Public License, Version 2"),
                 QStringLiteral("GPLv2.qml"),
                 QUrl(QStringLiteral("https://gitlab.freedesktop.org/dbus/dbus/blob/master/COPYING")),
+                QUrl()
+                );
+#endif
+
+#ifdef HBNSC_WITH_FIRFUORIDA
+    m_items.emplace_back(
+                QStringLiteral("libFirfuorida"),
+                QStringLiteral("Matthias Fehring"),
+                Firfuorida::version().toString(),
+                QUrl(QStringLiteral("https://github.com/Huessenbergnetz/libfirfuorida")),
+                //: Description for the libFirfuorida in the list of used 3rd party components.
+                //% "libFirfuorida is a Qt based library to perform database migrations."
+                qtTrId("hbnsc-components-firfuorida-desc"),
+                QStringLiteral("GNU Lesser General Public License, Version 3"),
+                QStringLiteral("LGPLv3.qml"),
+                QUrl(QStringLiteral("https://github.com/Huessenbergnetz/libfirfuorida/blob/master/LICENSE")),
                 QUrl()
                 );
 #endif

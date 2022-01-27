@@ -46,10 +46,12 @@ target_link_libraries(HbnSfosComponentsQt${QT_VERSION_MAJOR}
     PUBLIC
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Quick
+    PRIVATE
         $<$<BOOL:${HBNSC_WITH_OPENSSL}>:OpenSSL::SSL>
         $<$<BOOL:${HBNSC_WITH_NEMONOTIFY}>:PkgConfig::NemoNotify>
         $<$<BOOL:${HBNSC_WITH_SQLITE}>:SQLite::SQLite3>
         $<$<BOOL:${HBNSC_WITH_DBUS}>:PkgConfig::DBus>
+        $<$<BOOL:${HBNSC_WITH_FIRFUORIDA}>:FirfuoridaQt${QT_VERSION_MAJOR}::Core>
         PkgConfig::Sailfish
         PkgConfig::Silica
 )
@@ -71,6 +73,7 @@ target_compile_definitions(HbnSfosComponentsQt${QT_VERSION_MAJOR}
         $<$<BOOL:${HBNSC_WITH_NEMONOTIFY}>:HBNSC_WITH_NEMONOTIFY>
         $<$<BOOL:${HBNSC_WITH_SQLITE}>:HBNSC_WITH_SQLITE>
         $<$<BOOL:${HBNSC_WITH_DBUS}>:HBNSC_WITH_DBUS>
+        $<$<BOOL:${HBNSC_WITH_FIRFUORIDA}>:HBNSC_WITH_FIRFUORIDA>
 )
 
 if(ENABLE_MAINTAINER_FLAGS)

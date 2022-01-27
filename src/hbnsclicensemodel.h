@@ -47,6 +47,9 @@ namespace Hbnsc {
 class HBNSC_EXPORT LicenseModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_DISABLE_COPY(LicenseModel)
+    LicenseModel(LicenseModel &&other) = delete;
+    LicenseModel &operator=(LicenseModel &&other) = delete;
 public:
     explicit LicenseModel(QObject *parent = nullptr);
     ~LicenseModel() override;
@@ -67,10 +70,6 @@ public:
     QModelIndex index(int row, int column = 0, const QModelIndex &parent = QModelIndex()) const final;
     QHash<int, QByteArray> roleNames() const final;
     QVariant data(const QModelIndex &index, int role = Qt::UserRole) const final;
-
-    Q_DISABLE_COPY(LicenseModel)
-    LicenseModel(LicenseModel &&other) = delete;
-    LicenseModel &operator=(LicenseModel &&other) = delete;
 
 protected:
     void add(const QString &name, const QString &author, const QString &version, const QUrl &website, const QString &description, const QString &license, const QString &licenseFile, const QUrl &licenseWebsite, const QUrl &customLicenseFile);
