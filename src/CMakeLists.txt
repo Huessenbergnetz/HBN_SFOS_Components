@@ -74,14 +74,12 @@ target_compile_definitions(HbnSfosComponentsQt${QT_VERSION_MAJOR}
         $<$<BOOL:${HBNSC_WITH_SQLITE}>:HBNSC_WITH_SQLITE>
         $<$<BOOL:${HBNSC_WITH_DBUS}>:HBNSC_WITH_DBUS>
         $<$<BOOL:${HBNSC_WITH_FIRFUORIDA}>:HBNSC_WITH_FIRFUORIDA>
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+        $<$<NOT:$<CONFIG:Debug>>:QT_NO_DEBUG_OUTPUT>
+        $<$<NOT:$<CONFIG:Debug>>:QT_DEPRECATED_WARNINGS>
 )
 
 if(ENABLE_MAINTAINER_FLAGS)
-    target_compile_definitions(HbnSfosComponentsQt${QT_VERSION_MAJOR}
-        PRIVATE
-            QT_DEPRECATED_WARNINGS
-            $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-    )
     target_compile_options(HbnSfosComponentsQt${QT_VERSION_MAJOR}
         PRIVATE
             -Wall
