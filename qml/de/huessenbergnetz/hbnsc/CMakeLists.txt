@@ -13,6 +13,7 @@ set(QML_FILES
 
 if(HBNSC_LICENSES)
     set(QML_LICENSE_FILES
+        licenses/LicenseBase.qml
         licenses/LGPLv2_1.qml
         licenses/LGPLv3.qml
         licenses/BSD-3.qml
