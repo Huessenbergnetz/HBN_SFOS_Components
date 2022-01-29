@@ -36,10 +36,12 @@ BackgroundItem {
     id: lic
     width: parent.width
     height: Theme.itemSizeMedium
+    property int allowedOrientations: value
 
     onClicked: {
         if (model.licenseFile) {
             var args = {
+                allowedOrientations: lic.allowedOrientations,
                 componentName: model.name,
                 componentAuthor: model.author,
             }

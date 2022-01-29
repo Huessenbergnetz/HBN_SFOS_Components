@@ -100,19 +100,19 @@ Page {
             MenuItem {
                 //% "Privacy Policy"
                 text: qsTrId("btsc-priv-policy")
-                onClicked: pageStack.push(privacyPolicyQmlFile)
+                onClicked: pageStack.push(privacyPolicyQmlFile, {allowedOrientations: about.allowedOrientations})
                 visible: privacyPolicyQmlFile.length > 0
             }
             MenuItem {
                 //% "Changelog"
                 text: qsTrId("btsc-changelog")
-                onClicked: pageStack.push(Qt.resolvedUrl("Changelog.qml"), {model: changelogModel, bugTrackerBase: bugTrackerBaseUrl})
+                onClicked: pageStack.push(Qt.resolvedUrl("Changelog.qml"), {model: changelogModel, bugTrackerBase: bugTrackerBaseUrl, allowedOrientations: about.allowedOrientations})
                 visible: changelogModel !== null
             }
             MenuItem {
                 //% "Contributors"
                 text: qsTrId("btsc-contributors")
-                onClicked: pageStack.push(Qt.resolvedUrl("Contributors.qml"), { avatarBasePath: contributorsAvatarBasePath, model: contributorsModel })
+                onClicked: pageStack.push(Qt.resolvedUrl("Contributors.qml"), { avatarBasePath: contributorsAvatarBasePath, model: contributorsModel, allowedOrientations: about.allowedOrientations})
                 visible: contributorsModel !== null
             }
         }
@@ -190,7 +190,7 @@ Page {
                     if (appCustomLicense.toString().length > 0) {
                         pageStack.push(appCustomLicense)
                     } else if (appLicenseFile !== "") {
-                        pageStack.push("licenses/"+appLicenseFile, {componentName: appTitle, componentAuthor: appCopyrightHolder})
+                        pageStack.push("licenses/"+appLicenseFile, {componentName: appTitle, componentAuthor: appCopyrightHolder, allowedOrientations: about.allowedOrientations})
                     }
                 }
 
@@ -401,7 +401,7 @@ Page {
                 id: licensesRepeater
                 width: parent.width
                 itemHeight: Theme.itemSizeMedium
-                delegate: LicenseDelegate {}
+                delegate: LicenseDelegate { allowedOrientations: about.allowedOrientations }
             }
         }
     }
