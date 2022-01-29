@@ -241,6 +241,11 @@
     </message>
     <message id="btsc-source-code-url">
         <source>Source code</source>
+        <translation>Källkod</translation>
+    </message>
+    <message id="hbnsc-components-firfuorida-desc">
+        <source>libFirfuorida is a Qt based library to perform database migrations.</source>
+        <extracomment>Description for the libFirfuorida in the list of used 3rd party components.</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>

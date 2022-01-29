@@ -245,5 +245,10 @@
         <source>Source code</source>
         <translation type="unfinished"></translation>
     </message>
+    <message id="hbnsc-components-firfuorida-desc">
+        <source>libFirfuorida is a Qt based library to perform database migrations.</source>
+        <extracomment>Description for the libFirfuorida in the list of used 3rd party components.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
