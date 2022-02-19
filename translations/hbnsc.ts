@@ -20,7 +20,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="btsc-about">
-        <source>About</source>
+        <source>About %1</source>
+        <oldsource>About</oldsource>
+        <extracomment>%1 will be the application name</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message id="btsc-contact">
@@ -248,6 +250,11 @@
     <message id="hbnsc-components-firfuorida-desc">
         <source>libFirfuorida is a Qt based library to perform database migrations.</source>
         <extracomment>Description for the libFirfuorida in the list of used 3rd party components.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="btsc-version">
+        <source>Version %1</source>
+        <extracomment>%1 will be the version number</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>

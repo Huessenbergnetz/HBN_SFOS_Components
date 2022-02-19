@@ -18,8 +18,10 @@
         <translation>Contribuidores</translation>
     </message>
     <message id="btsc-about">
-        <source>About</source>
-        <translation>Acerca de nosotros</translation>
+        <source>About %1</source>
+        <oldsource>About</oldsource>
+        <extracomment>%1 will be the application name</extracomment>
+        <translation type="unfinished"/>
     </message>
     <message id="btsc-contact">
         <source>Contact</source>
@@ -246,6 +248,11 @@
     <message id="hbnsc-components-firfuorida-desc">
         <source>libFirfuorida is a Qt based library to perform database migrations.</source>
         <extracomment>Description for the libFirfuorida in the list of used 3rd party components.</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message id="btsc-version">
+        <source>Version %1</source>
+        <extracomment>%1 will be the version number</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>

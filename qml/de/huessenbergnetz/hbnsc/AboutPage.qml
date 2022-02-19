@@ -124,8 +124,9 @@ Page {
             PageHeader {
                 id: pHeader;
                 page: about
-                //% "About"
-                title: qsTrId("btsc-about")
+                //: %1 will be the application name
+                //% "About %1"
+                title: qsTrId("btsc-about").arg(appTitle)
             }
 
             Image {
@@ -146,7 +147,9 @@ Page {
             Label {
                 id: labelName
                 textFormat: Text.PlainText
-                text: appTitle + " " + Qt.application.version
+                //: %1 will be the version number
+                //% "Version %1"
+                text: qsTrId("btsc-version").arg(Qt.application.version)
                 font.pixelSize: Theme.fontSizeLarge
                 color: Theme.highlightColor
                 wrapMode: Text.WordWrap
