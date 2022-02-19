@@ -21,7 +21,7 @@
         <source>About %1</source>
         <oldsource>About</oldsource>
         <extracomment>%1 will be the application name</extracomment>
-        <translation type="unfinished"/>
+        <translation>Om %1</translation>
     </message>
     <message id="btsc-contact">
         <source>Contact</source>
@@ -253,7 +253,7 @@
     <message id="btsc-version">
         <source>Version %1</source>
         <extracomment>%1 will be the version number</extracomment>
-        <translation type="unfinished"/>
+        <translation>Version %1</translation>
     </message>
 </context>
 </TS>
