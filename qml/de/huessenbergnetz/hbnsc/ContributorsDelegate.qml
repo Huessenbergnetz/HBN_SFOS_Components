@@ -111,12 +111,6 @@ ListItem {
                 }
 
                 Image {
-                    source: visible ? "image://hbnsc/icon-s-google-plus?" + theColor : ""
-                    visible: model.googleplus !== undefined
-                    width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
-                }
-
-                Image {
                     source: visible ? "image://hbnsc/icon-s-linkedin?" + theColor : ""
                     visible: model.linkedin !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
