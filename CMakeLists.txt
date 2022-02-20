@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14.0 FATAL_ERROR)
 cmake_policy(SET CMP0048 NEW)
 
 project(libHbnSfosComponents
-        VERSION 1.5.7
+        VERSION 1.6.0
         DESCRIPTION "A set of QML components to use on Sailfish OS."
         LANGUAGES CXX)
 
@@ -33,8 +33,8 @@ include(GNUInstallDirs)
 
 option(BUILD_SHARED_LIBS "Enable the build of shared libraries" ON)
 option(ENABLE_MAINTAINER_FLAGS "Enables some build flags used for development" OFF)
-set(HBNSC_APPNAME ${HARBOUR_APPNAME} CACHE STRING "Name of the application the HBN SFOS Components are used for. Used for installation values.")
-set(HBNSC_BASEDIR ${CMAKE_INSTALL_FULL_DATADIR}/harbour-nazzida)
+set(HBNSC_APPNAME "" CACHE STRING "Name of the application the HBN SFOS Components are used for. Used for installation values.")
+set(HBNSC_BASEDIR ${CMAKE_INSTALL_FULL_DATADIR}/${HBNSC_APPNAME})
 set(HBNSC_LIBDIR ${HBNSC_BASEDIR}/lib CACHE PATH "Directory to install libraries.")
 set(HBNSC_I18NDIR ${HBNSC_BASEDIR}/translations CACHE PATH "Directory to install translations")
 set(HBNSC_ICONSDIR ${HBNSC_BASEDIR}/icons CACHE PATH "Directory to install icon")

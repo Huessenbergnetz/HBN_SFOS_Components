@@ -1,3 +1,14 @@
+HBN SFOS Components 1.6.0 - 2022-02-20
+* new: CMake support, therefore it now requires HBN SFOS Cmake
+  in the build tree
+* new: add libfirfuorida to the list of included 3rd party
+  applications
+* new: source code url on about page
+* improved: use allowedOrientation of AboutPage for subpages
+* changed: no debug output in release mode
+* changed: show app name in about page title
+* changed: remove google plus from ContributorsDelegate
+
 HBN SFOS Components 1.5.7 - 2019-06-27
 * new: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
   International Public License
