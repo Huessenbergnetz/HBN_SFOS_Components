@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015-2019, Hüssenbergnetz/Matthias Fehring
+Copyright (c) 2015-2022, Hüssenbergnetz/Matthias Fehring
 https://github.com/Huessenbergnetz/HBN_SFOS_Components
 All rights reserved.
 

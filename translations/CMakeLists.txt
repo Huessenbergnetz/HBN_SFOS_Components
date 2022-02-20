@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: (C) 2015-2022 Matthias Fehring / www.huessenbergnetz.de
+# SPDX-License-Identifier: BSD-3-Clause
+
 include(HBNSfosGenerateTranslations)
 
 hbn_sfos_gen_translation(hbnsfoscomptrans IDBASED INSTALL_DESTINATION ${HBNSC_I18NDIR} INPUT_FILE hbnsc.ts)
