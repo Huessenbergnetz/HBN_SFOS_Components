@@ -3,9 +3,26 @@
 
 include(HBNSfosGenerateTranslations)
 
-hbn_sfos_gen_translation(hbnsfoscomptrans IDBASED INSTALL_DESTINATION ${HBNSC_I18NDIR} INPUT_FILE hbnsc.ts)
+set(TS_FILES
+    hbnsc.ts
+    hbnsc_da.ts
+    hbnsc_de.ts
+    hbnsc_en_GB.ts
+    hbnsc_en_US.ts
+    hbnsc_es.ts
+    hbnsc_es_419.ts
+    hbnsc_fr.ts
+    hbnsc_nl.ts
+    hbnsc_sv.ts
+    hbnsc_zh.ts)
 
-set(_langs da de en_GB en_US es es_419 fr nl sv zh)
-foreach(_lang ${_langs})
-    hbn_sfos_gen_translation(hbnsfoscomptrans IDBASED INSTALL_DESTINATION ${HBNSC_I18NDIR} INPUT_FILE hbnsc_${_lang}.ts)
-endforeach()
+hbn_sfos_add_translation(QM_FILES ${TS_FILES} OPTIONS -idbased)
+
+add_custom_target(hbnsfoscomptrans ALL
+                  DEPENDS ${QM_FILES}
+                  COMMENT "Compiles HBN SFOS Components translation messages"
+                  SOURCES ${TS_FILES})
+
+install(FILES ${QM_FILES}
+        DESTINATION ${HBNSC_I18NDIR}
+        COMPONENT runtime)
