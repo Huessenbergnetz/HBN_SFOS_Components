@@ -1,3 +1,6 @@
+HBN SFOS Components 1.6.2 - 2022-02-22
+* changed: adopt to changes in HBN SFOS Cmake
+
 HBN SFOS Components 1.6.1 - 2022-02-20
 * fixed: set some CMake variables to correct values
 

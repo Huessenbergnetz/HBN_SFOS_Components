@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14.0 FATAL_ERROR)
 cmake_policy(SET CMP0048 NEW)
 
 project(libHbnSfosComponents
-        VERSION 1.6.1
+        VERSION 1.6.2
         DESCRIPTION "A set of QML components to use on Sailfish OS."
         LANGUAGES CXX)
 
