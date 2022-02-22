@@ -9,11 +9,19 @@ else()
     set(ICONSIZES s)
 endif()
 
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/bitbucket.svg)
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/browser.svg)
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/facebook.svg)
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/github.svg)
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/linkedin.svg)
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/tmo.svg)
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/twitter.svg)
-hbn_sfos_gen_icons(hbnsfoscompicons SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} INPUT_FILE src/weibo.svg)
+set(SVG_ICONS
+    src/bitbucket.svg
+    src/browser.svg
+    src/facebook.svg
+    src/github.svg
+    src/linkedin.svg
+    src/tmo.svg
+    src/twitter.svg
+    src/weibo.svg)
+
+hbn_sfos_add_icon(pngFiles SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} ${SVG_ICONS})
+
+add_custom_target(hbnSfosCompIcons ALL
+    DEPENDS ${pngFiles}
+    COMMENT "Generating HBN SFOS Component icons"
+    SOURCES ${SVG_ICONS})
