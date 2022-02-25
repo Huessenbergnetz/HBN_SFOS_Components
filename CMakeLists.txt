@@ -3,6 +3,7 @@
 
 cmake_minimum_required(VERSION 3.14.0 FATAL_ERROR)
 cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0077 NEW)
 
 project(libHbnSfosComponents
         VERSION 1.6.2
@@ -33,20 +34,13 @@ include(GNUInstallDirs)
 
 option(BUILD_SHARED_LIBS "Enable the build of shared libraries" ON)
 option(ENABLE_MAINTAINER_FLAGS "Enables some build flags used for development" OFF)
-if (NOT DEFINED HBNSC_APPNAME)
-    set(HBNSC_APPNAME "" CACHE STRING "Name of the application the HBN SFOS Components are used for. Used for installation values.")
-endif ()
-set(HBNSC_BASEDIR ${CMAKE_INSTALL_FULL_DATADIR}/${HBNSC_APPNAME})
-set(HBNSC_LIBDIR ${HBNSC_BASEDIR}/lib CACHE PATH "Directory to install libraries.")
+set(HBNSC_APPNAME "" CACHE STRING "Name of the application the HBN SFOS Components are used for. Used for installation values.")
+set(HBNSC_BASEDIR ${CMAKE_INSTALL_DATADIR}/${HBNSC_APPNAME})
 set(HBNSC_I18NDIR ${HBNSC_BASEDIR}/translations CACHE PATH "Directory to install translations")
 set(HBNSC_ICONSDIR ${HBNSC_BASEDIR}/icons CACHE PATH "Directory to install icon")
 set(HBNSC_QMLDIR ${HBNSC_BASEDIR} CACHE PATH "Directory to install QML files.")
-if (NOT DEFINED HBNSC_ICONSIZES)
-    set(HBNSC_ICONSIZES "s" CACHE STRING "Semicolon separated list of icon sizes to generate. HBNSC itself only requires small icons.")
-endif ()
-if (NOT DEFINED HBNSC_LICENSES)
-    set(HBNSC_LICENSES "" CACHE STRING "Semicolon separated list of licenses to include. By default, all licenses will be included.")
-endif ()
+set(HBNSC_ICONSIZES "s" CACHE STRING "Semicolon separated list of icon sizes to generate. HBNSC itself only requires small icons.")
+set(HBNSC_LICENSES "" CACHE STRING "Semicolon separated list of licenses to include. By default, all licenses will be included.")
 
 option(HBNSC_WITH_OPENSSL "Adds the OpenSSL license information to the licenses model. Requires openssl header files." ON)
 option(HBNSC_WITH_NEMONOTIFY "Adds the Nemo Notify lib license information to the licenses model." OFF)
