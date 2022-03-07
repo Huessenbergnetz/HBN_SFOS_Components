@@ -6,7 +6,7 @@ cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0077 NEW)
 
 project(libHbnSfosComponents
-        VERSION 1.6.2
+        VERSION 1.6.3
         DESCRIPTION "A set of QML components to use on Sailfish OS."
         LANGUAGES CXX)
 

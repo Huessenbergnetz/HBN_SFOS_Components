@@ -1,3 +1,7 @@
+HBN SFOS Components 1.6.3 - 2022-03-07
+* changed: do not link against libdbus but use macros to get
+  dbus version
+
 HBN SFOS Components 1.6.2 - 2022-02-22
 * changed: adopt to changes in HBN SFOS Cmake
 
