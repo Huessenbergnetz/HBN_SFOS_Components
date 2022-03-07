@@ -81,9 +81,9 @@ QPixmap BaseIconProvider::requestPixmap(const QString &id, QSize *size, const QS
     return sourcePixmap;
 }
 
-std::unique_ptr<BaseIconProvider> BaseIconProvider::createProvider(std::initializer_list<qreal> scales, const QString &iconsDir, bool largeAvailable, const QString &providerName, QQmlEngine *engine)
+void BaseIconProvider::createProvider(std::initializer_list<qreal> scales, const QString &iconsDir, bool largeAvailable, const QString &providerName, QQmlEngine *engine)
 {
-    return std::make_unique<BaseIconProvider>(scales, iconsDir, largeAvailable, providerName, engine);
+    new BaseIconProvider(scales, iconsDir, largeAvailable, providerName, engine);
 }
 
 HbnscIconProvider::HbnscIconProvider(QQmlEngine *engine)
@@ -94,7 +94,7 @@ HbnscIconProvider::HbnscIconProvider(QQmlEngine *engine)
 
 HbnscIconProvider::~HbnscIconProvider() = default;
 
-std::unique_ptr<HbnscIconProvider> HbnscIconProvider::createProvider(QQmlEngine *engine)
+void HbnscIconProvider::createProvider(QQmlEngine *engine)
 {
-    return std::make_unique<HbnscIconProvider>(engine);
+    new HbnscIconProvider(engine);
 }
