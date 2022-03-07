@@ -1,3 +1,10 @@
+HBN SFOS Components 1.6.4 - 2022-03-07
+* fixed: do not put created icon providers into std::unique_ptr
+  as they will already be put into QSharedPointer by
+  QQmlEngine::addImageProvider()
+* changed: rename BaseIconProvider::createProvider() to
+  addProvider()
+
 HBN SFOS Components 1.6.3 - 2022-03-07
 * changed: do not link against libdbus but use macros to get
   dbus version
