@@ -18,7 +18,7 @@ if(HBNSC_WITH_SQLITE)
 endif(HBNSC_WITH_SQLITE)
 
 if(HBNSC_WITH_DBUS)
-    pkg_search_module(DBus dbus-1 REQUIRED IMPORTED_TARGET)
+    pkg_search_module(DBus dbus-1 REQUIRED)
 endif(HBNSC_WITH_DBUS)
 
 set(HBN_SFOS_Comps_SRCS
@@ -50,7 +50,6 @@ target_link_libraries(HbnSfosComponentsQt${QT_VERSION_MAJOR}
         $<$<BOOL:${HBNSC_WITH_OPENSSL}>:OpenSSL::SSL>
         $<$<BOOL:${HBNSC_WITH_NEMONOTIFY}>:PkgConfig::NemoNotify>
         $<$<BOOL:${HBNSC_WITH_SQLITE}>:SQLite::SQLite3>
-        $<$<BOOL:${HBNSC_WITH_DBUS}>:PkgConfig::DBus>
         $<$<BOOL:${HBNSC_WITH_FIRFUORIDA}>:FirfuoridaQt${QT_VERSION_MAJOR}::Core>
         PkgConfig::Sailfish
         PkgConfig::Silica
@@ -95,9 +94,12 @@ if(ENABLE_MAINTAINER_FLAGS)
     )
 endif(ENABLE_MAINTAINER_FLAGS)
 
-target_include_directories(HbnSfosComponentsQt${QT_VERSION_MAJOR} PUBLIC
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/HbnSfosComponents-qt${QT_VERSION_MAJOR}>"
+target_include_directories(HbnSfosComponentsQt${QT_VERSION_MAJOR}
+    PUBLIC
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/HbnSfosComponents-qt${QT_VERSION_MAJOR}>"
+    PRIVATE
+        $<$<BOOL:${HBNSC_WITH_DBUS}>:${DBus_INCLUDE_DIRS}>
 )
 
 set_target_properties(HbnSfosComponentsQt${QT_VERSION_MAJOR} PROPERTIES
