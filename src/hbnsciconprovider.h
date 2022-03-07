@@ -47,13 +47,13 @@ namespace Hbnsc {
 class HBNSC_EXPORT BaseIconProvider : public QQuickImageProvider
 {
 public:
-    BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr);
+    BaseIconProvider(const QString &providerName, std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, QQmlEngine *engine = nullptr);
 
     ~BaseIconProvider() override;
 
     QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override;
 
-    static void addProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, const QString &providerName = QString(), QQmlEngine *engine = nullptr);
+    static void addProvider(QQmlEngine *engine, const QString &providerName, std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false);
 
     Q_DISABLE_COPY(BaseIconProvider)
     BaseIconProvider(BaseIconProvider &&other) = delete;
@@ -70,7 +70,7 @@ public:
 
     ~HbnscIconProvider() override;
 
-    static void addProvider(QQmlEngine *engine = nullptr);
+    static void addProvider(QQmlEngine *engine);
 
     Q_DISABLE_COPY(HbnscIconProvider)
     HbnscIconProvider(HbnscIconProvider &&other) = delete;

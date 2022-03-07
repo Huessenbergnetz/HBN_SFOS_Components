@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 using namespace Hbnsc;
 
-BaseIconProvider::BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir, bool largeAvailable, const QString &providerName, QQmlEngine *engine)
+BaseIconProvider::BaseIconProvider(const QString &providerName, std::initializer_list<qreal> scales, const QString &iconsDir, bool largeAvailable, QQmlEngine *engine)
     : QQuickImageProvider(QQuickImageProvider::Pixmap)
 {
     m_iconsDir = Hbnsc::getIconsDir(scales, iconsDir, largeAvailable);
@@ -81,13 +81,14 @@ QPixmap BaseIconProvider::requestPixmap(const QString &id, QSize *size, const QS
     return sourcePixmap;
 }
 
-void BaseIconProvider::addProvider(std::initializer_list<qreal> scales, const QString &iconsDir, bool largeAvailable, const QString &providerName, QQmlEngine *engine)
+void BaseIconProvider::addProvider(QQmlEngine *engine, const QString &providerName, std::initializer_list<qreal> scales, const QString &iconsDir, bool largeAvailable)
 {
-    new BaseIconProvider(scales, iconsDir, largeAvailable, providerName, engine);
+    Q_ASSERT_X(engine, "BaseIconProvider::addProvider", "invalid QQmlEngine pointer");
+    new BaseIconProvider(providerName, scales, iconsDir, largeAvailable, engine);
 }
 
 HbnscIconProvider::HbnscIconProvider(QQmlEngine *engine)
-    : BaseIconProvider({1.0, 1.25, 1.5, 1.75, 2.0}, QStringLiteral(HBNSC_ICONS_DIR), false, QStringLiteral("hbnsc"), engine)
+    : BaseIconProvider(QStringLiteral("hbnsc"), {1.0, 1.25, 1.5, 1.75, 2.0}, QStringLiteral(HBNSC_ICONS_DIR), false, engine)
 {
 
 }
@@ -96,5 +97,6 @@ HbnscIconProvider::~HbnscIconProvider() = default;
 
 void HbnscIconProvider::addProvider(QQmlEngine *engine)
 {
+    Q_ASSERT_X(engine, "HbnscIconProvider::addProvider", "invalid QQmlEngine pointer");
     new HbnscIconProvider(engine);
 }
