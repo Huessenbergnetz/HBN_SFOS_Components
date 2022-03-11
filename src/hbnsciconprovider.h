@@ -47,7 +47,7 @@ namespace Hbnsc {
 class HBNSC_EXPORT BaseIconProvider : public QQuickImageProvider
 {
 public:
-    BaseIconProvider(const QString &providerName, std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false, QQmlEngine *engine = nullptr);
+    BaseIconProvider(std::initializer_list<qreal> scales, const QString &iconsDir = QString(), bool largeAvailable = false);
 
     ~BaseIconProvider() override;
 
@@ -66,7 +66,7 @@ private:
 class HBNSC_EXPORT HbnscIconProvider : public BaseIconProvider
 {
 public:
-    HbnscIconProvider(QQmlEngine *engine = nullptr);
+    HbnscIconProvider();
 
     ~HbnscIconProvider() override;
 
