@@ -16,6 +16,7 @@ set(QML_FILES
 
 if(HBNSC_LICENSES)
     set(QML_LICENSE_FILES
+        licenses/GPLv3GCCRLE.qml
         licenses/LicenseBase.qml
         licenses/LGPLv2_1.qml
         licenses/LGPLv3.qml
@@ -51,6 +52,7 @@ else()
         licenses/CC0-1_0.qml
         licenses/GPLv2.qml
         licenses/GPLv3.qml
+        licenses/GPLv3GCCRLE.qml
         licenses/LGPLv2_1.qml
         licenses/LGPLv3.qml
         licenses/LicenseBase.qml
