@@ -1,3 +1,8 @@
+HBN SFOS Components 1.6.5 - 2022-03-26
+* new: add libstdc++ to the list of used 3rd party applications
+* new: GPLv3 and GCC Runtime Library Exception license file
+  GPLv3GCCRLE.qml
+
 HBN SFOS Components 1.6.4 - 2022-03-07
 * fixed: do not put created icon providers into std::unique_ptr
   as they will already be put into QSharedPointer by
