@@ -68,11 +68,6 @@ struct LicenseModel::Item {
 
     Item(const Item &other) = default;
 
-//    Item(Item &&other) :
-//        name(std::move(other.name)), author(std::move(other.author)), version(std::move(other.version)), description(std::move(other.description)), license(std::move(other.license)), licenseFile(std::move(other.licenseFile)), website(std::move(other.website)), customLicenseFile(std::move(other.customLicenseFile)), licenseWebsite(std::move(other.licenseWebsite))
-//    {
-
-//    }
     Item(Item &&other) = default;
 
     Item& operator=(const Item &other) = default;
@@ -82,6 +77,21 @@ struct LicenseModel::Item {
 
 LicenseModel::LicenseModel(QObject *parent) : QAbstractListModel(parent)
 {
+#ifdef __GNUC__
+    const QVersionNumber gccVersion(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__);
+    m_items.emplace_back(
+                QStringLiteral("libstdc++"),
+                QStringLiteral("Free Software Foundation"),
+                gccVersion.toString(),
+                QUrl(QStringLiteral("https://gcc.gnu.org/onlinedocs/libstdc++")),
+                QString(),
+                QStringLiteral("GNU General Public License & GCC Runtime Library Exception"),
+                QStringLiteral("GPLv3GCCRLE.qml"),
+                QUrl(QStringLiteral("https://gcc.gnu.org/onlinedocs/libstdc++/manual/license.html")),
+                QUrl()
+                );
+#endif
+
     m_items.emplace_back(
                 QStringLiteral("Qt"),
                 QStringLiteral("The Qt Company"),
