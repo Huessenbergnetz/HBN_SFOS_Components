@@ -39,6 +39,8 @@
 #include <silicascreen.h>
 #include <sailfishapp.h>
 
+constexpr qreal operator "" _qr(long double a){ return qreal(a); }
+
 QString Hbnsc::getLauncherIcon(std::initializer_list<int> sizes)
 {
     QString iconPath;
@@ -87,7 +89,7 @@ QString Hbnsc::getIconsDir(std::initializer_list<qreal> scales, const QString &i
 
     if (scales.size() > 1) {
         qreal lastDiff = 999.0;
-        for (qreal currentScale : scales) {
+        for (const qreal currentScale : scales) {
             const qreal diff = std::abs(currentScale - pixelRatio);
             if (diff < lastDiff) {
                 nearestScale = currentScale;
@@ -107,7 +109,20 @@ QString Hbnsc::getIconsDir(std::initializer_list<qreal> scales, const QString &i
         nearestScale = pixelRatio;
     }
 
-    ret = _iconsDir % (iconsDir.endsWith(QLatin1Char('/')) ? QStringLiteral("z") : QStringLiteral("/z")) % QString::number(nearestScale) % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
+    QString numberStr;
+    if (nearestScale == 1.0_qr) {
+        numberStr = QStringLiteral("1.0");
+    } else if (nearestScale == 2.0_qr) {
+        numberStr = QStringLiteral("2.0");
+    } else if (nearestScale == 3.0_qr) {
+        numberStr = QStringLiteral("3.0");
+    } else if (nearestScale == 4.0_qr) {
+        numberStr = QStringLiteral("4.0");
+    } else {
+        numberStr = QString::number(nearestScale);
+    }
+
+    ret = _iconsDir % (iconsDir.endsWith(QLatin1Char('/')) ? QStringLiteral("z") : QStringLiteral("/z")) % numberStr % (large ? QStringLiteral("-large/") : QStringLiteral("/"));
 
     return ret;
 }
