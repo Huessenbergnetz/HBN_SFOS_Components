@@ -178,7 +178,7 @@ ListItem {
             }
             MenuItem {
                 text: "X"
-                visible: model.twitter !== undefined || model.x.com !== undefined
+                visible: model.twitter !== undefined || model.x !== undefined
                 onClicked: Qt.openUrlExternally("https://x.com/" + (model.twitter ? model.twitter : model.x))
             }
             MenuItem {
