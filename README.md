@@ -11,7 +11,7 @@ branch/tag to work with. Or integrate it as a submodule into your project git tr
 
 ### Cloning and branching
 
-    git clone --branch v1.6.6 https://github.com/Huessenbergnetz/HBN_SFOS_Components.git
+    git clone --branch v1.6.7 https://github.com/Huessenbergnetz/HBN_SFOS_Components.git
 
 ### Requirements
 * [HBN SFOS Cmake](https://github.com/Huessenbergnetz/HBN_SFOS_Cmake)
@@ -453,7 +453,7 @@ int main(int argc, char *argv[])
 ```
 
 ## License
-Copyright (c) 2015-2022, Hüssenbergnetz/Matthias Fehring
+Copyright (c) 2015-2025, Hüssenbergnetz/Matthias Fehring
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
