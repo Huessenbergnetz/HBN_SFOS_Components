@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2015-2022 Matthias Fehring / www.huessenbergnetz.de
+# SPDX-FileCopyrightText: (C) 2015-2025 Matthias Fehring / www.huessenbergnetz.de
 # SPDX-License-Identifier: BSD-3-Clause
 
 include(HBNSfosGenerateIcons)
@@ -17,7 +17,8 @@ set(SVG_ICONS
     src/linkedin.svg
     src/tmo.svg
     src/twitter.svg
-    src/weibo.svg)
+    src/weibo.svg
+    src/x.svg)
 
 hbn_sfos_add_icon(pngFiles SIZES ${ICONSIZES} INSTALL_DESTINATION ${HBNSC_ICONSDIR} ${SVG_ICONS})
 

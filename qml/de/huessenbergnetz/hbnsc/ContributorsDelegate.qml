@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015-2022, Hüssenbergnetz/Matthias Fehring
+Copyright (c) 2015-2025, Hüssenbergnetz/Matthias Fehring
 https://github.com/Huessenbergnetz/HBN_SFOS_Components
 All rights reserved.
 
@@ -123,8 +123,8 @@ ListItem {
                 }
 
                 Image {
-                    source: visible ? "image://hbnsc/icon-s-twitter?" + theColor : ""
-                    visible: model.twitter !== undefined
+                    source: visible ? "image://hbnsc/icon-s-x?" + theColor : ""
+                    visible: model.twitter !== undefined || model.x !== undefined
                     width: Theme.iconSizeSmall; height: Theme.iconSizeSmall
                 }
 
@@ -177,9 +177,9 @@ ListItem {
                 onClicked: Qt.openUrlExternally("https://talk.maemo.org/member.php?u=" + model.tmo)
             }
             MenuItem {
-                text: "Twitter"
-                visible: model.twitter !== undefined
-                onClicked: Qt.openUrlExternally("https://twitter.com/" + model.twitter)
+                text: "X"
+                visible: model.twitter !== undefined || model.x.com !== undefined
+                onClicked: Qt.openUrlExternally("https://x.com/" + (model.twitter ? model.twitter : model.x))
             }
             MenuItem {
                 text: "Sina Weibo"
